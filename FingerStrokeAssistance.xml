@@ -3522,6 +3522,18 @@ Integrator</sigName>
           </parameter>
           </block>
 
+ 
+            <block>
+            <blkName>Constant7</blkName>
+            <xpcblkName>Constant7</xpcblkName>
+            <SLblockPath>FingerStrokeAssistance/Constant7</SLblockPath>
+            <isSrc>[1 0 1]</isSrc>
+          <parameter>
+          <paramName>Value</paramName>
+          <dim>[1, 1]</dim>  
+          </parameter>
+          </block>
+
 
 
  
@@ -3684,6 +3696,12 @@ Integrator</sigName>
               <sigWidth>1</sigWidth>
               <sigDim>[1, 1]</sigDim>
             </signal>
+
+
+    
+    
+
+
 
 
     

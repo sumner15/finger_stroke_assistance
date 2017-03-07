@@ -3,9 +3,9 @@
  *
  * Code generation for model "FingerStrokeAssistance".
  *
- * Model version              : 1.1121
+ * Model version              : 1.1127
  * Simulink Coder version : 8.10 (R2016a) 10-Feb-2016
- * C source code generated on : Fri Mar 03 17:12:20 2017
+ * C source code generated on : Mon Mar 06 14:20:29 2017
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -91,11 +91,14 @@ P_FingerStrokeAssistance_T FingerStrokeAssistance_P = {
   0.2,                                 /* Expression: .2
                                         * Referenced by: '<Root>/Constant4'
                                         */
-  -0.5,                                /* Expression: -0.5
+  -0.7,                                /* Expression: -0.7
                                         * Referenced by: '<Root>/Constant5'
                                         */
   -1.0,                                /* Expression: -1
                                         * Referenced by: '<Root>/Constant6'
+                                        */
+  -0.1,                                /* Expression: -.1
+                                        * Referenced by: '<Root>/Constant7'
                                         */
   0.0,                                 /* Expression: 0
                                         * Referenced by: '<S1>/Delay'

@@ -3,9 +3,9 @@
  *
  * Code generation for model "FingerStrokeAssistance".
  *
- * Model version              : 1.1121
+ * Model version              : 1.1127
  * Simulink Coder version : 8.10 (R2016a) 10-Feb-2016
- * C source code generated on : Fri Mar 03 17:12:20 2017
+ * C source code generated on : Mon Mar 06 14:20:29 2017
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -461,364 +461,367 @@ static const rtwCAPI_BlockParameters rtBlockParameters[] = {
   { 134, TARGET_STRING("Constant6"),
     TARGET_STRING("Value"), 0, 0, 0 },
 
-  { 135, TARGET_STRING("Unit Delay"),
+  { 135, TARGET_STRING("Constant7"),
+    TARGET_STRING("Value"), 0, 0, 0 },
+
+  { 136, TARGET_STRING("Unit Delay"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 136, TARGET_STRING("Unit Delay1"),
+  { 137, TARGET_STRING("Unit Delay1"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 137, TARGET_STRING("Unit Delay2"),
+  { 138, TARGET_STRING("Unit Delay2"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 138, TARGET_STRING("Unit Delay3"),
+  { 139, TARGET_STRING("Unit Delay3"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 139, TARGET_STRING("HL Controller/Detect Change"),
+  { 140, TARGET_STRING("HL Controller/Detect Change"),
     TARGET_STRING("vinit"), 0, 0, 0 },
-
-  { 140, TARGET_STRING("HL Controller/Discrete-Time Integrator"),
-    TARGET_STRING("gainval"), 0, 0, 0 },
 
   { 141, TARGET_STRING("HL Controller/Discrete-Time Integrator"),
-    TARGET_STRING("InitialCondition"), 0, 0, 0 },
+    TARGET_STRING("gainval"), 0, 0, 0 },
 
   { 142, TARGET_STRING("HL Controller/Discrete-Time Integrator"),
-    TARGET_STRING("UpperSaturationLimit"), 0, 0, 0 },
+    TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
   { 143, TARGET_STRING("HL Controller/Discrete-Time Integrator"),
+    TARGET_STRING("UpperSaturationLimit"), 0, 0, 0 },
+
+  { 144, TARGET_STRING("HL Controller/Discrete-Time Integrator"),
     TARGET_STRING("LowerSaturationLimit"), 0, 0, 0 },
 
-  { 144, TARGET_STRING("HL Controller/Damping"),
+  { 145, TARGET_STRING("HL Controller/Damping"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 145, TARGET_STRING("HL Controller/Gain1"),
+  { 146, TARGET_STRING("HL Controller/Gain1"),
     TARGET_STRING("Gain"), 0, 0, 0 },
-
-  { 146, TARGET_STRING("HL Controller/Delay"),
-    TARGET_STRING("DelayLength"), 2, 0, 0 },
 
   { 147, TARGET_STRING("HL Controller/Delay"),
-    TARGET_STRING("InitialCondition"), 0, 0, 0 },
-
-  { 148, TARGET_STRING("HL Controller/Delay1"),
     TARGET_STRING("DelayLength"), 2, 0, 0 },
 
-  { 149, TARGET_STRING("HL Controller/Delay1"),
+  { 148, TARGET_STRING("HL Controller/Delay"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 150, TARGET_STRING("HL Controller/Discrete Filter1"),
-    TARGET_STRING("Numerator"), 0, 4, 0 },
+  { 149, TARGET_STRING("HL Controller/Delay1"),
+    TARGET_STRING("DelayLength"), 2, 0, 0 },
+
+  { 150, TARGET_STRING("HL Controller/Delay1"),
+    TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
   { 151, TARGET_STRING("HL Controller/Discrete Filter1"),
-    TARGET_STRING("Denominator"), 0, 4, 0 },
-
-  { 152, TARGET_STRING("HL Controller/Discrete Filter1"),
-    TARGET_STRING("InitialStates"), 0, 0, 0 },
-
-  { 153, TARGET_STRING("LL Force Controller/Gain"),
-    TARGET_STRING("Gain"), 0, 0, 0 },
-
-  { 154, TARGET_STRING("LL Position Controller/Discrete PID Controller"),
-    TARGET_STRING("P"), 0, 0, 0 },
-
-  { 155, TARGET_STRING("LL Position Controller/Discrete PID Controller"),
-    TARGET_STRING("I"), 0, 0, 0 },
-
-  { 156, TARGET_STRING("LL Position Controller/Discrete PID Controller"),
-    TARGET_STRING("D"), 0, 0, 0 },
-
-  { 157, TARGET_STRING("LL Position Controller/Discrete PID Controller"),
-    TARGET_STRING("N"), 0, 0, 0 },
-
-  { 158, TARGET_STRING("ON//OFF/Constant"),
-    TARGET_STRING("Value"), 1, 0, 0 },
-
-  { 159, TARGET_STRING("Position Control // Force Control/Constant"),
-    TARGET_STRING("Value"), 1, 0, 0 },
-
-  { 160, TARGET_STRING("Robot/Discrete Derivative"),
-    TARGET_STRING("ICPrevScaledInput"), 0, 0, 0 },
-
-  { 161, TARGET_STRING("Robot/Gain"),
-    TARGET_STRING("Gain"), 0, 0, 0 },
-
-  { 162, TARGET_STRING("Robot/Gain1"),
-    TARGET_STRING("Gain"), 0, 0, 0 },
-
-  { 163, TARGET_STRING("Robot/PCI 6221 ENC "),
-    TARGET_STRING("P1"), 0, 0, 0 },
-
-  { 164, TARGET_STRING("Robot/PCI 6221 ENC "),
-    TARGET_STRING("P2"), 0, 0, 0 },
-
-  { 165, TARGET_STRING("Robot/PCI 6221 ENC "),
-    TARGET_STRING("P3"), 0, 0, 0 },
-
-  { 166, TARGET_STRING("Robot/PCI 6221 ENC "),
-    TARGET_STRING("P4"), 0, 0, 0 },
-
-  { 167, TARGET_STRING("Robot/PCI 6221 ENC "),
-    TARGET_STRING("P5"), 0, 0, 0 },
-
-  { 168, TARGET_STRING("Robot/PCI 6221 ENC "),
-    TARGET_STRING("P6"), 0, 0, 0 },
-
-  { 169, TARGET_STRING("Robot/PCI 6221 ENC "),
-    TARGET_STRING("P7"), 0, 0, 0 },
-
-  { 170, TARGET_STRING("Robot/PCI 6221 ENC "),
-    TARGET_STRING("P8"), 0, 0, 0 },
-
-  { 171, TARGET_STRING("Robot/PCI 6221 ENC "),
-    TARGET_STRING("P9"), 0, 0, 0 },
-
-  { 172, TARGET_STRING("Robot/PCI 6221 ENC "),
-    TARGET_STRING("P10"), 0, 0, 0 },
-
-  { 173, TARGET_STRING("Robot/PCI 6221 ENC 1"),
-    TARGET_STRING("P1"), 0, 0, 0 },
-
-  { 174, TARGET_STRING("Robot/PCI 6221 ENC 1"),
-    TARGET_STRING("P2"), 0, 0, 0 },
-
-  { 175, TARGET_STRING("Robot/PCI 6221 ENC 1"),
-    TARGET_STRING("P3"), 0, 0, 0 },
-
-  { 176, TARGET_STRING("Robot/PCI 6221 ENC 1"),
-    TARGET_STRING("P4"), 0, 0, 0 },
-
-  { 177, TARGET_STRING("Robot/PCI 6221 ENC 1"),
-    TARGET_STRING("P5"), 0, 0, 0 },
-
-  { 178, TARGET_STRING("Robot/PCI 6221 ENC 1"),
-    TARGET_STRING("P6"), 0, 0, 0 },
-
-  { 179, TARGET_STRING("Robot/PCI 6221 ENC 1"),
-    TARGET_STRING("P7"), 0, 0, 0 },
-
-  { 180, TARGET_STRING("Robot/PCI 6221 ENC 1"),
-    TARGET_STRING("P8"), 0, 0, 0 },
-
-  { 181, TARGET_STRING("Robot/PCI 6221 ENC 1"),
-    TARGET_STRING("P9"), 0, 0, 0 },
-
-  { 182, TARGET_STRING("Robot/PCI 6221 ENC 1"),
-    TARGET_STRING("P10"), 0, 0, 0 },
-
-  { 183, TARGET_STRING("Robot/PCI-6221 AD1"),
-    TARGET_STRING("P1"), 0, 5, 0 },
-
-  { 184, TARGET_STRING("Robot/PCI-6221 AD1"),
-    TARGET_STRING("P2"), 0, 5, 0 },
-
-  { 185, TARGET_STRING("Robot/PCI-6221 AD1"),
-    TARGET_STRING("P3"), 0, 5, 0 },
-
-  { 186, TARGET_STRING("Robot/PCI-6221 AD1"),
-    TARGET_STRING("P4"), 0, 0, 0 },
-
-  { 187, TARGET_STRING("Robot/PCI-6221 AD1"),
-    TARGET_STRING("P5"), 0, 0, 0 },
-
-  { 188, TARGET_STRING("Robot/PCI-6221 AD1"),
-    TARGET_STRING("P6"), 0, 0, 0 },
-
-  { 189, TARGET_STRING("Robot/PCI-6221 AD1"),
-    TARGET_STRING("P7"), 0, 0, 0 },
-
-  { 190, TARGET_STRING("Robot/PCI-6221 DA"),
-    TARGET_STRING("P1"), 0, 4, 0 },
-
-  { 191, TARGET_STRING("Robot/PCI-6221 DA"),
-    TARGET_STRING("P2"), 0, 4, 0 },
-
-  { 192, TARGET_STRING("Robot/PCI-6221 DA"),
-    TARGET_STRING("P3"), 0, 4, 0 },
-
-  { 193, TARGET_STRING("Robot/PCI-6221 DA"),
-    TARGET_STRING("P4"), 0, 4, 0 },
-
-  { 194, TARGET_STRING("Robot/PCI-6221 DA"),
-    TARGET_STRING("P5"), 0, 0, 0 },
-
-  { 195, TARGET_STRING("Robot/PCI-6221 DA"),
-    TARGET_STRING("P6"), 0, 0, 0 },
-
-  { 196, TARGET_STRING("Robot/PCI-6221 DA"),
-    TARGET_STRING("P7"), 0, 0, 0 },
-
-  { 197, TARGET_STRING("Robot/Discrete Filter1"),
     TARGET_STRING("Numerator"), 0, 4, 0 },
 
-  { 198, TARGET_STRING("Robot/Discrete Filter1"),
+  { 152, TARGET_STRING("HL Controller/Discrete Filter1"),
     TARGET_STRING("Denominator"), 0, 4, 0 },
 
-  { 199, TARGET_STRING("Robot/Discrete Filter1"),
+  { 153, TARGET_STRING("HL Controller/Discrete Filter1"),
     TARGET_STRING("InitialStates"), 0, 0, 0 },
 
-  { 200, TARGET_STRING("Robot/Unit Delay"),
+  { 154, TARGET_STRING("LL Force Controller/Gain"),
+    TARGET_STRING("Gain"), 0, 0, 0 },
+
+  { 155, TARGET_STRING("LL Position Controller/Discrete PID Controller"),
+    TARGET_STRING("P"), 0, 0, 0 },
+
+  { 156, TARGET_STRING("LL Position Controller/Discrete PID Controller"),
+    TARGET_STRING("I"), 0, 0, 0 },
+
+  { 157, TARGET_STRING("LL Position Controller/Discrete PID Controller"),
+    TARGET_STRING("D"), 0, 0, 0 },
+
+  { 158, TARGET_STRING("LL Position Controller/Discrete PID Controller"),
+    TARGET_STRING("N"), 0, 0, 0 },
+
+  { 159, TARGET_STRING("ON//OFF/Constant"),
+    TARGET_STRING("Value"), 1, 0, 0 },
+
+  { 160, TARGET_STRING("Position Control // Force Control/Constant"),
+    TARGET_STRING("Value"), 1, 0, 0 },
+
+  { 161, TARGET_STRING("Robot/Discrete Derivative"),
+    TARGET_STRING("ICPrevScaledInput"), 0, 0, 0 },
+
+  { 162, TARGET_STRING("Robot/Gain"),
+    TARGET_STRING("Gain"), 0, 0, 0 },
+
+  { 163, TARGET_STRING("Robot/Gain1"),
+    TARGET_STRING("Gain"), 0, 0, 0 },
+
+  { 164, TARGET_STRING("Robot/PCI 6221 ENC "),
+    TARGET_STRING("P1"), 0, 0, 0 },
+
+  { 165, TARGET_STRING("Robot/PCI 6221 ENC "),
+    TARGET_STRING("P2"), 0, 0, 0 },
+
+  { 166, TARGET_STRING("Robot/PCI 6221 ENC "),
+    TARGET_STRING("P3"), 0, 0, 0 },
+
+  { 167, TARGET_STRING("Robot/PCI 6221 ENC "),
+    TARGET_STRING("P4"), 0, 0, 0 },
+
+  { 168, TARGET_STRING("Robot/PCI 6221 ENC "),
+    TARGET_STRING("P5"), 0, 0, 0 },
+
+  { 169, TARGET_STRING("Robot/PCI 6221 ENC "),
+    TARGET_STRING("P6"), 0, 0, 0 },
+
+  { 170, TARGET_STRING("Robot/PCI 6221 ENC "),
+    TARGET_STRING("P7"), 0, 0, 0 },
+
+  { 171, TARGET_STRING("Robot/PCI 6221 ENC "),
+    TARGET_STRING("P8"), 0, 0, 0 },
+
+  { 172, TARGET_STRING("Robot/PCI 6221 ENC "),
+    TARGET_STRING("P9"), 0, 0, 0 },
+
+  { 173, TARGET_STRING("Robot/PCI 6221 ENC "),
+    TARGET_STRING("P10"), 0, 0, 0 },
+
+  { 174, TARGET_STRING("Robot/PCI 6221 ENC 1"),
+    TARGET_STRING("P1"), 0, 0, 0 },
+
+  { 175, TARGET_STRING("Robot/PCI 6221 ENC 1"),
+    TARGET_STRING("P2"), 0, 0, 0 },
+
+  { 176, TARGET_STRING("Robot/PCI 6221 ENC 1"),
+    TARGET_STRING("P3"), 0, 0, 0 },
+
+  { 177, TARGET_STRING("Robot/PCI 6221 ENC 1"),
+    TARGET_STRING("P4"), 0, 0, 0 },
+
+  { 178, TARGET_STRING("Robot/PCI 6221 ENC 1"),
+    TARGET_STRING("P5"), 0, 0, 0 },
+
+  { 179, TARGET_STRING("Robot/PCI 6221 ENC 1"),
+    TARGET_STRING("P6"), 0, 0, 0 },
+
+  { 180, TARGET_STRING("Robot/PCI 6221 ENC 1"),
+    TARGET_STRING("P7"), 0, 0, 0 },
+
+  { 181, TARGET_STRING("Robot/PCI 6221 ENC 1"),
+    TARGET_STRING("P8"), 0, 0, 0 },
+
+  { 182, TARGET_STRING("Robot/PCI 6221 ENC 1"),
+    TARGET_STRING("P9"), 0, 0, 0 },
+
+  { 183, TARGET_STRING("Robot/PCI 6221 ENC 1"),
+    TARGET_STRING("P10"), 0, 0, 0 },
+
+  { 184, TARGET_STRING("Robot/PCI-6221 AD1"),
+    TARGET_STRING("P1"), 0, 5, 0 },
+
+  { 185, TARGET_STRING("Robot/PCI-6221 AD1"),
+    TARGET_STRING("P2"), 0, 5, 0 },
+
+  { 186, TARGET_STRING("Robot/PCI-6221 AD1"),
+    TARGET_STRING("P3"), 0, 5, 0 },
+
+  { 187, TARGET_STRING("Robot/PCI-6221 AD1"),
+    TARGET_STRING("P4"), 0, 0, 0 },
+
+  { 188, TARGET_STRING("Robot/PCI-6221 AD1"),
+    TARGET_STRING("P5"), 0, 0, 0 },
+
+  { 189, TARGET_STRING("Robot/PCI-6221 AD1"),
+    TARGET_STRING("P6"), 0, 0, 0 },
+
+  { 190, TARGET_STRING("Robot/PCI-6221 AD1"),
+    TARGET_STRING("P7"), 0, 0, 0 },
+
+  { 191, TARGET_STRING("Robot/PCI-6221 DA"),
+    TARGET_STRING("P1"), 0, 4, 0 },
+
+  { 192, TARGET_STRING("Robot/PCI-6221 DA"),
+    TARGET_STRING("P2"), 0, 4, 0 },
+
+  { 193, TARGET_STRING("Robot/PCI-6221 DA"),
+    TARGET_STRING("P3"), 0, 4, 0 },
+
+  { 194, TARGET_STRING("Robot/PCI-6221 DA"),
+    TARGET_STRING("P4"), 0, 4, 0 },
+
+  { 195, TARGET_STRING("Robot/PCI-6221 DA"),
+    TARGET_STRING("P5"), 0, 0, 0 },
+
+  { 196, TARGET_STRING("Robot/PCI-6221 DA"),
+    TARGET_STRING("P6"), 0, 0, 0 },
+
+  { 197, TARGET_STRING("Robot/PCI-6221 DA"),
+    TARGET_STRING("P7"), 0, 0, 0 },
+
+  { 198, TARGET_STRING("Robot/Discrete Filter1"),
+    TARGET_STRING("Numerator"), 0, 4, 0 },
+
+  { 199, TARGET_STRING("Robot/Discrete Filter1"),
+    TARGET_STRING("Denominator"), 0, 4, 0 },
+
+  { 200, TARGET_STRING("Robot/Discrete Filter1"),
+    TARGET_STRING("InitialStates"), 0, 0, 0 },
+
+  { 201, TARGET_STRING("Robot/Unit Delay"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 201, TARGET_STRING("Subsystem/Detect Change"),
+  { 202, TARGET_STRING("Subsystem/Detect Change"),
     TARGET_STRING("vinit"), 0, 0, 0 },
-
-  { 202, TARGET_STRING("Subsystem/Discrete-Time Integrator"),
-    TARGET_STRING("gainval"), 0, 0, 0 },
 
   { 203, TARGET_STRING("Subsystem/Discrete-Time Integrator"),
+    TARGET_STRING("gainval"), 0, 0, 0 },
+
+  { 204, TARGET_STRING("Subsystem/Discrete-Time Integrator"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 204, TARGET_STRING("Subsystem/Unit Delay1"),
+  { 205, TARGET_STRING("Subsystem/Unit Delay1"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 205, TARGET_STRING("Subsystem/Unit Delay2"),
+  { 206, TARGET_STRING("Subsystem/Unit Delay2"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 206, TARGET_STRING("Subsystem1/Detect Change"),
+  { 207, TARGET_STRING("Subsystem1/Detect Change"),
     TARGET_STRING("vinit"), 0, 0, 0 },
 
-  { 207, TARGET_STRING("Subsystem1/Discrete-Time Integrator"),
+  { 208, TARGET_STRING("Subsystem1/Discrete-Time Integrator"),
     TARGET_STRING("gainval"), 0, 0, 0 },
 
-  { 208, TARGET_STRING("Subsystem1/Discrete-Time Integrator"),
+  { 209, TARGET_STRING("Subsystem1/Discrete-Time Integrator"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 209, TARGET_STRING("Subsystem1/Unit Delay1"),
+  { 210, TARGET_STRING("Subsystem1/Unit Delay1"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 210, TARGET_STRING("Subsystem1/Unit Delay2"),
+  { 211, TARGET_STRING("Subsystem1/Unit Delay2"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 211, TARGET_STRING("parameters/paremeters_ must_be_one"),
+  { 212, TARGET_STRING("parameters/paremeters_ must_be_one"),
     TARGET_STRING("Value"), 0, 0, 0 },
 
-  { 212, TARGET_STRING("parameters/parChangeRate"),
+  { 213, TARGET_STRING("parameters/parChangeRate"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 213, TARGET_STRING("parameters/parFThresh"),
+  { 214, TARGET_STRING("parameters/parFThresh"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 214, TARGET_STRING("parameters/parFixedDur"),
+  { 215, TARGET_STRING("parameters/parFixedDur"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 215, TARGET_STRING("parameters/parForceTrigger"),
+  { 216, TARGET_STRING("parameters/parForceTrigger"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 216, TARGET_STRING("parameters/parKd1"),
+  { 217, TARGET_STRING("parameters/parKd1"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 217, TARGET_STRING("parameters/parKd2"),
+  { 218, TARGET_STRING("parameters/parKd2"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 218, TARGET_STRING("parameters/parKdV1"),
+  { 219, TARGET_STRING("parameters/parKdV1"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 219, TARGET_STRING("parameters/parKdV2"),
+  { 220, TARGET_STRING("parameters/parKdV2"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 220, TARGET_STRING("parameters/parKp1"),
+  { 221, TARGET_STRING("parameters/parKp1"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 221, TARGET_STRING("parameters/parKp2"),
+  { 222, TARGET_STRING("parameters/parKp2"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 222, TARGET_STRING("parameters/parLeftMode"),
+  { 223, TARGET_STRING("parameters/parLeftMode"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 223, TARGET_STRING("parameters/parMarker"),
+  { 224, TARGET_STRING("parameters/parMarker"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 224, TARGET_STRING("parameters/parMaxTrajDur"),
+  { 225, TARGET_STRING("parameters/parMaxTrajDur"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 225, TARGET_STRING("parameters/parPStop"),
+  { 226, TARGET_STRING("parameters/parPStop"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 226, TARGET_STRING("parameters/parTrajMode"),
+  { 227, TARGET_STRING("parameters/parTrajMode"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 227, TARGET_STRING("parameters/parVThresh"),
+  { 228, TARGET_STRING("parameters/parVThresh"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 228, TARGET_STRING("parameters/parWiggleAmp"),
+  { 229, TARGET_STRING("parameters/parWiggleAmp"),
     TARGET_STRING("Gain"), 0, 0, 0 },
-
-  { 229, TARGET_STRING("parameters/Saturation"),
-    TARGET_STRING("UpperLimit"), 0, 0, 0 },
 
   { 230, TARGET_STRING("parameters/Saturation"),
-    TARGET_STRING("LowerLimit"), 0, 0, 0 },
-
-  { 231, TARGET_STRING("parameters/Saturation1"),
     TARGET_STRING("UpperLimit"), 0, 0, 0 },
+
+  { 231, TARGET_STRING("parameters/Saturation"),
+    TARGET_STRING("LowerLimit"), 0, 0, 0 },
 
   { 232, TARGET_STRING("parameters/Saturation1"),
-    TARGET_STRING("LowerLimit"), 0, 0, 0 },
-
-  { 233, TARGET_STRING("parameters/Saturation2"),
     TARGET_STRING("UpperLimit"), 0, 0, 0 },
 
-  { 234, TARGET_STRING("parameters/Saturation2"),
+  { 233, TARGET_STRING("parameters/Saturation1"),
     TARGET_STRING("LowerLimit"), 0, 0, 0 },
 
-  { 235, TARGET_STRING("signals/Gain"),
+  { 234, TARGET_STRING("parameters/Saturation2"),
+    TARGET_STRING("UpperLimit"), 0, 0, 0 },
+
+  { 235, TARGET_STRING("parameters/Saturation2"),
+    TARGET_STRING("LowerLimit"), 0, 0, 0 },
+
+  { 236, TARGET_STRING("signals/Gain"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 236, TARGET_STRING("signals/Gain1"),
+  { 237, TARGET_STRING("signals/Gain1"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 237, TARGET_STRING("signals/Gain2"),
+  { 238, TARGET_STRING("signals/Gain2"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 238, TARGET_STRING("signals/Gain3"),
+  { 239, TARGET_STRING("signals/Gain3"),
     TARGET_STRING("Gain"), 0, 0, 0 },
-
-  { 239, TARGET_STRING("LL Position Controller/Discrete PID Controller/Filter"),
-    TARGET_STRING("gainval"), 0, 0, 0 },
 
   { 240, TARGET_STRING("LL Position Controller/Discrete PID Controller/Filter"),
-    TARGET_STRING("InitialCondition"), 0, 0, 0 },
-
-  { 241, TARGET_STRING("LL Position Controller/Discrete PID Controller/Integrator"),
     TARGET_STRING("gainval"), 0, 0, 0 },
 
-  { 242, TARGET_STRING("LL Position Controller/Discrete PID Controller/Integrator"),
+  { 241, TARGET_STRING("LL Position Controller/Discrete PID Controller/Filter"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 243, TARGET_STRING("Robot/Discrete Derivative/TSamp"),
+  { 242, TARGET_STRING("LL Position Controller/Discrete PID Controller/Integrator"),
+    TARGET_STRING("gainval"), 0, 0, 0 },
+
+  { 243, TARGET_STRING("LL Position Controller/Discrete PID Controller/Integrator"),
+    TARGET_STRING("InitialCondition"), 0, 0, 0 },
+
+  { 244, TARGET_STRING("Robot/Discrete Derivative/TSamp"),
     TARGET_STRING("WtEt"), 0, 0, 0 },
 
-  { 244, TARGET_STRING("Robot/Triggered Subsystem/Out1"),
+  { 245, TARGET_STRING("Robot/Triggered Subsystem/Out1"),
     TARGET_STRING("InitialOutput"), 0, 0, 0 },
 
-  { 245, TARGET_STRING("Robot/filtered force output/Memory"),
+  { 246, TARGET_STRING("Robot/filtered force output/Memory"),
     TARGET_STRING("X0"), 0, 0, 0 },
 
-  { 246, TARGET_STRING("Robot/filtered force output/Memory1"),
+  { 247, TARGET_STRING("Robot/filtered force output/Memory1"),
     TARGET_STRING("X0"), 0, 0, 0 },
 
-  { 247, TARGET_STRING("Robot/gravDir/Constant"),
+  { 248, TARGET_STRING("Robot/gravDir/Constant"),
     TARGET_STRING("Value"), 0, 0, 0 },
 
-  { 248, TARGET_STRING("Robot/gravDir/gain"),
+  { 249, TARGET_STRING("Robot/gravDir/gain"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 249, TARGET_STRING("parameters/gain transition/Memory"),
+  { 250, TARGET_STRING("parameters/gain transition/Memory"),
     TARGET_STRING("X0"), 0, 6, 0 },
 
-  { 250, TARGET_STRING("parameters/gain transition1/Memory"),
+  { 251, TARGET_STRING("parameters/gain transition1/Memory"),
     TARGET_STRING("X0"), 0, 6, 0 },
 
-  { 251, TARGET_STRING("parameters/gain transition2/Memory"),
+  { 252, TARGET_STRING("parameters/gain transition2/Memory"),
     TARGET_STRING("X0"), 0, 6, 0 },
 
-  { 252, TARGET_STRING("parameters/gain transition3/Memory"),
+  { 253, TARGET_STRING("parameters/gain transition3/Memory"),
     TARGET_STRING("X0"), 0, 6, 0 },
 
-  { 253, TARGET_STRING("parameters/gain transition4/Memory"),
+  { 254, TARGET_STRING("parameters/gain transition4/Memory"),
     TARGET_STRING("X0"), 0, 6, 0 },
 
-  { 254, TARGET_STRING("parameters/gain transition5/Memory"),
+  { 255, TARGET_STRING("parameters/gain transition5/Memory"),
     TARGET_STRING("X0"), 0, 6, 0 },
 
   {
@@ -829,15 +832,15 @@ static const rtwCAPI_BlockParameters rtBlockParameters[] = {
 /* Tunable variable parameters */
 static const rtwCAPI_ModelParameters rtModelParameters[] = {
   /* addrMapIndex, varName, dataTypeIndex, dimIndex, fixPtIndex */
-  { 255, TARGET_STRING("Alow"), 0, 7, 0 },
+  { 256, TARGET_STRING("Alow"), 0, 7, 0 },
 
-  { 256, TARGET_STRING("Blow"), 0, 1, 0 },
+  { 257, TARGET_STRING("Blow"), 0, 1, 0 },
 
-  { 257, TARGET_STRING("Clow"), 0, 4, 0 },
+  { 258, TARGET_STRING("Clow"), 0, 4, 0 },
 
-  { 258, TARGET_STRING("Dlow"), 0, 0, 0 },
+  { 259, TARGET_STRING("Dlow"), 0, 0, 0 },
 
-  { 259, TARGET_STRING("x0low"), 0, 1, 0 },
+  { 260, TARGET_STRING("x0low"), 0, 1, 0 },
 
   { 0, (NULL), 0, 0, 0 }
 };
@@ -981,131 +984,132 @@ static void* rtDataAddrMap[] = {
   &FingerStrokeAssistance_P.Constant4_Value,/* 132: Block Parameter */
   &FingerStrokeAssistance_P.Constant5_Value,/* 133: Block Parameter */
   &FingerStrokeAssistance_P.Constant6_Value,/* 134: Block Parameter */
-  &FingerStrokeAssistance_P.UnitDelay_InitialCondition,/* 135: Block Parameter */
-  &FingerStrokeAssistance_P.UnitDelay1_InitialCondition,/* 136: Block Parameter */
-  &FingerStrokeAssistance_P.UnitDelay2_InitialCondition_a,/* 137: Block Parameter */
-  &FingerStrokeAssistance_P.UnitDelay3_InitialCondition,/* 138: Block Parameter */
-  &FingerStrokeAssistance_P.DetectChange_vinit,/* 139: Mask Parameter */
-  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_gainval,/* 140: Block Parameter */
-  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_IC,/* 141: Block Parameter */
-  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_UpperSat,/* 142: Block Parameter */
-  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_LowerSat,/* 143: Block Parameter */
-  &FingerStrokeAssistance_P.Damping_Gain,/* 144: Block Parameter */
-  &FingerStrokeAssistance_P.Gain1_Gain,/* 145: Block Parameter */
-  &FingerStrokeAssistance_P.Delay_DelayLength,/* 146: Block Parameter */
-  &FingerStrokeAssistance_P.Delay_InitialCondition,/* 147: Block Parameter */
-  &FingerStrokeAssistance_P.Delay1_DelayLength,/* 148: Block Parameter */
-  &FingerStrokeAssistance_P.Delay1_InitialCondition,/* 149: Block Parameter */
-  &FingerStrokeAssistance_P.DiscreteFilter1_NumCoef[0],/* 150: Block Parameter */
-  &FingerStrokeAssistance_P.DiscreteFilter1_DenCoef[0],/* 151: Block Parameter */
-  &FingerStrokeAssistance_P.DiscreteFilter1_InitialStates,/* 152: Block Parameter */
-  &FingerStrokeAssistance_P.Gain_Gain_i,/* 153: Block Parameter */
-  &FingerStrokeAssistance_P.DiscretePIDController_P,/* 154: Mask Parameter */
-  &FingerStrokeAssistance_P.DiscretePIDController_I,/* 155: Mask Parameter */
-  &FingerStrokeAssistance_P.DiscretePIDController_D,/* 156: Mask Parameter */
-  &FingerStrokeAssistance_P.DiscretePIDController_N,/* 157: Mask Parameter */
-  &FingerStrokeAssistance_P.Constant_Value_i,/* 158: Block Parameter */
-  &FingerStrokeAssistance_P.Constant_Value_j,/* 159: Block Parameter */
-  &FingerStrokeAssistance_P.DiscreteDerivative_ICPrevScaled,/* 160: Mask Parameter */
-  &FingerStrokeAssistance_P.Gain_Gain, /* 161: Block Parameter */
-  &FingerStrokeAssistance_P.Gain1_Gain_a,/* 162: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC_P1,/* 163: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC_P2,/* 164: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC_P3,/* 165: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC_P4,/* 166: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC_P5,/* 167: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC_P6,/* 168: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC_P7,/* 169: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC_P8,/* 170: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC_P9,/* 171: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC_P10,/* 172: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC1_P1,/* 173: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC1_P2,/* 174: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC1_P3,/* 175: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC1_P4,/* 176: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC1_P5,/* 177: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC1_P6,/* 178: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC1_P7,/* 179: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC1_P8,/* 180: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC1_P9,/* 181: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221ENC1_P10,/* 182: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221AD1_P1[0],/* 183: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221AD1_P2[0],/* 184: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221AD1_P3[0],/* 185: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221AD1_P4,/* 186: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221AD1_P5,/* 187: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221AD1_P6,/* 188: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221AD1_P7,/* 189: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221DA_P1[0],/* 190: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221DA_P2[0],/* 191: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221DA_P3[0],/* 192: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221DA_P4[0],/* 193: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221DA_P5,/* 194: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221DA_P6,/* 195: Block Parameter */
-  &FingerStrokeAssistance_P.PCI6221DA_P7,/* 196: Block Parameter */
-  &FingerStrokeAssistance_P.DiscreteFilter1_NumCoef_g[0],/* 197: Block Parameter */
-  &FingerStrokeAssistance_P.DiscreteFilter1_DenCoef_a[0],/* 198: Block Parameter */
-  &FingerStrokeAssistance_P.DiscreteFilter1_InitialStates_c,/* 199: Block Parameter */
-  &FingerStrokeAssistance_P.UnitDelay_InitialCondition_e,/* 200: Block Parameter */
-  &FingerStrokeAssistance_P.DetectChange_vinit_a,/* 201: Mask Parameter */
-  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_gainva_n,/* 202: Block Parameter */
-  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_IC_k,/* 203: Block Parameter */
-  &FingerStrokeAssistance_P.UnitDelay1_InitialCondition_o,/* 204: Block Parameter */
-  &FingerStrokeAssistance_P.UnitDelay2_InitialCondition,/* 205: Block Parameter */
-  &FingerStrokeAssistance_P.DetectChange_vinit_d,/* 206: Mask Parameter */
-  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_gainva_b,/* 207: Block Parameter */
-  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_IC_l,/* 208: Block Parameter */
-  &FingerStrokeAssistance_P.UnitDelay1_InitialCondition_oy,/* 209: Block Parameter */
-  &FingerStrokeAssistance_P.UnitDelay2_InitialCondition_f,/* 210: Block Parameter */
-  &FingerStrokeAssistance_P.paremeters_must_be_one_Value,/* 211: Block Parameter */
-  &FingerStrokeAssistance_P.parChangeRate_Gain,/* 212: Block Parameter */
-  &FingerStrokeAssistance_P.parFThresh_Gain,/* 213: Block Parameter */
-  &FingerStrokeAssistance_P.parFixedDur_Gain,/* 214: Block Parameter */
-  &FingerStrokeAssistance_P.parForceTrigger_Gain,/* 215: Block Parameter */
-  &FingerStrokeAssistance_P.parKd1_Gain,/* 216: Block Parameter */
-  &FingerStrokeAssistance_P.parKd2_Gain,/* 217: Block Parameter */
-  &FingerStrokeAssistance_P.parKdV1_Gain,/* 218: Block Parameter */
-  &FingerStrokeAssistance_P.parKdV2_Gain,/* 219: Block Parameter */
-  &FingerStrokeAssistance_P.parKp1_Gain,/* 220: Block Parameter */
-  &FingerStrokeAssistance_P.parKp2_Gain,/* 221: Block Parameter */
-  &FingerStrokeAssistance_P.parLeftMode_Gain,/* 222: Block Parameter */
-  &FingerStrokeAssistance_P.parMarker_Gain,/* 223: Block Parameter */
-  &FingerStrokeAssistance_P.parMaxTrajDur_Gain,/* 224: Block Parameter */
-  &FingerStrokeAssistance_P.parPStop_Gain,/* 225: Block Parameter */
-  &FingerStrokeAssistance_P.parTrajMode_Gain,/* 226: Block Parameter */
-  &FingerStrokeAssistance_P.parVThresh_Gain,/* 227: Block Parameter */
-  &FingerStrokeAssistance_P.parWiggleAmp_Gain,/* 228: Block Parameter */
-  &FingerStrokeAssistance_P.Saturation_UpperSat,/* 229: Block Parameter */
-  &FingerStrokeAssistance_P.Saturation_LowerSat,/* 230: Block Parameter */
-  &FingerStrokeAssistance_P.Saturation1_UpperSat,/* 231: Block Parameter */
-  &FingerStrokeAssistance_P.Saturation1_LowerSat,/* 232: Block Parameter */
-  &FingerStrokeAssistance_P.Saturation2_UpperSat,/* 233: Block Parameter */
-  &FingerStrokeAssistance_P.Saturation2_LowerSat,/* 234: Block Parameter */
-  &FingerStrokeAssistance_P.Gain_Gain_n,/* 235: Block Parameter */
-  &FingerStrokeAssistance_P.Gain1_Gain_k,/* 236: Block Parameter */
-  &FingerStrokeAssistance_P.Gain2_Gain,/* 237: Block Parameter */
-  &FingerStrokeAssistance_P.Gain3_Gain,/* 238: Block Parameter */
-  &FingerStrokeAssistance_P.Filter_gainval,/* 239: Block Parameter */
-  &FingerStrokeAssistance_P.Filter_IC, /* 240: Block Parameter */
-  &FingerStrokeAssistance_P.Integrator_gainval,/* 241: Block Parameter */
-  &FingerStrokeAssistance_P.Integrator_IC,/* 242: Block Parameter */
-  &FingerStrokeAssistance_P.TSamp_WtEt,/* 243: Block Parameter */
-  &FingerStrokeAssistance_P.Out1_Y0,   /* 244: Block Parameter */
-  &FingerStrokeAssistance_P.Memory_X0, /* 245: Block Parameter */
-  &FingerStrokeAssistance_P.Memory1_X0,/* 246: Block Parameter */
-  &FingerStrokeAssistance_P.Constant_Value,/* 247: Block Parameter */
-  &FingerStrokeAssistance_P.gain_Gain, /* 248: Block Parameter */
-  &FingerStrokeAssistance_P.Memory_X0_g[0],/* 249: Block Parameter */
-  &FingerStrokeAssistance_P.Memory_X0_a[0],/* 250: Block Parameter */
-  &FingerStrokeAssistance_P.Memory_X0_b[0],/* 251: Block Parameter */
-  &FingerStrokeAssistance_P.Memory_X0_g0[0],/* 252: Block Parameter */
-  &FingerStrokeAssistance_P.Memory_X0_bp[0],/* 253: Block Parameter */
-  &FingerStrokeAssistance_P.Memory_X0_e[0],/* 254: Block Parameter */
-  &FingerStrokeAssistance_P.Alow[0],   /* 255: Model Parameter */
-  &FingerStrokeAssistance_P.Blow[0],   /* 256: Model Parameter */
-  &FingerStrokeAssistance_P.Clow[0],   /* 257: Model Parameter */
-  &FingerStrokeAssistance_P.Dlow,      /* 258: Model Parameter */
-  &FingerStrokeAssistance_P.x0low[0],  /* 259: Model Parameter */
+  &FingerStrokeAssistance_P.Constant7_Value,/* 135: Block Parameter */
+  &FingerStrokeAssistance_P.UnitDelay_InitialCondition,/* 136: Block Parameter */
+  &FingerStrokeAssistance_P.UnitDelay1_InitialCondition,/* 137: Block Parameter */
+  &FingerStrokeAssistance_P.UnitDelay2_InitialCondition_a,/* 138: Block Parameter */
+  &FingerStrokeAssistance_P.UnitDelay3_InitialCondition,/* 139: Block Parameter */
+  &FingerStrokeAssistance_P.DetectChange_vinit,/* 140: Mask Parameter */
+  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_gainval,/* 141: Block Parameter */
+  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_IC,/* 142: Block Parameter */
+  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_UpperSat,/* 143: Block Parameter */
+  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_LowerSat,/* 144: Block Parameter */
+  &FingerStrokeAssistance_P.Damping_Gain,/* 145: Block Parameter */
+  &FingerStrokeAssistance_P.Gain1_Gain,/* 146: Block Parameter */
+  &FingerStrokeAssistance_P.Delay_DelayLength,/* 147: Block Parameter */
+  &FingerStrokeAssistance_P.Delay_InitialCondition,/* 148: Block Parameter */
+  &FingerStrokeAssistance_P.Delay1_DelayLength,/* 149: Block Parameter */
+  &FingerStrokeAssistance_P.Delay1_InitialCondition,/* 150: Block Parameter */
+  &FingerStrokeAssistance_P.DiscreteFilter1_NumCoef[0],/* 151: Block Parameter */
+  &FingerStrokeAssistance_P.DiscreteFilter1_DenCoef[0],/* 152: Block Parameter */
+  &FingerStrokeAssistance_P.DiscreteFilter1_InitialStates,/* 153: Block Parameter */
+  &FingerStrokeAssistance_P.Gain_Gain_i,/* 154: Block Parameter */
+  &FingerStrokeAssistance_P.DiscretePIDController_P,/* 155: Mask Parameter */
+  &FingerStrokeAssistance_P.DiscretePIDController_I,/* 156: Mask Parameter */
+  &FingerStrokeAssistance_P.DiscretePIDController_D,/* 157: Mask Parameter */
+  &FingerStrokeAssistance_P.DiscretePIDController_N,/* 158: Mask Parameter */
+  &FingerStrokeAssistance_P.Constant_Value_i,/* 159: Block Parameter */
+  &FingerStrokeAssistance_P.Constant_Value_j,/* 160: Block Parameter */
+  &FingerStrokeAssistance_P.DiscreteDerivative_ICPrevScaled,/* 161: Mask Parameter */
+  &FingerStrokeAssistance_P.Gain_Gain, /* 162: Block Parameter */
+  &FingerStrokeAssistance_P.Gain1_Gain_a,/* 163: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC_P1,/* 164: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC_P2,/* 165: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC_P3,/* 166: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC_P4,/* 167: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC_P5,/* 168: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC_P6,/* 169: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC_P7,/* 170: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC_P8,/* 171: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC_P9,/* 172: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC_P10,/* 173: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC1_P1,/* 174: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC1_P2,/* 175: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC1_P3,/* 176: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC1_P4,/* 177: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC1_P5,/* 178: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC1_P6,/* 179: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC1_P7,/* 180: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC1_P8,/* 181: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC1_P9,/* 182: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221ENC1_P10,/* 183: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221AD1_P1[0],/* 184: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221AD1_P2[0],/* 185: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221AD1_P3[0],/* 186: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221AD1_P4,/* 187: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221AD1_P5,/* 188: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221AD1_P6,/* 189: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221AD1_P7,/* 190: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221DA_P1[0],/* 191: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221DA_P2[0],/* 192: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221DA_P3[0],/* 193: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221DA_P4[0],/* 194: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221DA_P5,/* 195: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221DA_P6,/* 196: Block Parameter */
+  &FingerStrokeAssistance_P.PCI6221DA_P7,/* 197: Block Parameter */
+  &FingerStrokeAssistance_P.DiscreteFilter1_NumCoef_g[0],/* 198: Block Parameter */
+  &FingerStrokeAssistance_P.DiscreteFilter1_DenCoef_a[0],/* 199: Block Parameter */
+  &FingerStrokeAssistance_P.DiscreteFilter1_InitialStates_c,/* 200: Block Parameter */
+  &FingerStrokeAssistance_P.UnitDelay_InitialCondition_e,/* 201: Block Parameter */
+  &FingerStrokeAssistance_P.DetectChange_vinit_a,/* 202: Mask Parameter */
+  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_gainva_n,/* 203: Block Parameter */
+  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_IC_k,/* 204: Block Parameter */
+  &FingerStrokeAssistance_P.UnitDelay1_InitialCondition_o,/* 205: Block Parameter */
+  &FingerStrokeAssistance_P.UnitDelay2_InitialCondition,/* 206: Block Parameter */
+  &FingerStrokeAssistance_P.DetectChange_vinit_d,/* 207: Mask Parameter */
+  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_gainva_b,/* 208: Block Parameter */
+  &FingerStrokeAssistance_P.DiscreteTimeIntegrator_IC_l,/* 209: Block Parameter */
+  &FingerStrokeAssistance_P.UnitDelay1_InitialCondition_oy,/* 210: Block Parameter */
+  &FingerStrokeAssistance_P.UnitDelay2_InitialCondition_f,/* 211: Block Parameter */
+  &FingerStrokeAssistance_P.paremeters_must_be_one_Value,/* 212: Block Parameter */
+  &FingerStrokeAssistance_P.parChangeRate_Gain,/* 213: Block Parameter */
+  &FingerStrokeAssistance_P.parFThresh_Gain,/* 214: Block Parameter */
+  &FingerStrokeAssistance_P.parFixedDur_Gain,/* 215: Block Parameter */
+  &FingerStrokeAssistance_P.parForceTrigger_Gain,/* 216: Block Parameter */
+  &FingerStrokeAssistance_P.parKd1_Gain,/* 217: Block Parameter */
+  &FingerStrokeAssistance_P.parKd2_Gain,/* 218: Block Parameter */
+  &FingerStrokeAssistance_P.parKdV1_Gain,/* 219: Block Parameter */
+  &FingerStrokeAssistance_P.parKdV2_Gain,/* 220: Block Parameter */
+  &FingerStrokeAssistance_P.parKp1_Gain,/* 221: Block Parameter */
+  &FingerStrokeAssistance_P.parKp2_Gain,/* 222: Block Parameter */
+  &FingerStrokeAssistance_P.parLeftMode_Gain,/* 223: Block Parameter */
+  &FingerStrokeAssistance_P.parMarker_Gain,/* 224: Block Parameter */
+  &FingerStrokeAssistance_P.parMaxTrajDur_Gain,/* 225: Block Parameter */
+  &FingerStrokeAssistance_P.parPStop_Gain,/* 226: Block Parameter */
+  &FingerStrokeAssistance_P.parTrajMode_Gain,/* 227: Block Parameter */
+  &FingerStrokeAssistance_P.parVThresh_Gain,/* 228: Block Parameter */
+  &FingerStrokeAssistance_P.parWiggleAmp_Gain,/* 229: Block Parameter */
+  &FingerStrokeAssistance_P.Saturation_UpperSat,/* 230: Block Parameter */
+  &FingerStrokeAssistance_P.Saturation_LowerSat,/* 231: Block Parameter */
+  &FingerStrokeAssistance_P.Saturation1_UpperSat,/* 232: Block Parameter */
+  &FingerStrokeAssistance_P.Saturation1_LowerSat,/* 233: Block Parameter */
+  &FingerStrokeAssistance_P.Saturation2_UpperSat,/* 234: Block Parameter */
+  &FingerStrokeAssistance_P.Saturation2_LowerSat,/* 235: Block Parameter */
+  &FingerStrokeAssistance_P.Gain_Gain_n,/* 236: Block Parameter */
+  &FingerStrokeAssistance_P.Gain1_Gain_k,/* 237: Block Parameter */
+  &FingerStrokeAssistance_P.Gain2_Gain,/* 238: Block Parameter */
+  &FingerStrokeAssistance_P.Gain3_Gain,/* 239: Block Parameter */
+  &FingerStrokeAssistance_P.Filter_gainval,/* 240: Block Parameter */
+  &FingerStrokeAssistance_P.Filter_IC, /* 241: Block Parameter */
+  &FingerStrokeAssistance_P.Integrator_gainval,/* 242: Block Parameter */
+  &FingerStrokeAssistance_P.Integrator_IC,/* 243: Block Parameter */
+  &FingerStrokeAssistance_P.TSamp_WtEt,/* 244: Block Parameter */
+  &FingerStrokeAssistance_P.Out1_Y0,   /* 245: Block Parameter */
+  &FingerStrokeAssistance_P.Memory_X0, /* 246: Block Parameter */
+  &FingerStrokeAssistance_P.Memory1_X0,/* 247: Block Parameter */
+  &FingerStrokeAssistance_P.Constant_Value,/* 248: Block Parameter */
+  &FingerStrokeAssistance_P.gain_Gain, /* 249: Block Parameter */
+  &FingerStrokeAssistance_P.Memory_X0_g[0],/* 250: Block Parameter */
+  &FingerStrokeAssistance_P.Memory_X0_a[0],/* 251: Block Parameter */
+  &FingerStrokeAssistance_P.Memory_X0_b[0],/* 252: Block Parameter */
+  &FingerStrokeAssistance_P.Memory_X0_g0[0],/* 253: Block Parameter */
+  &FingerStrokeAssistance_P.Memory_X0_bp[0],/* 254: Block Parameter */
+  &FingerStrokeAssistance_P.Memory_X0_e[0],/* 255: Block Parameter */
+  &FingerStrokeAssistance_P.Alow[0],   /* 256: Model Parameter */
+  &FingerStrokeAssistance_P.Blow[0],   /* 257: Model Parameter */
+  &FingerStrokeAssistance_P.Clow[0],   /* 258: Model Parameter */
+  &FingerStrokeAssistance_P.Dlow,      /* 259: Model Parameter */
+  &FingerStrokeAssistance_P.x0low[0],  /* 260: Model Parameter */
 };
 
 /* Declare Data Run-Time Dimension Buffer Addresses statically */
@@ -1217,7 +1221,7 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic = {
     (NULL), 0,
     (NULL), 0 },
 
-  { rtBlockParameters, 126,
+  { rtBlockParameters, 127,
     rtModelParameters, 5 },
 
   { (NULL), 0 },
@@ -1226,10 +1230,10 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic = {
     rtElementMap, rtSampleTimeMap, rtDimensionArray },
   "float",
 
-  { 798857796U,
-    1436763105U,
-    3531048487U,
-    257422549U },
+  { 1144302332U,
+    1082513851U,
+    2958483096U,
+    377749752U },
   (NULL), 0,
   0
 };

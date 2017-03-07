@@ -3,9 +3,9 @@
  *
  * Code generation for model "FingerStrokeAssistance".
  *
- * Model version              : 1.1121
+ * Model version              : 1.1127
  * Simulink Coder version : 8.10 (R2016a) 10-Feb-2016
- * C source code generated on : Fri Mar 03 17:12:20 2017
+ * C source code generated on : Mon Mar 06 14:20:29 2017
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -457,6 +457,7 @@ static void FingerStrokeAssistance_output(void)
    *  Constant: '<Root>/Constant4'
    *  Constant: '<Root>/Constant5'
    *  Constant: '<Root>/Constant6'
+   *  Constant: '<Root>/Constant7'
    */
   FingerStrokeAssistance_B.f_ref[1] = 0.0;
   FingerStrokeAssistance_B.pos_ref[1] = FingerStrokeAssistance_B.Sum[1];
@@ -614,7 +615,7 @@ static void FingerStrokeAssistance_output(void)
     FingerStrokeAssistance_B.pos_ref_Llim = 0.0;
 
     /* '<S4>:1:78' */
-    FingerStrokeAssistance_B.f_ref_lim = 5.0;
+    FingerStrokeAssistance_B.f_ref_lim = 2.5;
     if (fabs(FingerStrokeAssistance_B.UnitDelay2_p[1]) >=
         FingerStrokeAssistance_P.Constant4_Value) {
       /* '<S4>:1:86' */
@@ -627,10 +628,11 @@ static void FingerStrokeAssistance_output(void)
         FingerStrokeAssistance_B.Sum[0];
     }
 
-    if (FingerStrokeAssistance_B.Sum[0] >= 1.0) {
+    if (FingerStrokeAssistance_B.Sum[0] >= 0.9) {
       /* '<S4>:1:93' */
       /* '<S4>:1:94' */
-      u1 = 0.0;
+      u1 = FingerStrokeAssistance_B.UnitDelay2_p[1] *
+        FingerStrokeAssistance_P.Constant7_Value;
     }
 
     /* '<S4>:1:97' */
@@ -2904,9 +2906,9 @@ RT_MODEL_FingerStrokeAssistance_T *FingerStrokeAssistance(void)
   FingerStrokeAssistance_M->Sizes.numU = (0);/* Number of model inputs */
   FingerStrokeAssistance_M->Sizes.sysDirFeedThru = (0);/* The model is not direct feedthrough */
   FingerStrokeAssistance_M->Sizes.numSampTimes = (1);/* Number of sample times */
-  FingerStrokeAssistance_M->Sizes.numBlocks = (131);/* Number of blocks */
+  FingerStrokeAssistance_M->Sizes.numBlocks = (132);/* Number of blocks */
   FingerStrokeAssistance_M->Sizes.numBlockIO = (130);/* Number of block outputs */
-  FingerStrokeAssistance_M->Sizes.numBlockPrms = (252);/* Sum of parameter "widths" */
+  FingerStrokeAssistance_M->Sizes.numBlockPrms = (253);/* Sum of parameter "widths" */
   return FingerStrokeAssistance_M;
 }
 
