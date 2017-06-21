@@ -3,9 +3,9 @@
  *
  * Code generation for model "FingerStrokeAssistance".
  *
- * Model version              : 1.1127
+ * Model version              : 1.1213
  * Simulink Coder version : 8.10 (R2016a) 10-Feb-2016
- * C source code generated on : Mon Mar 06 14:20:29 2017
+ * C source code generated on : Tue Jun 20 17:04:50 2017
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -28,6 +28,9 @@ DW_FingerStrokeAssistance_T FingerStrokeAssistance_DW;
 /* Previous zero-crossings (trigger) states */
 PrevZCX_FingerStrokeAssistance_T FingerStrokeAssistance_PrevZCX;
 
+/* External outputs (root outports fed by signals with auto storage) */
+ExtY_FingerStrokeAssistance_T FingerStrokeAssistance_Y;
+
 /* Real-time model */
 RT_MODEL_FingerStrokeAssistance_T FingerStrokeAssistance_M_;
 RT_MODEL_FingerStrokeAssistance_T *const FingerStrokeAssistance_M =
@@ -35,31 +38,31 @@ RT_MODEL_FingerStrokeAssistance_T *const FingerStrokeAssistance_M =
 
 /*
  * Output and update for atomic system:
- *    '<S22>/MATLAB Function'
- *    '<S24>/MATLAB Function'
- *    '<S25>/MATLAB Function'
+ *    '<S30>/MATLAB Function'
+ *    '<S32>/MATLAB Function'
+ *    '<S33>/MATLAB Function'
  */
 void FingerStrokeAssi_MATLABFunction(real_T rtu_input1, real_T rtu_input2,
   real_T rtu_leftyMode, B_MATLABFunction_FingerStroke_T *localB)
 {
-  /* MATLAB Function 'Robot/account for handedness/MATLAB Function': '<S28>:1' */
+  /* MATLAB Function 'Robot/account for handedness/MATLAB Function': '<S36>:1' */
   /*  encoder 1 and output 1 relate to the blue mechanism */
   /*  encoder 2, output 2 and accel 2 relate to the gold mechanism */
   /*  in right hand mode, we want the gold mechanism to control the index finger */
   /*  in left hand mode, we want the blue mechanism to control the index finger */
   /*  we wallways want the index finger to be finger 1 */
   if (rtu_leftyMode == 1.0) {
-    /* '<S28>:1:10' */
-    /* '<S28>:1:11' */
+    /* '<S36>:1:10' */
+    /* '<S36>:1:11' */
     localB->output1 = rtu_input1;
 
-    /* '<S28>:1:12' */
+    /* '<S36>:1:12' */
     localB->output2 = rtu_input2;
   } else {
-    /* '<S28>:1:14' */
+    /* '<S36>:1:14' */
     localB->output1 = rtu_input2;
 
-    /* '<S28>:1:15' */
+    /* '<S36>:1:15' */
     localB->output2 = rtu_input1;
   }
 }
@@ -112,12 +115,12 @@ real_T rt_powd_snf(real_T u0, real_T u1)
 
 /*
  * Output and update for atomic system:
- *    '<S34>/gainramp'
- *    '<S35>/gainramp'
- *    '<S36>/gainramp'
- *    '<S37>/gainramp'
- *    '<S38>/gainramp'
- *    '<S39>/gainramp'
+ *    '<S42>/gainramp'
+ *    '<S43>/gainramp'
+ *    '<S44>/gainramp'
+ *    '<S45>/gainramp'
+ *    '<S46>/gainramp'
+ *    '<S47>/gainramp'
  */
 void FingerStrokeAssistance_gainramp(real_T rtu_tr, real_T rtu_valD, const
   real_T rtu_state[4], B_gainramp_FingerStrokeAssist_T *localB)
@@ -128,45 +131,45 @@ void FingerStrokeAssistance_gainramp(real_T rtu_tr, real_T rtu_valD, const
   localB->state1[2] = rtu_state[2];
   localB->state1[3] = rtu_state[3];
 
-  /* MATLAB Function 'parameters/gain transition/gainramp': '<S40>:1' */
+  /* MATLAB Function 'parameters/gain transition/gainramp': '<S48>:1' */
   /*  state contains [valD_,val_,Ro_,t_] */
   /*  first we need to check if they have changed the desired Value */
   if (!(rtu_valD == rtu_state[0])) {
-    /* '<S40>:1:6' */
-    /* '<S40>:1:7' */
+    /* '<S48>:1:6' */
+    /* '<S48>:1:7' */
     localB->state1[0] = rtu_valD;
 
-    /* '<S40>:1:8' */
+    /* '<S48>:1:8' */
     localB->state1[3] = 0.0;
 
-    /* '<S40>:1:9' */
+    /* '<S48>:1:9' */
     localB->state1[2] = rtu_valD - rtu_state[1];
   }
 
-  /* '<S40>:1:12' */
-  /* '<S40>:1:13' */
+  /* '<S48>:1:12' */
+  /* '<S48>:1:13' */
   if ((localB->state1[3] <= rtu_tr) && (rtu_tr != 0.0)) {
-    /* '<S40>:1:15' */
-    /* '<S40>:1:16' */
+    /* '<S48>:1:15' */
+    /* '<S48>:1:16' */
     Rd = localB->state1[2] - ((10.0 * rt_powd_snf(localB->state1[3], 3.0) /
       rt_powd_snf(rtu_tr, 3.0) - 15.0 * rt_powd_snf(localB->state1[3], 4.0) /
       rt_powd_snf(rtu_tr, 4.0)) + 6.0 * rt_powd_snf(localB->state1[3], 5.0) /
       rt_powd_snf(rtu_tr, 5.0)) * localB->state1[2];
   } else {
-    /* '<S40>:1:18' */
+    /* '<S48>:1:18' */
     Rd = 0.0;
   }
 
-  /* '<S40>:1:21' */
+  /* '<S48>:1:21' */
   Rd = localB->state1[0] - Rd;
 
-  /* '<S40>:1:22' */
+  /* '<S48>:1:22' */
   localB->state1[1] = Rd;
 
-  /* '<S40>:1:23' */
+  /* '<S48>:1:23' */
   localB->state1[3] += 0.001;
 
-  /* '<S40>:1:24' */
+  /* '<S48>:1:24' */
   localB->val = Rd;
 }
 
@@ -198,6 +201,172 @@ static void FingerStrokeAssistance_output(void)
 
   /* Reset subsysRan breadcrumbs */
   srClearBC(FingerStrokeAssistance_DW.TriggeredSubsystem_SubsysRanBC);
+
+  /* Reset subsysRan breadcrumbs */
+  srClearBC(FingerStrokeAssistance_DW.TriggeredSubsystem1_SubsysRanBC);
+
+  /* Level2 S-Function Block: '<S7>/PCI-6221 AD1' (adnipcim) */
+  {
+    SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[0];
+    sfcnOutputs(rts, 0);
+  }
+
+  /* MATLAB Function: '<S7>/MATLAB Function1' */
+  /* MATLAB Function 'Robot/MATLAB Function1': '<S19>:1' */
+  /* '<S19>:1:3' */
+  FingerStrokeAssistance_B.Pressure = (FingerStrokeAssistance_B.PCI6221AD1_o10 -
+    0.5) * 3.75;
+
+  /* MATLAB Function: '<S7>/MATLAB Function3' */
+  /* MATLAB Function 'Robot/MATLAB Function3': '<S21>:1' */
+  /* '<S21>:1:8' */
+  FingerStrokeAssistance_DW.bufSum_a -= FingerStrokeAssistance_DW.buf_g[(int32_T)
+    FingerStrokeAssistance_DW.i_g - 1];
+
+  /* '<S21>:1:9' */
+  FingerStrokeAssistance_DW.buf_g[(int32_T)FingerStrokeAssistance_DW.i_g - 1] =
+    FingerStrokeAssistance_B.PCI6221AD1_o12;
+
+  /* '<S21>:1:10' */
+  FingerStrokeAssistance_DW.bufSum_a += FingerStrokeAssistance_B.PCI6221AD1_o12;
+
+  /* '<S21>:1:11' */
+  FingerStrokeAssistance_DW.i_g++;
+  if (FingerStrokeAssistance_DW.i_g > 50.0) {
+    /* '<S21>:1:12' */
+    /* '<S21>:1:13' */
+    FingerStrokeAssistance_DW.i_g = 1.0;
+  }
+
+  /* '<S21>:1:15' */
+  FingerStrokeAssistance_B.Raw_Average_Grip_Force =
+    FingerStrokeAssistance_DW.bufSum_a / 50.0;
+
+  /* End of MATLAB Function: '<S7>/MATLAB Function3' */
+
+  /* MATLAB Function: '<S7>/MATLAB Function' */
+  /* MATLAB Function 'Robot/MATLAB Function': '<S18>:1' */
+  /* '<S18>:1:2' */
+  /* voltage */
+  /* '<S18>:1:4' */
+  /* Kilograms */
+  /* '<S18>:1:5' */
+  /* Kilograms */
+  /* '<S18>:1:7' */
+  /* '<S18>:1:10' */
+  FingerStrokeAssistance_B.GripForce =
+    (FingerStrokeAssistance_B.Raw_Average_Grip_Force - 2.43) * 0.5 /
+    0.7799999999999998 * 9.80665002864;
+
+  /* MATLAB Function: '<S7>/MATLAB Function4' */
+  /*  conversion to Netwons */
+  /* MATLAB Function 'Robot/MATLAB Function4': '<S22>:1' */
+  /* '<S22>:1:8' */
+  FingerStrokeAssistance_DW.bufSum_l -= FingerStrokeAssistance_DW.buf_e[(int32_T)
+    FingerStrokeAssistance_DW.i_a - 1];
+
+  /* '<S22>:1:9' */
+  FingerStrokeAssistance_DW.buf_e[(int32_T)FingerStrokeAssistance_DW.i_a - 1] =
+    FingerStrokeAssistance_B.PCI6221AD1_o9;
+
+  /* '<S22>:1:10' */
+  FingerStrokeAssistance_DW.bufSum_l += FingerStrokeAssistance_B.PCI6221AD1_o9;
+
+  /* '<S22>:1:11' */
+  FingerStrokeAssistance_DW.i_a++;
+  if (FingerStrokeAssistance_DW.i_a > 50.0) {
+    /* '<S22>:1:12' */
+    /* '<S22>:1:13' */
+    FingerStrokeAssistance_DW.i_a = 1.0;
+  }
+
+  /* '<S22>:1:15' */
+  FingerStrokeAssistance_B.Raw_avg_x_acc = FingerStrokeAssistance_DW.bufSum_l /
+    50.0;
+
+  /* End of MATLAB Function: '<S7>/MATLAB Function4' */
+
+  /* MATLAB Function: '<S7>/MATLAB Function7' */
+  /* MATLAB Function 'Robot/MATLAB Function7': '<S25>:1' */
+  /* '<S25>:1:4' */
+  /* '<S25>:1:6' */
+  FingerStrokeAssistance_B.x_acc = (FingerStrokeAssistance_B.Raw_avg_x_acc -
+    1.24) / 0.24;
+
+  /* MATLAB Function: '<S7>/MATLAB Function2' */
+  /* MATLAB Function 'Robot/MATLAB Function2': '<S20>:1' */
+  /* '<S20>:1:8' */
+  FingerStrokeAssistance_DW.bufSum_e -= FingerStrokeAssistance_DW.buf_i[(int32_T)
+    FingerStrokeAssistance_DW.i_o - 1];
+
+  /* '<S20>:1:9' */
+  FingerStrokeAssistance_DW.buf_i[(int32_T)FingerStrokeAssistance_DW.i_o - 1] =
+    FingerStrokeAssistance_B.PCI6221AD1_o11;
+
+  /* '<S20>:1:10' */
+  FingerStrokeAssistance_DW.bufSum_e += FingerStrokeAssistance_B.PCI6221AD1_o11;
+
+  /* '<S20>:1:11' */
+  FingerStrokeAssistance_DW.i_o++;
+  if (FingerStrokeAssistance_DW.i_o > 50.0) {
+    /* '<S20>:1:12' */
+    /* '<S20>:1:13' */
+    FingerStrokeAssistance_DW.i_o = 1.0;
+  }
+
+  /* '<S20>:1:15' */
+  FingerStrokeAssistance_B.Raw_avg_y_acc = FingerStrokeAssistance_DW.bufSum_e /
+    50.0;
+
+  /* End of MATLAB Function: '<S7>/MATLAB Function2' */
+
+  /* MATLAB Function: '<S7>/MATLAB Function8' */
+  /* MATLAB Function 'Robot/MATLAB Function8': '<S26>:1' */
+  /* '<S26>:1:4' */
+  /* '<S26>:1:6' */
+  FingerStrokeAssistance_B.y_acc = (FingerStrokeAssistance_B.Raw_avg_y_acc -
+    1.245) / 0.24499999999999988;
+
+  /* MATLAB Function: '<S7>/MATLAB Function5' */
+  /* MATLAB Function 'Robot/MATLAB Function5': '<S23>:1' */
+  /* '<S23>:1:8' */
+  FingerStrokeAssistance_DW.bufSum -= FingerStrokeAssistance_DW.buf[(int32_T)
+    FingerStrokeAssistance_DW.i - 1];
+
+  /* '<S23>:1:9' */
+  FingerStrokeAssistance_DW.buf[(int32_T)FingerStrokeAssistance_DW.i - 1] =
+    FingerStrokeAssistance_B.PCI6221AD1_o2;
+
+  /* '<S23>:1:10' */
+  FingerStrokeAssistance_DW.bufSum += FingerStrokeAssistance_B.PCI6221AD1_o2;
+
+  /* '<S23>:1:11' */
+  FingerStrokeAssistance_DW.i++;
+  if (FingerStrokeAssistance_DW.i > 50.0) {
+    /* '<S23>:1:12' */
+    /* '<S23>:1:13' */
+    FingerStrokeAssistance_DW.i = 1.0;
+  }
+
+  /* '<S23>:1:15' */
+  FingerStrokeAssistance_B.Raw_avg_Z_acc = FingerStrokeAssistance_DW.bufSum /
+    50.0;
+
+  /* End of MATLAB Function: '<S7>/MATLAB Function5' */
+
+  /* MATLAB Function: '<S7>/MATLAB Function6' */
+  /* MATLAB Function 'Robot/MATLAB Function6': '<S24>:1' */
+  /* '<S24>:1:4' */
+  /* '<S24>:1:6' */
+  FingerStrokeAssistance_B.Z_acc = (FingerStrokeAssistance_B.Raw_avg_Z_acc -
+    1.3250000000000002) / 0.24499999999999988;
+
+  /* Outport: '<Root>/Out1' */
+  FingerStrokeAssistance_Y.Out1[0] = FingerStrokeAssistance_B.Pressure;
+  FingerStrokeAssistance_Y.Out1[1] = FingerStrokeAssistance_B.GripForce;
+  FingerStrokeAssistance_Y.Out1[2] = FingerStrokeAssistance_B.x_acc;
+  FingerStrokeAssistance_Y.Out1[3] = FingerStrokeAssistance_B.y_acc;
+  FingerStrokeAssistance_Y.Out1[4] = FingerStrokeAssistance_B.Z_acc;
 
   /* DataTypeConversion: '<Root>/Data Type Conversion' incorporates:
    *  Constant: '<S5>/Constant'
@@ -238,10 +407,10 @@ static void FingerStrokeAssistance_output(void)
   /* Delay: '<S1>/Delay1' */
   FingerStrokeAssistance_B.Delay1 = FingerStrokeAssistance_DW.Delay1_DSTATE;
 
-  /* UnitDelay: '<S12>/Delay Input1' */
+  /* UnitDelay: '<S13>/Delay Input1' */
   FingerStrokeAssistance_B.Uk1 = FingerStrokeAssistance_DW.DelayInput1_DSTATE;
 
-  /* RelationalOperator: '<S12>/FixPt Relational Operator' */
+  /* RelationalOperator: '<S13>/FixPt Relational Operator' */
   FingerStrokeAssistance_B.FixPtRelationalOperator =
     (FingerStrokeAssistance_B.Delay1 != FingerStrokeAssistance_B.Uk1);
 
@@ -283,11 +452,11 @@ static void FingerStrokeAssistance_output(void)
   FingerStrokeAssistance_B.UnitDelay2 =
     FingerStrokeAssistance_DW.UnitDelay2_DSTATE;
 
-  /* UnitDelay: '<S32>/Delay Input1' */
+  /* UnitDelay: '<S40>/Delay Input1' */
   FingerStrokeAssistance_B.Uk1_o =
     FingerStrokeAssistance_DW.DelayInput1_DSTATE_l;
 
-  /* RelationalOperator: '<S32>/FixPt Relational Operator' */
+  /* RelationalOperator: '<S40>/FixPt Relational Operator' */
   FingerStrokeAssistance_B.FixPtRelationalOperator_i =
     (FingerStrokeAssistance_B.UnitDelay2 != FingerStrokeAssistance_B.Uk1_o);
 
@@ -329,11 +498,11 @@ static void FingerStrokeAssistance_output(void)
   FingerStrokeAssistance_B.UnitDelay2_j =
     FingerStrokeAssistance_DW.UnitDelay2_DSTATE_h;
 
-  /* UnitDelay: '<S33>/Delay Input1' */
+  /* UnitDelay: '<S41>/Delay Input1' */
   FingerStrokeAssistance_B.Uk1_m =
     FingerStrokeAssistance_DW.DelayInput1_DSTATE_j;
 
-  /* RelationalOperator: '<S33>/FixPt Relational Operator' */
+  /* RelationalOperator: '<S41>/FixPt Relational Operator' */
   FingerStrokeAssistance_B.FixPtRelationalOperator_f =
     (FingerStrokeAssistance_B.UnitDelay2_j != FingerStrokeAssistance_B.Uk1_m);
 
@@ -357,24 +526,24 @@ static void FingerStrokeAssistance_output(void)
 
   /* Level2 S-Function Block: '<S7>/PCI 6221 ENC ' (encnipcim) */
   {
-    SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[0];
+    SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[1];
     sfcnOutputs(rts, 0);
   }
 
   /* Level2 S-Function Block: '<S7>/PCI 6221 ENC 1' (encnipcim) */
   {
-    SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[1];
+    SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[2];
     sfcnOutputs(rts, 0);
   }
 
-  /* Gain: '<S10>/parLeftMode' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parLeftMode' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parLeftMode =
     FingerStrokeAssistance_P.parLeftMode_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* Saturate: '<S10>/Saturation' */
+  /* Saturate: '<S11>/Saturation' */
   state = FingerStrokeAssistance_B.parLeftMode;
   u1 = FingerStrokeAssistance_P.Saturation_LowerSat;
   u2 = FingerStrokeAssistance_P.Saturation_UpperSat;
@@ -386,18 +555,18 @@ static void FingerStrokeAssistance_output(void)
     FingerStrokeAssistance_B.Saturation = state;
   }
 
-  /* End of Saturate: '<S10>/Saturation' */
+  /* End of Saturate: '<S11>/Saturation' */
 
-  /* MATLAB Function: '<S24>/MATLAB Function' */
+  /* MATLAB Function: '<S32>/MATLAB Function' */
   FingerStrokeAssi_MATLABFunction(FingerStrokeAssistance_B.PCI6221ENC,
     FingerStrokeAssistance_B.PCI6221ENC1, FingerStrokeAssistance_B.Saturation,
-    &FingerStrokeAssistance_B.sf_MATLABFunction);
+    &FingerStrokeAssistance_B.sf_MATLABFunction_e);
 
   /* Gain: '<S7>/Gain' */
   FingerStrokeAssistance_B.Gain[0] = FingerStrokeAssistance_P.Gain_Gain *
-    FingerStrokeAssistance_B.sf_MATLABFunction.output1;
+    FingerStrokeAssistance_B.sf_MATLABFunction_e.output1;
   FingerStrokeAssistance_B.Gain[1] = FingerStrokeAssistance_P.Gain_Gain *
-    FingerStrokeAssistance_B.sf_MATLABFunction.output2;
+    FingerStrokeAssistance_B.sf_MATLABFunction_e.output2;
 
   /* UnitDelay: '<Root>/Unit Delay1' */
   FingerStrokeAssistance_B.UnitDelay1 =
@@ -411,18 +580,21 @@ static void FingerStrokeAssistance_output(void)
   state = FingerStrokeAssistance_B.state;
 
   /* % Create Finite State Machine for FINGER Robot */
-  /* '<S4>:1:6' */
+  /* '<S4>:1:5' */
   FingerStrokeAssistance_B.ramp_switch = 0.0;
 
-  /* '<S4>:1:7' */
+  /* '<S4>:1:6' */
   FingerStrokeAssistance_B.fp_ramp_switch = 0.0;
 
+  /* '<S4>:1:7' */
   /* '<S4>:1:8' */
-  /* '<S4>:1:9' */
   FingerStrokeAssistance_B.f_ref_lim = 0.0;
 
-  /* '<S4>:1:10' */
+  /* '<S4>:1:9' */
   FingerStrokeAssistance_B.enc_trigger = 0.0;
+
+  /* '<S4>:1:10' */
+  FingerStrokeAssistance_B.p_trigger = 0.0;
 
   /* '<S4>:1:11' */
   FingerStrokeAssistance_B.pos_ref_Ulim = 1.0;
@@ -452,12 +624,13 @@ static void FingerStrokeAssistance_output(void)
     FingerStrokeAssistance_B.UnitDelay_g[1];
 
   /* MATLAB Function: '<Root>/MATLAB Function' incorporates:
-   *  Constant: '<Root>/Constant1'
+   *  Constant: '<Root>/Constant2'
    *  Constant: '<Root>/Constant3'
    *  Constant: '<Root>/Constant4'
    *  Constant: '<Root>/Constant5'
    *  Constant: '<Root>/Constant6'
    *  Constant: '<Root>/Constant7'
+   *  Constant: '<Root>/Constant8'
    */
   FingerStrokeAssistance_B.f_ref[1] = 0.0;
   FingerStrokeAssistance_B.pos_ref[1] = FingerStrokeAssistance_B.Sum[1];
@@ -507,7 +680,8 @@ static void FingerStrokeAssistance_output(void)
     FingerStrokeAssistance_B.f_ref_lim = 2.5;
 
     /*  re-establish limit for reference force */
-    if (FingerStrokeAssistance_B.DiscreteTimeIntegrator_e >= 10.0) {
+    if ((FingerStrokeAssistance_B.DiscreteTimeIntegrator_e >= 10.0) &&
+        (FingerStrokeAssistance_B.DataTypeConversion1 == 1.0)) {
       /* '<S4>:1:33' */
       /* '<S4>:1:34' */
       FingerStrokeAssistance_B.enc_trigger = 1.0;
@@ -517,130 +691,107 @@ static void FingerStrokeAssistance_output(void)
       FingerStrokeAssistance_B.ramp_switch = 0.0;
 
       /* '<S4>:1:36' */
-      state = 3.0;
-    }
-    break;
-
-   case 3:
-    /* Move second finger to flex position */
-    /* '<S4>:1:40' */
-    FingerStrokeAssistance_B.fp_ramp_switch = 1.0;
-
-    /* '<S4>:1:41' */
-    FingerStrokeAssistance_B.pos_ref[0] = 0.0;
-    FingerStrokeAssistance_B.pos_ref[1] =
-      FingerStrokeAssistance_B.DiscreteTimeIntegrator_k *
-      FingerStrokeAssistance_P.Constant1_Value;
-
-    /* '<S4>:1:42' */
-    FingerStrokeAssistance_B.pos_ref_Ulim = 1.0;
-
-    /* '<S4>:1:43' */
-    FingerStrokeAssistance_B.pos_ref_Llim = 0.0;
-    if (FingerStrokeAssistance_B.DataTypeConversion1 == 1.0) {
-      /* '<S4>:1:45' */
-      /* '<S4>:1:46' */
       FingerStrokeAssistance_B.f_ref[0] = FingerStrokeAssistance_B.UnitDelay2_p
         [0];
       FingerStrokeAssistance_B.f_ref[1] = FingerStrokeAssistance_B.UnitDelay2_p
         [1];
 
-      /* '<S4>:1:47' */
+      /* '<S4>:1:37' */
       FingerStrokeAssistance_B.f_ref_lim = 2.5;
-    } else {
-      /* '<S4>:1:49' */
+
+      /* '<S4>:1:38' */
+      FingerStrokeAssistance_B.p_trigger = 1.0;
+
+      /* '<S4>:1:39' */
+      state = 3.0;
+    } else if ((FingerStrokeAssistance_B.DiscreteTimeIntegrator_e >= 10.0) &&
+               (FingerStrokeAssistance_B.DataTypeConversion1 == 0.0)) {
+      /* '<S4>:1:40' */
+      /* '<S4>:1:41' */
+      FingerStrokeAssistance_B.enc_trigger = 1.0;
+
+      /* '<S4>:1:42' */
+      FingerStrokeAssistance_B.ramp_switch = 0.0;
+
+      /* '<S4>:1:43' */
       FingerStrokeAssistance_B.f_ref[0] = FingerStrokeAssistance_B.UnitDelay3[0];
       FingerStrokeAssistance_B.f_ref[1] = FingerStrokeAssistance_B.UnitDelay3[1];
 
-      /* '<S4>:1:50' */
+      /* '<S4>:1:44' */
       FingerStrokeAssistance_B.f_ref_lim = 2.5;
-    }
 
-    if ((FingerStrokeAssistance_B.Sum[1] >= 0.9) &&
-        (FingerStrokeAssistance_B.DataTypeConversion1 == 1.0)) {
-      /* '<S4>:1:53' */
-      /* '<S4>:1:54' */
-      FingerStrokeAssistance_B.fp_ramp_switch = 0.0;
-
-      /* '<S4>:1:55' */
-      state = 5.0;
-    } else if ((FingerStrokeAssistance_B.Sum[1] >= 0.9) &&
-               (FingerStrokeAssistance_B.DataTypeConversion1 == 0.0)) {
-      /* '<S4>:1:56' */
-      /* '<S4>:1:57' */
-      FingerStrokeAssistance_B.fp_ramp_switch = 0.0;
-
-      /* '<S4>:1:58' */
+      /* '<S4>:1:45' */
       state = 4.0;
     } else {
-      /* '<S4>:1:60' */
-      state = 3.0;
+      /* '<S4>:1:47' */
+      state = 2.0;
+    }
+    break;
+
+   case 3:
+    /* '<S4>:1:51' */
+    FingerStrokeAssistance_B.pos_ref[0] = FingerStrokeAssistance_B.UnitDelay1;
+    FingerStrokeAssistance_B.pos_ref[1] = 0.0;
+
+    /* '<S4>:1:52' */
+    FingerStrokeAssistance_B.pos_ref_Ulim = 1.0;
+
+    /* '<S4>:1:53' */
+    FingerStrokeAssistance_B.pos_ref_Llim = 0.0;
+
+    /* '<S4>:1:54' */
+    FingerStrokeAssistance_B.f_ref_lim = 2.5;
+    if (fabs(FingerStrokeAssistance_B.UnitDelay2_p[0]) >=
+        FingerStrokeAssistance_P.Constant4_Value) {
+      /* '<S4>:1:56' */
+      /* '<S4>:1:57' */
+      u1 = FingerStrokeAssistance_B.UnitDelay2_p[0] *
+        FingerStrokeAssistance_P.Constant2_Value;
+      if (FingerStrokeAssistance_B.Sum[1] >=
+          FingerStrokeAssistance_P.Constant7_Value) {
+        /* '<S4>:1:59' */
+        /* '<S4>:1:60' */
+        u1 = FingerStrokeAssistance_B.UnitDelay2_p[0] *
+          FingerStrokeAssistance_P.Constant8_Value;
+      }
+    } else {
+      /* '<S4>:1:63' */
+      u1 = FingerStrokeAssistance_P.Constant5_Value *
+        FingerStrokeAssistance_B.Sum[0] +
+        FingerStrokeAssistance_P.Constant6_Value;
+    }
+
+    /* '<S4>:1:66' */
+    FingerStrokeAssistance_B.f_ref[0] = u1;
+    FingerStrokeAssistance_B.f_ref[1] = FingerStrokeAssistance_B.UnitDelay2_p[0];
+    if (FingerStrokeAssistance_B.DataTypeConversion == 0.0) {
+      /* '<S4>:1:68' */
+      /* '<S4>:1:69' */
+      state = 1.0;
     }
     break;
 
    case 4:
     /* Operating Mode_Position Control - Control first finger linkage */
-    /* '<S4>:1:64' */
+    /* '<S4>:1:73' */
     FingerStrokeAssistance_B.pos_ref[0] = FingerStrokeAssistance_B.UnitDelay1;
-    FingerStrokeAssistance_B.pos_ref[1] = 0.9;
+    FingerStrokeAssistance_B.pos_ref[1] = 0.0;
 
-    /* '<S4>:1:65' */
+    /* '<S4>:1:74' */
     FingerStrokeAssistance_B.f_ref[0] = FingerStrokeAssistance_B.UnitDelay3[0];
     FingerStrokeAssistance_B.f_ref[1] = FingerStrokeAssistance_B.UnitDelay3[1];
 
-    /* '<S4>:1:66' */
-    FingerStrokeAssistance_B.pos_ref_Ulim = 1.0;
-
-    /* '<S4>:1:67' */
-    FingerStrokeAssistance_B.pos_ref_Llim = 0.0;
-
-    /* '<S4>:1:68' */
-    FingerStrokeAssistance_B.f_ref_lim = 5.0;
-    if (FingerStrokeAssistance_B.DataTypeConversion == 0.0) {
-      /* '<S4>:1:70' */
-      /* '<S4>:1:71' */
-      state = 1.0;
-    }
-    break;
-
-   case 5:
     /* '<S4>:1:75' */
-    FingerStrokeAssistance_B.pos_ref[0] = FingerStrokeAssistance_B.UnitDelay1;
-    FingerStrokeAssistance_B.pos_ref[1] = 0.9;
+    FingerStrokeAssistance_B.pos_ref_Ulim = 1.0;
 
     /* '<S4>:1:76' */
-    FingerStrokeAssistance_B.pos_ref_Ulim = 1.0;
-
-    /* '<S4>:1:77' */
     FingerStrokeAssistance_B.pos_ref_Llim = 0.0;
 
-    /* '<S4>:1:78' */
-    FingerStrokeAssistance_B.f_ref_lim = 2.5;
-    if (fabs(FingerStrokeAssistance_B.UnitDelay2_p[1]) >=
-        FingerStrokeAssistance_P.Constant4_Value) {
-      /* '<S4>:1:86' */
-      /* '<S4>:1:88' */
-      u1 = FingerStrokeAssistance_B.UnitDelay2_p[1] *
-        FingerStrokeAssistance_P.Constant6_Value;
-    } else {
-      /* '<S4>:1:90' */
-      u1 = FingerStrokeAssistance_P.Constant5_Value *
-        FingerStrokeAssistance_B.Sum[0];
-    }
-
-    if (FingerStrokeAssistance_B.Sum[0] >= 0.9) {
-      /* '<S4>:1:93' */
-      /* '<S4>:1:94' */
-      u1 = FingerStrokeAssistance_B.UnitDelay2_p[1] *
-        FingerStrokeAssistance_P.Constant7_Value;
-    }
-
-    /* '<S4>:1:97' */
-    FingerStrokeAssistance_B.f_ref[0] = u1;
-    FingerStrokeAssistance_B.f_ref[1] = FingerStrokeAssistance_B.UnitDelay2_p[1];
+    /* '<S4>:1:77' */
+    FingerStrokeAssistance_B.f_ref_lim = 5.0;
     if (FingerStrokeAssistance_B.DataTypeConversion == 0.0) {
-      /* '<S4>:1:98' */
-      /* '<S4>:1:99' */
+      /* '<S4>:1:79' */
+      /* '<S4>:1:80' */
       state = 1.0;
     }
     break;
@@ -648,151 +799,211 @@ static void FingerStrokeAssistance_output(void)
 
   FingerStrokeAssistance_B.state = state;
 
-  /* RelationalOperator: '<S18>/LowerRelop1' */
-  FingerStrokeAssistance_B.LowerRelop1[0] = (FingerStrokeAssistance_B.pos_ref[0]
-    > FingerStrokeAssistance_B.pos_ref_Ulim);
+  /* UnitDelay: '<S7>/Unit Delay1' */
+  FingerStrokeAssistance_B.UnitDelay1_n =
+    FingerStrokeAssistance_DW.UnitDelay1_DSTATE_n;
 
-  /* RelationalOperator: '<S18>/UpperRelop' */
-  FingerStrokeAssistance_B.UpperRelop[0] = (FingerStrokeAssistance_B.pos_ref[0] <
+  /* Sum: '<S3>/Sum1' */
+  FingerStrokeAssistance_B.Sum1 = FingerStrokeAssistance_B.Pressure -
+    FingerStrokeAssistance_B.UnitDelay1_n;
+
+  /* RelationalOperator: '<S16>/LowerRelop1' incorporates:
+   *  Constant: '<S3>/Constant'
+   */
+  FingerStrokeAssistance_B.LowerRelop1[0] = (FingerStrokeAssistance_B.Sum1 >
+    FingerStrokeAssistance_B.pos_ref_Ulim);
+  FingerStrokeAssistance_B.LowerRelop1[1] =
+    (FingerStrokeAssistance_P.Constant_Value >
+     FingerStrokeAssistance_B.pos_ref_Ulim);
+
+  /* RelationalOperator: '<S16>/UpperRelop' incorporates:
+   *  Constant: '<S3>/Constant'
+   */
+  FingerStrokeAssistance_B.UpperRelop[0] = (FingerStrokeAssistance_B.Sum1 <
     FingerStrokeAssistance_B.pos_ref_Llim);
+  FingerStrokeAssistance_B.UpperRelop[1] =
+    (FingerStrokeAssistance_P.Constant_Value <
+     FingerStrokeAssistance_B.pos_ref_Llim);
 
-  /* Switch: '<S18>/Switch' */
+  /* Switch: '<S16>/Switch' incorporates:
+   *  Constant: '<S3>/Constant'
+   */
   if (FingerStrokeAssistance_B.UpperRelop[0]) {
     FingerStrokeAssistance_B.Switch[0] = FingerStrokeAssistance_B.pos_ref_Llim;
   } else {
-    FingerStrokeAssistance_B.Switch[0] = FingerStrokeAssistance_B.pos_ref[0];
+    FingerStrokeAssistance_B.Switch[0] = FingerStrokeAssistance_B.Sum1;
   }
 
-  /* Switch: '<S18>/Switch2' */
+  if (FingerStrokeAssistance_B.UpperRelop[1]) {
+    FingerStrokeAssistance_B.Switch[1] = FingerStrokeAssistance_B.pos_ref_Llim;
+  } else {
+    FingerStrokeAssistance_B.Switch[1] = FingerStrokeAssistance_P.Constant_Value;
+  }
+
+  /* End of Switch: '<S16>/Switch' */
+
+  /* Switch: '<S16>/Switch2' */
   if (FingerStrokeAssistance_B.LowerRelop1[0]) {
     FingerStrokeAssistance_B.Switch2[0] = FingerStrokeAssistance_B.pos_ref_Ulim;
   } else {
     FingerStrokeAssistance_B.Switch2[0] = FingerStrokeAssistance_B.Switch[0];
   }
 
-  /* Sum: '<S3>/Sum' */
-  FingerStrokeAssistance_B.Sum_h[0] = FingerStrokeAssistance_B.Switch2[0] -
-    FingerStrokeAssistance_B.Sum[0];
-
-  /* Gain: '<S17>/Proportional Gain' */
-  FingerStrokeAssistance_B.ProportionalGain[0] =
-    FingerStrokeAssistance_P.DiscretePIDController_P *
-    FingerStrokeAssistance_B.Sum_h[0];
-
-  /* DiscreteIntegrator: '<S17>/Integrator' */
-  FingerStrokeAssistance_B.Integrator[0] =
-    FingerStrokeAssistance_DW.Integrator_DSTATE[0];
-
-  /* Gain: '<S17>/Derivative Gain' */
-  FingerStrokeAssistance_B.DerivativeGain[0] =
-    FingerStrokeAssistance_P.DiscretePIDController_D *
-    FingerStrokeAssistance_B.Sum_h[0];
-
-  /* DiscreteIntegrator: '<S17>/Filter' */
-  FingerStrokeAssistance_B.Filter[0] = FingerStrokeAssistance_DW.Filter_DSTATE[0];
-
-  /* Sum: '<S17>/SumD' */
-  FingerStrokeAssistance_B.SumD[0] = FingerStrokeAssistance_B.DerivativeGain[0]
-    - FingerStrokeAssistance_B.Filter[0];
-
-  /* Gain: '<S17>/Filter Coefficient' */
-  FingerStrokeAssistance_B.FilterCoefficient[0] =
-    FingerStrokeAssistance_P.DiscretePIDController_N *
-    FingerStrokeAssistance_B.SumD[0];
-
-  /* Sum: '<S17>/Sum' */
-  FingerStrokeAssistance_B.Sum_a[0] =
-    (FingerStrokeAssistance_B.ProportionalGain[0] +
-     FingerStrokeAssistance_B.Integrator[0]) +
-    FingerStrokeAssistance_B.FilterCoefficient[0];
-
-  /* Gain: '<S17>/Integral Gain' */
-  FingerStrokeAssistance_B.IntegralGain[0] =
-    FingerStrokeAssistance_P.DiscretePIDController_I *
-    FingerStrokeAssistance_B.Sum_h[0];
-
-  /* RelationalOperator: '<S18>/LowerRelop1' */
-  FingerStrokeAssistance_B.LowerRelop1[1] = (FingerStrokeAssistance_B.pos_ref[1]
-    > FingerStrokeAssistance_B.pos_ref_Ulim);
-
-  /* RelationalOperator: '<S18>/UpperRelop' */
-  FingerStrokeAssistance_B.UpperRelop[1] = (FingerStrokeAssistance_B.pos_ref[1] <
-    FingerStrokeAssistance_B.pos_ref_Llim);
-
-  /* Switch: '<S18>/Switch' */
-  if (FingerStrokeAssistance_B.UpperRelop[1]) {
-    FingerStrokeAssistance_B.Switch[1] = FingerStrokeAssistance_B.pos_ref_Llim;
-  } else {
-    FingerStrokeAssistance_B.Switch[1] = FingerStrokeAssistance_B.pos_ref[1];
-  }
-
-  /* Switch: '<S18>/Switch2' */
   if (FingerStrokeAssistance_B.LowerRelop1[1]) {
     FingerStrokeAssistance_B.Switch2[1] = FingerStrokeAssistance_B.pos_ref_Ulim;
   } else {
     FingerStrokeAssistance_B.Switch2[1] = FingerStrokeAssistance_B.Switch[1];
   }
 
+  /* End of Switch: '<S16>/Switch2' */
+
+  /* Gain: '<S2>/Gain' */
+  FingerStrokeAssistance_B.Gain_d = FingerStrokeAssistance_P.Gain_Gain_i *
+    FingerStrokeAssistance_B.Switch2[0];
+
+  /* RelationalOperator: '<S15>/LowerRelop1' */
+  FingerStrokeAssistance_B.LowerRelop1_f[0] = (FingerStrokeAssistance_B.pos_ref
+    [0] > FingerStrokeAssistance_B.pos_ref_Ulim);
+
+  /* RelationalOperator: '<S15>/UpperRelop' */
+  FingerStrokeAssistance_B.UpperRelop_o[0] = (FingerStrokeAssistance_B.pos_ref[0]
+    < FingerStrokeAssistance_B.pos_ref_Llim);
+
+  /* Switch: '<S15>/Switch' */
+  if (FingerStrokeAssistance_B.UpperRelop_o[0]) {
+    FingerStrokeAssistance_B.Switch_g[0] = FingerStrokeAssistance_B.pos_ref_Llim;
+  } else {
+    FingerStrokeAssistance_B.Switch_g[0] = FingerStrokeAssistance_B.pos_ref[0];
+  }
+
+  /* Switch: '<S15>/Switch2' */
+  if (FingerStrokeAssistance_B.LowerRelop1_f[0]) {
+    FingerStrokeAssistance_B.Switch2_d[0] =
+      FingerStrokeAssistance_B.pos_ref_Ulim;
+  } else {
+    FingerStrokeAssistance_B.Switch2_d[0] = FingerStrokeAssistance_B.Switch_g[0];
+  }
+
   /* Sum: '<S3>/Sum' */
-  FingerStrokeAssistance_B.Sum_h[1] = FingerStrokeAssistance_B.Switch2[1] -
+  FingerStrokeAssistance_B.Sum_h[0] = FingerStrokeAssistance_B.Switch2_d[0] -
+    FingerStrokeAssistance_B.Sum[0];
+
+  /* Gain: '<S14>/Derivative Gain' */
+  FingerStrokeAssistance_B.DerivativeGain[0] =
+    FingerStrokeAssistance_P.DiscretePIDController_D *
+    FingerStrokeAssistance_B.Sum_h[0];
+
+  /* DiscreteIntegrator: '<S14>/Filter' */
+  FingerStrokeAssistance_B.Filter[0] = FingerStrokeAssistance_DW.Filter_DSTATE[0];
+
+  /* Sum: '<S14>/SumD' */
+  FingerStrokeAssistance_B.SumD[0] = FingerStrokeAssistance_B.DerivativeGain[0]
+    - FingerStrokeAssistance_B.Filter[0];
+
+  /* Gain: '<S14>/Filter Coefficient' */
+  FingerStrokeAssistance_B.FilterCoefficient[0] =
+    FingerStrokeAssistance_P.DiscretePIDController_N *
+    FingerStrokeAssistance_B.SumD[0];
+
+  /* Gain: '<S14>/Integral Gain' */
+  FingerStrokeAssistance_B.IntegralGain[0] =
+    FingerStrokeAssistance_P.DiscretePIDController_I *
+    FingerStrokeAssistance_B.Sum_h[0];
+
+  /* DiscreteIntegrator: '<S14>/Integrator' */
+  FingerStrokeAssistance_B.Integrator[0] =
+    FingerStrokeAssistance_DW.Integrator_DSTATE[0];
+
+  /* Gain: '<S14>/Proportional Gain' */
+  FingerStrokeAssistance_B.ProportionalGain[0] =
+    FingerStrokeAssistance_P.DiscretePIDController_P *
+    FingerStrokeAssistance_B.Sum_h[0];
+
+  /* Sum: '<S14>/Sum' */
+  FingerStrokeAssistance_B.Sum_a[0] =
+    (FingerStrokeAssistance_B.ProportionalGain[0] +
+     FingerStrokeAssistance_B.Integrator[0]) +
+    FingerStrokeAssistance_B.FilterCoefficient[0];
+
+  /* RelationalOperator: '<S15>/LowerRelop1' */
+  FingerStrokeAssistance_B.LowerRelop1_f[1] = (FingerStrokeAssistance_B.pos_ref
+    [1] > FingerStrokeAssistance_B.pos_ref_Ulim);
+
+  /* RelationalOperator: '<S15>/UpperRelop' */
+  FingerStrokeAssistance_B.UpperRelop_o[1] = (FingerStrokeAssistance_B.pos_ref[1]
+    < FingerStrokeAssistance_B.pos_ref_Llim);
+
+  /* Switch: '<S15>/Switch' */
+  if (FingerStrokeAssistance_B.UpperRelop_o[1]) {
+    FingerStrokeAssistance_B.Switch_g[1] = FingerStrokeAssistance_B.pos_ref_Llim;
+  } else {
+    FingerStrokeAssistance_B.Switch_g[1] = FingerStrokeAssistance_B.pos_ref[1];
+  }
+
+  /* Switch: '<S15>/Switch2' */
+  if (FingerStrokeAssistance_B.LowerRelop1_f[1]) {
+    FingerStrokeAssistance_B.Switch2_d[1] =
+      FingerStrokeAssistance_B.pos_ref_Ulim;
+  } else {
+    FingerStrokeAssistance_B.Switch2_d[1] = FingerStrokeAssistance_B.Switch_g[1];
+  }
+
+  /* Sum: '<S3>/Sum' */
+  FingerStrokeAssistance_B.Sum_h[1] = FingerStrokeAssistance_B.Switch2_d[1] -
     FingerStrokeAssistance_B.Sum[1];
 
-  /* Gain: '<S17>/Proportional Gain' */
-  FingerStrokeAssistance_B.ProportionalGain[1] =
-    FingerStrokeAssistance_P.DiscretePIDController_P *
-    FingerStrokeAssistance_B.Sum_h[1];
-
-  /* DiscreteIntegrator: '<S17>/Integrator' */
-  FingerStrokeAssistance_B.Integrator[1] =
-    FingerStrokeAssistance_DW.Integrator_DSTATE[1];
-
-  /* Gain: '<S17>/Derivative Gain' */
+  /* Gain: '<S14>/Derivative Gain' */
   FingerStrokeAssistance_B.DerivativeGain[1] =
     FingerStrokeAssistance_P.DiscretePIDController_D *
     FingerStrokeAssistance_B.Sum_h[1];
 
-  /* DiscreteIntegrator: '<S17>/Filter' */
+  /* DiscreteIntegrator: '<S14>/Filter' */
   FingerStrokeAssistance_B.Filter[1] = FingerStrokeAssistance_DW.Filter_DSTATE[1];
 
-  /* Sum: '<S17>/SumD' */
+  /* Sum: '<S14>/SumD' */
   FingerStrokeAssistance_B.SumD[1] = FingerStrokeAssistance_B.DerivativeGain[1]
     - FingerStrokeAssistance_B.Filter[1];
 
-  /* Gain: '<S17>/Filter Coefficient' */
+  /* Gain: '<S14>/Filter Coefficient' */
   FingerStrokeAssistance_B.FilterCoefficient[1] =
     FingerStrokeAssistance_P.DiscretePIDController_N *
     FingerStrokeAssistance_B.SumD[1];
 
-  /* Sum: '<S17>/Sum' */
+  /* Gain: '<S14>/Integral Gain' */
+  FingerStrokeAssistance_B.IntegralGain[1] =
+    FingerStrokeAssistance_P.DiscretePIDController_I *
+    FingerStrokeAssistance_B.Sum_h[1];
+
+  /* DiscreteIntegrator: '<S14>/Integrator' */
+  FingerStrokeAssistance_B.Integrator[1] =
+    FingerStrokeAssistance_DW.Integrator_DSTATE[1];
+
+  /* Gain: '<S14>/Proportional Gain' */
+  FingerStrokeAssistance_B.ProportionalGain[1] =
+    FingerStrokeAssistance_P.DiscretePIDController_P *
+    FingerStrokeAssistance_B.Sum_h[1];
+
+  /* Sum: '<S14>/Sum' */
   FingerStrokeAssistance_B.Sum_a[1] =
     (FingerStrokeAssistance_B.ProportionalGain[1] +
      FingerStrokeAssistance_B.Integrator[1]) +
     FingerStrokeAssistance_B.FilterCoefficient[1];
 
-  /* Gain: '<S17>/Integral Gain' */
-  FingerStrokeAssistance_B.IntegralGain[1] =
-    FingerStrokeAssistance_P.DiscretePIDController_I *
-    FingerStrokeAssistance_B.Sum_h[1];
-
-  /* Gain: '<S2>/Gain' */
-  FingerStrokeAssistance_B.Gain_d = FingerStrokeAssistance_P.Gain_Gain_i *
-    FingerStrokeAssistance_B.Sum_a[1];
-
   /* DiscreteFilter: '<S7>/Discrete Filter1' */
   FingerStrokeAssistance_DW.DiscreteFilter1_tmp_d[0U] = 0.0;
 
-  /* SampleTimeMath: '<S19>/TSamp'
+  /* SampleTimeMath: '<S17>/TSamp'
    *
-   * About '<S19>/TSamp':
+   * About '<S17>/TSamp':
    *  y = u * K where K = 1 / ( w * Ts )
    */
   FingerStrokeAssistance_B.TSamp[0] = FingerStrokeAssistance_B.Sum[0] *
     FingerStrokeAssistance_P.TSamp_WtEt;
 
-  /* UnitDelay: '<S19>/UD' */
+  /* UnitDelay: '<S17>/UD' */
   FingerStrokeAssistance_B.Uk1_d[0] = FingerStrokeAssistance_DW.UD_DSTATE[0];
 
-  /* Sum: '<S19>/Diff' */
+  /* Sum: '<S17>/Diff' */
   FingerStrokeAssistance_B.Diff[0] = FingerStrokeAssistance_B.TSamp[0] -
     FingerStrokeAssistance_B.Uk1_d[0];
 
@@ -808,18 +1019,18 @@ static void FingerStrokeAssistance_output(void)
     FingerStrokeAssistance_DW.DiscreteFilter1_states_g[0];
   FingerStrokeAssistance_B.DiscreteFilter1_j[0] = state;
 
-  /* SampleTimeMath: '<S19>/TSamp'
+  /* SampleTimeMath: '<S17>/TSamp'
    *
-   * About '<S19>/TSamp':
+   * About '<S17>/TSamp':
    *  y = u * K where K = 1 / ( w * Ts )
    */
   FingerStrokeAssistance_B.TSamp[1] = FingerStrokeAssistance_B.Sum[1] *
     FingerStrokeAssistance_P.TSamp_WtEt;
 
-  /* UnitDelay: '<S19>/UD' */
+  /* UnitDelay: '<S17>/UD' */
   FingerStrokeAssistance_B.Uk1_d[1] = FingerStrokeAssistance_DW.UD_DSTATE[1];
 
-  /* Sum: '<S19>/Diff' */
+  /* Sum: '<S17>/Diff' */
   FingerStrokeAssistance_B.Diff[1] = FingerStrokeAssistance_B.TSamp[1] -
     FingerStrokeAssistance_B.Uk1_d[1];
 
@@ -836,15 +1047,15 @@ static void FingerStrokeAssistance_output(void)
   FingerStrokeAssistance_B.DiscreteFilter1_j[1] = state;
 
   /* Outputs for Triggered SubSystem: '<S7>/Triggered Subsystem' incorporates:
-   *  TriggerPort: '<S21>/Trigger'
+   *  TriggerPort: '<S28>/Trigger'
    */
   zcEvent = rt_ZCFcn(RISING_ZERO_CROSSING,
                      &FingerStrokeAssistance_PrevZCX.TriggeredSubsystem_Trig_ZCE,
                      (FingerStrokeAssistance_B.enc_trigger));
   if (zcEvent != NO_ZCEVENT) {
-    /* Inport: '<S21>/In1' */
-    FingerStrokeAssistance_B.In1[0] = FingerStrokeAssistance_B.Gain[0];
-    FingerStrokeAssistance_B.In1[1] = FingerStrokeAssistance_B.Gain[1];
+    /* Inport: '<S28>/In1' */
+    FingerStrokeAssistance_B.In1_g[0] = FingerStrokeAssistance_B.Gain[0];
+    FingerStrokeAssistance_B.In1_g[1] = FingerStrokeAssistance_B.Gain[1];
     FingerStrokeAssistance_DW.TriggeredSubsystem_SubsysRanBC = 4;
   }
 
@@ -854,62 +1065,62 @@ static void FingerStrokeAssistance_output(void)
   FingerStrokeAssistance_B.Gain1_l = FingerStrokeAssistance_P.Gain1_Gain_a *
     FingerStrokeAssistance_B.f_ref_lim;
 
-  /* RelationalOperator: '<S20>/LowerRelop1' */
+  /* RelationalOperator: '<S27>/LowerRelop1' */
   FingerStrokeAssistance_B.LowerRelop1_p[0] = (FingerStrokeAssistance_B.f_ref[0]
     > FingerStrokeAssistance_B.f_ref_lim);
 
-  /* RelationalOperator: '<S20>/UpperRelop' */
+  /* RelationalOperator: '<S27>/UpperRelop' */
   FingerStrokeAssistance_B.UpperRelop_l[0] = (FingerStrokeAssistance_B.f_ref[0] <
     FingerStrokeAssistance_B.Gain1_l);
 
-  /* Switch: '<S20>/Switch' */
+  /* Switch: '<S27>/Switch' */
   if (FingerStrokeAssistance_B.UpperRelop_l[0]) {
     FingerStrokeAssistance_B.Switch_n[0] = FingerStrokeAssistance_B.Gain1_l;
   } else {
     FingerStrokeAssistance_B.Switch_n[0] = FingerStrokeAssistance_B.f_ref[0];
   }
 
-  /* Switch: '<S20>/Switch2' */
+  /* Switch: '<S27>/Switch2' */
   if (FingerStrokeAssistance_B.LowerRelop1_p[0]) {
     FingerStrokeAssistance_B.Switch2_l[0] = FingerStrokeAssistance_B.f_ref_lim;
   } else {
     FingerStrokeAssistance_B.Switch2_l[0] = FingerStrokeAssistance_B.Switch_n[0];
   }
 
-  /* RelationalOperator: '<S20>/LowerRelop1' */
+  /* RelationalOperator: '<S27>/LowerRelop1' */
   FingerStrokeAssistance_B.LowerRelop1_p[1] = (FingerStrokeAssistance_B.f_ref[1]
     > FingerStrokeAssistance_B.f_ref_lim);
 
-  /* RelationalOperator: '<S20>/UpperRelop' */
+  /* RelationalOperator: '<S27>/UpperRelop' */
   FingerStrokeAssistance_B.UpperRelop_l[1] = (FingerStrokeAssistance_B.f_ref[1] <
     FingerStrokeAssistance_B.Gain1_l);
 
-  /* Switch: '<S20>/Switch' */
+  /* Switch: '<S27>/Switch' */
   if (FingerStrokeAssistance_B.UpperRelop_l[1]) {
     FingerStrokeAssistance_B.Switch_n[1] = FingerStrokeAssistance_B.Gain1_l;
   } else {
     FingerStrokeAssistance_B.Switch_n[1] = FingerStrokeAssistance_B.f_ref[1];
   }
 
-  /* Switch: '<S20>/Switch2' */
+  /* Switch: '<S27>/Switch2' */
   if (FingerStrokeAssistance_B.LowerRelop1_p[1]) {
     FingerStrokeAssistance_B.Switch2_l[1] = FingerStrokeAssistance_B.f_ref_lim;
   } else {
     FingerStrokeAssistance_B.Switch2_l[1] = FingerStrokeAssistance_B.Switch_n[1];
   }
 
-  /* MATLAB Function: '<S22>/MATLAB Function' */
+  /* MATLAB Function: '<S30>/MATLAB Function' */
   FingerStrokeAssi_MATLABFunction(FingerStrokeAssistance_B.Switch2_l[0],
     FingerStrokeAssistance_B.Switch2_l[1], FingerStrokeAssistance_B.Saturation,
     &FingerStrokeAssistance_B.sf_MATLABFunction_m);
 
   /* Level2 S-Function Block: '<S7>/PCI-6221 DA' (danipcim) */
   {
-    SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[2];
+    SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[3];
     sfcnOutputs(rts, 0);
   }
 
-  /* DiscreteStateSpace: '<S26>/Low Pass 100 Hz' */
+  /* DiscreteStateSpace: '<S34>/Low Pass 100 Hz' */
   FingerStrokeAssistance_B.LowPass100Hz = 0.0;
   FingerStrokeAssistance_B.LowPass100Hz += FingerStrokeAssistance_P.Clow[0] *
     FingerStrokeAssistance_DW.LowPass100Hz_DSTATE[0];
@@ -918,7 +1129,7 @@ static void FingerStrokeAssistance_output(void)
   FingerStrokeAssistance_B.LowPass100Hz += FingerStrokeAssistance_P.Dlow *
     FingerStrokeAssistance_B.Switch2_l[0];
 
-  /* DiscreteStateSpace: '<S26>/Low Pass 100 Hz1' */
+  /* DiscreteStateSpace: '<S34>/Low Pass 100 Hz1' */
   FingerStrokeAssistance_B.LowPass100Hz1 = 0.0;
   FingerStrokeAssistance_B.LowPass100Hz1 += FingerStrokeAssistance_P.Clow[0] *
     FingerStrokeAssistance_DW.LowPass100Hz1_DSTATE[0];
@@ -927,81 +1138,29 @@ static void FingerStrokeAssistance_output(void)
   FingerStrokeAssistance_B.LowPass100Hz1 += FingerStrokeAssistance_P.Dlow *
     FingerStrokeAssistance_B.Switch2_l[1];
 
-  /* Memory: '<S26>/Memory' */
+  /* Memory: '<S34>/Memory' */
   FingerStrokeAssistance_B.Memory =
     FingerStrokeAssistance_DW.Memory_PreviousInput;
 
-  /* Memory: '<S26>/Memory1' */
+  /* Memory: '<S34>/Memory1' */
   FingerStrokeAssistance_B.Memory1 =
     FingerStrokeAssistance_DW.Memory1_PreviousInput;
 
-  /* Level2 S-Function Block: '<S7>/PCI-6221 AD1' (adnipcim) */
-  {
-    SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[3];
-    sfcnOutputs(rts, 0);
+  /* Outputs for Triggered SubSystem: '<S7>/Triggered Subsystem1' incorporates:
+   *  TriggerPort: '<S29>/Trigger'
+   */
+  zcEvent = rt_ZCFcn(RISING_ZERO_CROSSING,
+                     &FingerStrokeAssistance_PrevZCX.TriggeredSubsystem1_Trig_ZCE,
+                     (FingerStrokeAssistance_B.p_trigger));
+  if (zcEvent != NO_ZCEVENT) {
+    /* Inport: '<S29>/In1' */
+    FingerStrokeAssistance_B.In1 = FingerStrokeAssistance_B.PCI6221AD1_o10;
+    FingerStrokeAssistance_DW.TriggeredSubsystem1_SubsysRanBC = 4;
   }
 
-  /* Sum: '<S27>/Sum' incorporates:
-   *  Constant: '<S27>/Constant'
-   */
-  FingerStrokeAssistance_B.Sum_m = FingerStrokeAssistance_B.PCI6221AD1_o2 -
-    FingerStrokeAssistance_P.Constant_Value;
+  /* End of Outputs for SubSystem: '<S7>/Triggered Subsystem1' */
 
-  /* Gain: '<S27>/gain' */
-  FingerStrokeAssistance_B.gain = FingerStrokeAssistance_P.gain_Gain *
-    FingerStrokeAssistance_B.Sum_m;
-
-  /* SignalConversion: '<S29>/TmpSignal ConversionAt SFunction Inport1' incorporates:
-   *  MATLAB Function: '<S23>/MATLAB Function'
-   */
-  FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[0] =
-    FingerStrokeAssistance_B.PCI6221AD1_o4;
-  FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[1] =
-    FingerStrokeAssistance_B.PCI6221AD1_o5;
-  FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[2] =
-    FingerStrokeAssistance_B.PCI6221AD1_o6;
-  FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[3] =
-    FingerStrokeAssistance_B.PCI6221AD1_o7;
-  FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[4] =
-    FingerStrokeAssistance_B.PCI6221AD1_o8;
-
-  /* MATLAB Function: '<S23>/MATLAB Function' */
-  /* MATLAB Function 'Robot/account for handedness force/MATLAB Function': '<S29>:1' */
-  /*  channel1 - gold tip */
-  /*  channel2 - blue tip */
-  /*  channel3 - gold base */
-  /*  channel4 - blue base */
-  /*  we wallways want the index finger to be finger 1 */
-  if (FingerStrokeAssistance_B.Saturation == 1.0) {
-    /* '<S29>:1:10' */
-    /* '<S29>:1:11' */
-    FingerStrokeAssistance_B.output[0] =
-      FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[3];
-    FingerStrokeAssistance_B.output[1] =
-      FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[1];
-    FingerStrokeAssistance_B.output[2] =
-      FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[2];
-    FingerStrokeAssistance_B.output[3] =
-      FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[0];
-    FingerStrokeAssistance_B.output[4] =
-      FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[4];
-  } else {
-    /* '<S29>:1:13' */
-    FingerStrokeAssistance_B.output[0] =
-      FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[2];
-    FingerStrokeAssistance_B.output[1] =
-      FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[0];
-    FingerStrokeAssistance_B.output[2] =
-      FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[3];
-    FingerStrokeAssistance_B.output[3] =
-      FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[1];
-    FingerStrokeAssistance_B.output[4] =
-      FingerStrokeAssistance_B.TmpSignalConversionAtSFunctionI[4];
-
-    /* output = [inp1(3,1); inp1(4,2); inp1(5)]; */
-  }
-
-  /* MATLAB Function: '<S25>/MATLAB Function' */
+  /* MATLAB Function: '<S33>/MATLAB Function' */
   FingerStrokeAssi_MATLABFunction(FingerStrokeAssistance_B.PCI6221AD1_o1,
     FingerStrokeAssistance_B.PCI6221AD1_o3, FingerStrokeAssistance_B.Saturation,
     &FingerStrokeAssistance_B.sf_MATLABFunction_n);
@@ -1014,18 +1173,18 @@ static void FingerStrokeAssistance_output(void)
   FingerStrokeAssistance_B.UnitDelay1_d =
     FingerStrokeAssistance_DW.UnitDelay1_DSTATE_i;
 
-  /* Gain: '<S10>/parTrajMode' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parTrajMode' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parTrajMode =
     FingerStrokeAssistance_P.parTrajMode_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* Rounding: '<S10>/Rounding Function' */
+  /* Rounding: '<S11>/Rounding Function' */
   FingerStrokeAssistance_B.RoundingFunction = rt_roundd_snf
     (FingerStrokeAssistance_B.parTrajMode);
 
-  /* Saturate: '<S10>/Saturation1' */
+  /* Saturate: '<S11>/Saturation1' */
   state = FingerStrokeAssistance_B.RoundingFunction;
   u1 = FingerStrokeAssistance_P.Saturation1_LowerSat;
   u2 = FingerStrokeAssistance_P.Saturation1_UpperSat;
@@ -1037,16 +1196,16 @@ static void FingerStrokeAssistance_output(void)
     FingerStrokeAssistance_B.Saturation1 = state;
   }
 
-  /* End of Saturate: '<S10>/Saturation1' */
+  /* End of Saturate: '<S11>/Saturation1' */
 
-  /* Gain: '<S10>/parFixedDur' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parFixedDur' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parFixedDur =
     FingerStrokeAssistance_P.parFixedDur_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* Saturate: '<S10>/Saturation2' */
+  /* Saturate: '<S11>/Saturation2' */
   state = FingerStrokeAssistance_B.parFixedDur;
   u1 = FingerStrokeAssistance_P.Saturation2_LowerSat;
   u2 = FingerStrokeAssistance_P.Saturation2_UpperSat;
@@ -1058,9 +1217,9 @@ static void FingerStrokeAssistance_output(void)
     FingerStrokeAssistance_B.Saturation2 = state;
   }
 
-  /* End of Saturate: '<S10>/Saturation2' */
+  /* End of Saturate: '<S11>/Saturation2' */
 
-  /* Memory: '<S34>/Memory' */
+  /* Memory: '<S42>/Memory' */
   FingerStrokeAssistance_B.Memory_g[0] =
     FingerStrokeAssistance_DW.Memory_PreviousInput_k[0];
   FingerStrokeAssistance_B.Memory_g[1] =
@@ -1070,25 +1229,25 @@ static void FingerStrokeAssistance_output(void)
   FingerStrokeAssistance_B.Memory_g[3] =
     FingerStrokeAssistance_DW.Memory_PreviousInput_k[3];
 
-  /* Gain: '<S10>/parChangeRate' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parChangeRate' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parChangeRate =
     FingerStrokeAssistance_P.parChangeRate_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* Gain: '<S10>/parKp1' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parKp1' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parKp1 = FingerStrokeAssistance_P.parKp1_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* MATLAB Function: '<S34>/gainramp' */
+  /* MATLAB Function: '<S42>/gainramp' */
   FingerStrokeAssistance_gainramp(FingerStrokeAssistance_B.parChangeRate,
     FingerStrokeAssistance_B.parKp1, FingerStrokeAssistance_B.Memory_g,
     &FingerStrokeAssistance_B.sf_gainramp);
 
-  /* Memory: '<S35>/Memory' */
+  /* Memory: '<S43>/Memory' */
   FingerStrokeAssistance_B.Memory_i[0] =
     FingerStrokeAssistance_DW.Memory_PreviousInput_n[0];
   FingerStrokeAssistance_B.Memory_i[1] =
@@ -1098,18 +1257,18 @@ static void FingerStrokeAssistance_output(void)
   FingerStrokeAssistance_B.Memory_i[3] =
     FingerStrokeAssistance_DW.Memory_PreviousInput_n[3];
 
-  /* Gain: '<S10>/parKp2' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parKp2' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parKp2 = FingerStrokeAssistance_P.parKp2_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* MATLAB Function: '<S35>/gainramp' */
+  /* MATLAB Function: '<S43>/gainramp' */
   FingerStrokeAssistance_gainramp(FingerStrokeAssistance_B.parChangeRate,
     FingerStrokeAssistance_B.parKp2, FingerStrokeAssistance_B.Memory_i,
     &FingerStrokeAssistance_B.sf_gainramp_i);
 
-  /* Memory: '<S36>/Memory' */
+  /* Memory: '<S44>/Memory' */
   FingerStrokeAssistance_B.Memory_e[0] =
     FingerStrokeAssistance_DW.Memory_PreviousInput_b[0];
   FingerStrokeAssistance_B.Memory_e[1] =
@@ -1119,18 +1278,18 @@ static void FingerStrokeAssistance_output(void)
   FingerStrokeAssistance_B.Memory_e[3] =
     FingerStrokeAssistance_DW.Memory_PreviousInput_b[3];
 
-  /* Gain: '<S10>/parKd1' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parKd1' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parKd1 = FingerStrokeAssistance_P.parKd1_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* MATLAB Function: '<S36>/gainramp' */
+  /* MATLAB Function: '<S44>/gainramp' */
   FingerStrokeAssistance_gainramp(FingerStrokeAssistance_B.parChangeRate,
     FingerStrokeAssistance_B.parKd1, FingerStrokeAssistance_B.Memory_e,
     &FingerStrokeAssistance_B.sf_gainramp_id);
 
-  /* Memory: '<S37>/Memory' */
+  /* Memory: '<S45>/Memory' */
   FingerStrokeAssistance_B.Memory_o[0] =
     FingerStrokeAssistance_DW.Memory_PreviousInput_j[0];
   FingerStrokeAssistance_B.Memory_o[1] =
@@ -1140,18 +1299,18 @@ static void FingerStrokeAssistance_output(void)
   FingerStrokeAssistance_B.Memory_o[3] =
     FingerStrokeAssistance_DW.Memory_PreviousInput_j[3];
 
-  /* Gain: '<S10>/parKd2' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parKd2' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parKd2 = FingerStrokeAssistance_P.parKd2_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* MATLAB Function: '<S37>/gainramp' */
+  /* MATLAB Function: '<S45>/gainramp' */
   FingerStrokeAssistance_gainramp(FingerStrokeAssistance_B.parChangeRate,
     FingerStrokeAssistance_B.parKd2, FingerStrokeAssistance_B.Memory_o,
     &FingerStrokeAssistance_B.sf_gainramp_b);
 
-  /* Memory: '<S38>/Memory' */
+  /* Memory: '<S46>/Memory' */
   FingerStrokeAssistance_B.Memory_n[0] =
     FingerStrokeAssistance_DW.Memory_PreviousInput_i[0];
   FingerStrokeAssistance_B.Memory_n[1] =
@@ -1161,18 +1320,18 @@ static void FingerStrokeAssistance_output(void)
   FingerStrokeAssistance_B.Memory_n[3] =
     FingerStrokeAssistance_DW.Memory_PreviousInput_i[3];
 
-  /* Gain: '<S10>/parKdV1' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parKdV1' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parKdV1 = FingerStrokeAssistance_P.parKdV1_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* MATLAB Function: '<S38>/gainramp' */
+  /* MATLAB Function: '<S46>/gainramp' */
   FingerStrokeAssistance_gainramp(FingerStrokeAssistance_B.parChangeRate,
     FingerStrokeAssistance_B.parKdV1, FingerStrokeAssistance_B.Memory_n,
     &FingerStrokeAssistance_B.sf_gainramp_f);
 
-  /* Memory: '<S39>/Memory' */
+  /* Memory: '<S47>/Memory' */
   FingerStrokeAssistance_B.Memory_os[0] =
     FingerStrokeAssistance_DW.Memory_PreviousInput_c[0];
   FingerStrokeAssistance_B.Memory_os[1] =
@@ -1182,93 +1341,83 @@ static void FingerStrokeAssistance_output(void)
   FingerStrokeAssistance_B.Memory_os[3] =
     FingerStrokeAssistance_DW.Memory_PreviousInput_c[3];
 
-  /* Gain: '<S10>/parKdV2' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parKdV2' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parKdV2 = FingerStrokeAssistance_P.parKdV2_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* MATLAB Function: '<S39>/gainramp' */
+  /* MATLAB Function: '<S47>/gainramp' */
   FingerStrokeAssistance_gainramp(FingerStrokeAssistance_B.parChangeRate,
     FingerStrokeAssistance_B.parKdV2, FingerStrokeAssistance_B.Memory_os,
     &FingerStrokeAssistance_B.sf_gainramp_a);
 
-  /* Gain: '<S10>/parFThresh' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parFThresh' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parFThresh = FingerStrokeAssistance_P.parFThresh_Gain
     * FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* Gain: '<S10>/parForceTrigger' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parForceTrigger' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parForceTrigger =
     FingerStrokeAssistance_P.parForceTrigger_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* Gain: '<S10>/parMarker' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parMarker' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parMarker = FingerStrokeAssistance_P.parMarker_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* Gain: '<S10>/parMaxTrajDur' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parMaxTrajDur' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parMaxTrajDur =
     FingerStrokeAssistance_P.parMaxTrajDur_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* Gain: '<S10>/parPStop' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parPStop' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parPStop = FingerStrokeAssistance_P.parPStop_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* Gain: '<S10>/parVThresh' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parVThresh' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parVThresh = FingerStrokeAssistance_P.parVThresh_Gain
     * FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* Gain: '<S10>/parWiggleAmp' incorporates:
-   *  Constant: '<S10>/paremeters_ must_be_one'
+  /* Gain: '<S11>/parWiggleAmp' incorporates:
+   *  Constant: '<S11>/paremeters_ must_be_one'
    */
   FingerStrokeAssistance_B.parWiggleAmp =
     FingerStrokeAssistance_P.parWiggleAmp_Gain *
     FingerStrokeAssistance_P.paremeters_must_be_one_Value;
 
-  /* ok to acquire for <S51>/S-Function */
+  /* ok to acquire for <S61>/S-Function */
   FingerStrokeAssistance_DW.SFunction_IWORK.AcquireOK = 1;
 
-  /* Gain: '<S11>/Gain3' */
-  FingerStrokeAssistance_B.Gain3 = FingerStrokeAssistance_P.Gain3_Gain *
-    FingerStrokeAssistance_B.f_ref[1];
-
-  /* ok to acquire for <S53>/S-Function */
-  FingerStrokeAssistance_DW.SFunction_IWORK_l.AcquireOK = 1;
-
-  /* Gain: '<S11>/Gain2' */
+  /* Gain: '<S12>/Gain2' */
   FingerStrokeAssistance_B.Gain2 = FingerStrokeAssistance_P.Gain2_Gain *
     FingerStrokeAssistance_B.f_ref[0];
 
-  /* ok to acquire for <S50>/S-Function */
+  /* ok to acquire for <S58>/S-Function */
   FingerStrokeAssistance_DW.SFunction_IWORK_b.AcquireOK = 1;
 
-  /* Gain: '<S11>/Gain' */
+  /* Gain: '<S12>/Gain' */
   FingerStrokeAssistance_B.Gain_f[0] = FingerStrokeAssistance_P.Gain_Gain_n *
     FingerStrokeAssistance_B.Switch2_l[0];
   FingerStrokeAssistance_B.Gain_f[1] = FingerStrokeAssistance_P.Gain_Gain_n *
     FingerStrokeAssistance_B.Switch2_l[1];
 
-  /* ok to acquire for <S52>/S-Function */
+  /* ok to acquire for <S60>/S-Function */
   FingerStrokeAssistance_DW.SFunction_IWORK_h.AcquireOK = 1;
 
-  /* Gain: '<S11>/Gain1' */
-  FingerStrokeAssistance_B.Gain1_e[0] = FingerStrokeAssistance_P.Gain1_Gain_k *
-    FingerStrokeAssistance_B.Sum_a[0];
-  FingerStrokeAssistance_B.Gain1_e[1] = FingerStrokeAssistance_P.Gain1_Gain_k *
-    FingerStrokeAssistance_B.Sum_a[1];
+  /* ok to acquire for <S59>/S-Function */
+  FingerStrokeAssistance_DW.SFunction_IWORK_l.AcquireOK = 1;
 }
 
 /* Model update function */
@@ -1279,8 +1428,8 @@ static void FingerStrokeAssistance_update(void)
   real_T xnew_idx_0;
 
   /* Update for Delay: '<S1>/Delay' */
-  FingerStrokeAssistance_DW.Delay_DSTATE[0] = FingerStrokeAssistance_B.Sum_a[0];
-  FingerStrokeAssistance_DW.Delay_DSTATE[1] = FingerStrokeAssistance_B.Sum_a[1];
+  FingerStrokeAssistance_DW.Delay_DSTATE[0] = FingerStrokeAssistance_B.Switch2[0];
+  FingerStrokeAssistance_DW.Delay_DSTATE[1] = FingerStrokeAssistance_B.Switch2[1];
 
   /* Update for DiscreteFilter: '<S1>/Discrete Filter1' */
   FingerStrokeAssistance_DW.DiscreteFilter1_states =
@@ -1289,7 +1438,7 @@ static void FingerStrokeAssistance_update(void)
   /* Update for Delay: '<S1>/Delay1' */
   FingerStrokeAssistance_DW.Delay1_DSTATE = FingerStrokeAssistance_B.state;
 
-  /* Update for UnitDelay: '<S12>/Delay Input1' */
+  /* Update for UnitDelay: '<S13>/Delay Input1' */
   FingerStrokeAssistance_DW.DelayInput1_DSTATE = FingerStrokeAssistance_B.Delay1;
 
   /* Update for DiscreteIntegrator: '<S1>/Discrete-Time Integrator' */
@@ -1326,7 +1475,7 @@ static void FingerStrokeAssistance_update(void)
   /* Update for UnitDelay: '<S8>/Unit Delay2' */
   FingerStrokeAssistance_DW.UnitDelay2_DSTATE = FingerStrokeAssistance_B.state;
 
-  /* Update for UnitDelay: '<S32>/Delay Input1' */
+  /* Update for UnitDelay: '<S40>/Delay Input1' */
   FingerStrokeAssistance_DW.DelayInput1_DSTATE_l =
     FingerStrokeAssistance_B.UnitDelay2;
 
@@ -1350,12 +1499,12 @@ static void FingerStrokeAssistance_update(void)
   FingerStrokeAssistance_DW.UnitDelay2_DSTATE_f[0] =
     FingerStrokeAssistance_B.Gain_d;
   FingerStrokeAssistance_DW.UnitDelay2_DSTATE_f[1] =
-    FingerStrokeAssistance_B.Sum_a[1];
+    FingerStrokeAssistance_B.Switch2[0];
 
   /* Update for UnitDelay: '<S9>/Unit Delay2' */
   FingerStrokeAssistance_DW.UnitDelay2_DSTATE_h = FingerStrokeAssistance_B.state;
 
-  /* Update for UnitDelay: '<S33>/Delay Input1' */
+  /* Update for UnitDelay: '<S41>/Delay Input1' */
   FingerStrokeAssistance_DW.DelayInput1_DSTATE_j =
     FingerStrokeAssistance_B.UnitDelay2_j;
 
@@ -1379,25 +1528,28 @@ static void FingerStrokeAssistance_update(void)
   FingerStrokeAssistance_DW.UnitDelay1_DSTATE =
     FingerStrokeAssistance_B.DiscreteTimeIntegrator;
 
+  /* Update for UnitDelay: '<S7>/Unit Delay1' */
+  FingerStrokeAssistance_DW.UnitDelay1_DSTATE_n = FingerStrokeAssistance_B.In1;
+
   /* Update for UnitDelay: '<Root>/Unit Delay3' */
   FingerStrokeAssistance_DW.UnitDelay3_DSTATE[0] =
-    FingerStrokeAssistance_B.Sum_a[0];
+    FingerStrokeAssistance_B.Switch2[0];
 
   /* Update for UnitDelay: '<S7>/Unit Delay' */
   FingerStrokeAssistance_DW.UnitDelay_DSTATE_h[0] =
-    FingerStrokeAssistance_B.In1[0];
+    FingerStrokeAssistance_B.In1_g[0];
 
-  /* Update for DiscreteIntegrator: '<S17>/Integrator' */
-  FingerStrokeAssistance_DW.Integrator_DSTATE[0] +=
-    FingerStrokeAssistance_P.Integrator_gainval *
-    FingerStrokeAssistance_B.IntegralGain[0];
-
-  /* Update for DiscreteIntegrator: '<S17>/Filter' */
+  /* Update for DiscreteIntegrator: '<S14>/Filter' */
   FingerStrokeAssistance_DW.Filter_DSTATE[0] +=
     FingerStrokeAssistance_P.Filter_gainval *
     FingerStrokeAssistance_B.FilterCoefficient[0];
 
-  /* Update for UnitDelay: '<S19>/UD' */
+  /* Update for DiscreteIntegrator: '<S14>/Integrator' */
+  FingerStrokeAssistance_DW.Integrator_DSTATE[0] +=
+    FingerStrokeAssistance_P.Integrator_gainval *
+    FingerStrokeAssistance_B.IntegralGain[0];
+
+  /* Update for UnitDelay: '<S17>/UD' */
   FingerStrokeAssistance_DW.UD_DSTATE[0] = FingerStrokeAssistance_B.TSamp[0];
 
   /* Update for DiscreteFilter: '<S7>/Discrete Filter1' */
@@ -1406,30 +1558,30 @@ static void FingerStrokeAssistance_update(void)
 
   /* Update for UnitDelay: '<Root>/Unit Delay3' */
   FingerStrokeAssistance_DW.UnitDelay3_DSTATE[1] =
-    FingerStrokeAssistance_B.Sum_a[1];
+    FingerStrokeAssistance_B.Switch2[1];
 
   /* Update for UnitDelay: '<S7>/Unit Delay' */
   FingerStrokeAssistance_DW.UnitDelay_DSTATE_h[1] =
-    FingerStrokeAssistance_B.In1[1];
+    FingerStrokeAssistance_B.In1_g[1];
 
-  /* Update for DiscreteIntegrator: '<S17>/Integrator' */
-  FingerStrokeAssistance_DW.Integrator_DSTATE[1] +=
-    FingerStrokeAssistance_P.Integrator_gainval *
-    FingerStrokeAssistance_B.IntegralGain[1];
-
-  /* Update for DiscreteIntegrator: '<S17>/Filter' */
+  /* Update for DiscreteIntegrator: '<S14>/Filter' */
   FingerStrokeAssistance_DW.Filter_DSTATE[1] +=
     FingerStrokeAssistance_P.Filter_gainval *
     FingerStrokeAssistance_B.FilterCoefficient[1];
 
-  /* Update for UnitDelay: '<S19>/UD' */
+  /* Update for DiscreteIntegrator: '<S14>/Integrator' */
+  FingerStrokeAssistance_DW.Integrator_DSTATE[1] +=
+    FingerStrokeAssistance_P.Integrator_gainval *
+    FingerStrokeAssistance_B.IntegralGain[1];
+
+  /* Update for UnitDelay: '<S17>/UD' */
   FingerStrokeAssistance_DW.UD_DSTATE[1] = FingerStrokeAssistance_B.TSamp[1];
 
   /* Update for DiscreteFilter: '<S7>/Discrete Filter1' */
   FingerStrokeAssistance_DW.DiscreteFilter1_states_g[1] =
     FingerStrokeAssistance_DW.DiscreteFilter1_tmp_d[1];
 
-  /* Update for DiscreteStateSpace: '<S26>/Low Pass 100 Hz' */
+  /* Update for DiscreteStateSpace: '<S34>/Low Pass 100 Hz' */
   xnew_0 = FingerStrokeAssistance_P.Alow[0] *
     FingerStrokeAssistance_DW.LowPass100Hz_DSTATE[0];
   xnew_0 += FingerStrokeAssistance_P.Alow[2] *
@@ -1445,7 +1597,7 @@ static void FingerStrokeAssistance_update(void)
     FingerStrokeAssistance_B.Switch2_l[0];
   FingerStrokeAssistance_DW.LowPass100Hz_DSTATE[0] = xnew_idx_0;
 
-  /* Update for DiscreteStateSpace: '<S26>/Low Pass 100 Hz1' */
+  /* Update for DiscreteStateSpace: '<S34>/Low Pass 100 Hz1' */
   xnew = FingerStrokeAssistance_P.Alow[0] *
     FingerStrokeAssistance_DW.LowPass100Hz1_DSTATE[0];
   xnew += FingerStrokeAssistance_P.Alow[2] *
@@ -1454,10 +1606,10 @@ static void FingerStrokeAssistance_update(void)
   xnew_idx_0 += FingerStrokeAssistance_P.Blow[0] *
     FingerStrokeAssistance_B.Switch2_l[1];
 
-  /* Update for DiscreteStateSpace: '<S26>/Low Pass 100 Hz' */
+  /* Update for DiscreteStateSpace: '<S34>/Low Pass 100 Hz' */
   FingerStrokeAssistance_DW.LowPass100Hz_DSTATE[1] = xnew_0;
 
-  /* Update for DiscreteStateSpace: '<S26>/Low Pass 100 Hz1' */
+  /* Update for DiscreteStateSpace: '<S34>/Low Pass 100 Hz1' */
   xnew = FingerStrokeAssistance_P.Alow[1] *
     FingerStrokeAssistance_DW.LowPass100Hz1_DSTATE[0];
   xnew += FingerStrokeAssistance_P.Alow[3] *
@@ -1467,11 +1619,11 @@ static void FingerStrokeAssistance_update(void)
   FingerStrokeAssistance_DW.LowPass100Hz1_DSTATE[0] = xnew_idx_0;
   FingerStrokeAssistance_DW.LowPass100Hz1_DSTATE[1] = xnew;
 
-  /* Update for Memory: '<S26>/Memory' */
+  /* Update for Memory: '<S34>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput =
     FingerStrokeAssistance_B.LowPass100Hz;
 
-  /* Update for Memory: '<S26>/Memory1' */
+  /* Update for Memory: '<S34>/Memory1' */
   FingerStrokeAssistance_DW.Memory1_PreviousInput =
     FingerStrokeAssistance_B.LowPass100Hz1;
 
@@ -1483,99 +1635,99 @@ static void FingerStrokeAssistance_update(void)
   FingerStrokeAssistance_DW.UnitDelay1_DSTATE_i =
     FingerStrokeAssistance_B.fp_ramp_switch;
 
-  /* Update for Memory: '<S34>/Memory' */
+  /* Update for Memory: '<S42>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_k[0] =
     FingerStrokeAssistance_B.sf_gainramp.state1[0];
 
-  /* Update for Memory: '<S35>/Memory' */
+  /* Update for Memory: '<S43>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_n[0] =
     FingerStrokeAssistance_B.sf_gainramp_i.state1[0];
 
-  /* Update for Memory: '<S36>/Memory' */
+  /* Update for Memory: '<S44>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_b[0] =
     FingerStrokeAssistance_B.sf_gainramp_id.state1[0];
 
-  /* Update for Memory: '<S37>/Memory' */
+  /* Update for Memory: '<S45>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_j[0] =
     FingerStrokeAssistance_B.sf_gainramp_b.state1[0];
 
-  /* Update for Memory: '<S38>/Memory' */
+  /* Update for Memory: '<S46>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_i[0] =
     FingerStrokeAssistance_B.sf_gainramp_f.state1[0];
 
-  /* Update for Memory: '<S39>/Memory' */
+  /* Update for Memory: '<S47>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_c[0] =
     FingerStrokeAssistance_B.sf_gainramp_a.state1[0];
 
-  /* Update for Memory: '<S34>/Memory' */
+  /* Update for Memory: '<S42>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_k[1] =
     FingerStrokeAssistance_B.sf_gainramp.state1[1];
 
-  /* Update for Memory: '<S35>/Memory' */
+  /* Update for Memory: '<S43>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_n[1] =
     FingerStrokeAssistance_B.sf_gainramp_i.state1[1];
 
-  /* Update for Memory: '<S36>/Memory' */
+  /* Update for Memory: '<S44>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_b[1] =
     FingerStrokeAssistance_B.sf_gainramp_id.state1[1];
 
-  /* Update for Memory: '<S37>/Memory' */
+  /* Update for Memory: '<S45>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_j[1] =
     FingerStrokeAssistance_B.sf_gainramp_b.state1[1];
 
-  /* Update for Memory: '<S38>/Memory' */
+  /* Update for Memory: '<S46>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_i[1] =
     FingerStrokeAssistance_B.sf_gainramp_f.state1[1];
 
-  /* Update for Memory: '<S39>/Memory' */
+  /* Update for Memory: '<S47>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_c[1] =
     FingerStrokeAssistance_B.sf_gainramp_a.state1[1];
 
-  /* Update for Memory: '<S34>/Memory' */
+  /* Update for Memory: '<S42>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_k[2] =
     FingerStrokeAssistance_B.sf_gainramp.state1[2];
 
-  /* Update for Memory: '<S35>/Memory' */
+  /* Update for Memory: '<S43>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_n[2] =
     FingerStrokeAssistance_B.sf_gainramp_i.state1[2];
 
-  /* Update for Memory: '<S36>/Memory' */
+  /* Update for Memory: '<S44>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_b[2] =
     FingerStrokeAssistance_B.sf_gainramp_id.state1[2];
 
-  /* Update for Memory: '<S37>/Memory' */
+  /* Update for Memory: '<S45>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_j[2] =
     FingerStrokeAssistance_B.sf_gainramp_b.state1[2];
 
-  /* Update for Memory: '<S38>/Memory' */
+  /* Update for Memory: '<S46>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_i[2] =
     FingerStrokeAssistance_B.sf_gainramp_f.state1[2];
 
-  /* Update for Memory: '<S39>/Memory' */
+  /* Update for Memory: '<S47>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_c[2] =
     FingerStrokeAssistance_B.sf_gainramp_a.state1[2];
 
-  /* Update for Memory: '<S34>/Memory' */
+  /* Update for Memory: '<S42>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_k[3] =
     FingerStrokeAssistance_B.sf_gainramp.state1[3];
 
-  /* Update for Memory: '<S35>/Memory' */
+  /* Update for Memory: '<S43>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_n[3] =
     FingerStrokeAssistance_B.sf_gainramp_i.state1[3];
 
-  /* Update for Memory: '<S36>/Memory' */
+  /* Update for Memory: '<S44>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_b[3] =
     FingerStrokeAssistance_B.sf_gainramp_id.state1[3];
 
-  /* Update for Memory: '<S37>/Memory' */
+  /* Update for Memory: '<S45>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_j[3] =
     FingerStrokeAssistance_B.sf_gainramp_b.state1[3];
 
-  /* Update for Memory: '<S38>/Memory' */
+  /* Update for Memory: '<S46>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_i[3] =
     FingerStrokeAssistance_B.sf_gainramp_f.state1[3];
 
-  /* Update for Memory: '<S39>/Memory' */
+  /* Update for Memory: '<S47>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_c[3] =
     FingerStrokeAssistance_B.sf_gainramp_a.state1[3];
 
@@ -1602,7 +1754,7 @@ static void FingerStrokeAssistance_update(void)
 /* Model initialize function */
 static void FingerStrokeAssistance_initialize(void)
 {
-  /* Level2 S-Function Block: '<S7>/PCI 6221 ENC ' (encnipcim) */
+  /* Level2 S-Function Block: '<S7>/PCI-6221 AD1' (adnipcim) */
   {
     SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[0];
     sfcnStart(rts);
@@ -1610,7 +1762,7 @@ static void FingerStrokeAssistance_initialize(void)
       return;
   }
 
-  /* Level2 S-Function Block: '<S7>/PCI 6221 ENC 1' (encnipcim) */
+  /* Level2 S-Function Block: '<S7>/PCI 6221 ENC ' (encnipcim) */
   {
     SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[1];
     sfcnStart(rts);
@@ -1618,7 +1770,7 @@ static void FingerStrokeAssistance_initialize(void)
       return;
   }
 
-  /* Level2 S-Function Block: '<S7>/PCI-6221 DA' (danipcim) */
+  /* Level2 S-Function Block: '<S7>/PCI 6221 ENC 1' (encnipcim) */
   {
     SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[2];
     sfcnStart(rts);
@@ -1626,7 +1778,7 @@ static void FingerStrokeAssistance_initialize(void)
       return;
   }
 
-  /* Level2 S-Function Block: '<S7>/PCI-6221 AD1' (adnipcim) */
+  /* Level2 S-Function Block: '<S7>/PCI-6221 DA' (danipcim) */
   {
     SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[3];
     sfcnStart(rts);
@@ -1634,50 +1786,7 @@ static void FingerStrokeAssistance_initialize(void)
       return;
   }
 
-  /* S-Function Block: <S51>/S-Function (scblock) */
-  {
-    int i;
-    if ((i = rl32eScopeExists(4)) == 0) {
-      if ((i = rl32eDefScope(4,2)) != 0) {
-        printf("Error creating scope 4\n");
-      } else {
-        rl32eAddSignal(4, rl32eGetSignalNo("signals/Gain3"));
-        rl32eAddSignal(4, rl32eGetSignalNo(
-          "Robot/account for handedness1/MATLAB Function/p2"));
-        rl32eAddSignal(4, rl32eGetSignalNo("Robot/Gain/s2"));
-        rl32eAddSignal(4, rl32eGetSignalNo("MATLAB Function/p7/s2"));
-        rl32eAddSignal(4, rl32eGetSignalNo("Robot/Sum/s2"));
-        rl32eSetTargetScopeSigFt(4,rl32eGetSignalNo("signals/Gain3"),
-          "f_ref2:%15.6f");
-        rl32eSetTargetScopeSigFt(4,rl32eGetSignalNo(
-          "Robot/account for handedness1/MATLAB Function/p2"),"enc_raw2:%15.6f");
-        rl32eSetTargetScopeSigFt(4,rl32eGetSignalNo("Robot/Gain/s2"),
-          "enc_norm2:%15.6f");
-        rl32eSetTargetScopeSigFt(4,rl32eGetSignalNo("MATLAB Function/p7/s2"),
-          "pos_ref_2:%15.6f");
-        rl32eSetTargetScopeSigFt(4,rl32eGetSignalNo("Robot/Sum/s2"),
-          "pos_meas_2:%15.6f");
-        rl32eSetScope(4, 4, 10);
-        rl32eSetScope(4, 5, 0);
-        rl32eSetScope(4, 6, 1);
-        rl32eSetScope(4, 0, 0);
-        rl32eSetScope(4, 3, rl32eGetSignalNo("signals/Gain3"));
-        rl32eSetScope(4, 1, 0.0);
-        rl32eSetScope(4, 2, 0);
-        rl32eSetScope(4, 9, 0);
-        rl32eSetTargetScope(4, 1, 0.0);
-        rl32eSetTargetScope(4, 11, 0.03);
-        rl32eSetTargetScope(4, 10, 0.1);
-        xpceScopeAcqOK(4, &FingerStrokeAssistance_DW.SFunction_IWORK.AcquireOK);
-      }
-    }
-
-    if (i) {
-      rl32eRestartAcquisition(4);
-    }
-  }
-
-  /* S-Function Block: <S53>/S-Function (scblock) */
+  /* S-Function Block: <S61>/S-Function (scblock) */
   {
     int i;
     if ((i = rl32eScopeExists(3)) == 0) {
@@ -1688,7 +1797,7 @@ static void FingerStrokeAssistance_initialize(void)
         rl32eAddSignal(3, rl32eGetSignalNo(
           "Robot/account for handedness1/MATLAB Function/p1"));
         rl32eAddSignal(3, rl32eGetSignalNo("Robot/Gain/s1"));
-        rl32eAddSignal(3, rl32eGetSignalNo("MATLAB Function/p7/s1"));
+        rl32eAddSignal(3, rl32eGetSignalNo("MATLAB Function/p8/s1"));
         rl32eAddSignal(3, rl32eGetSignalNo("Robot/Sum/s1"));
         rl32eSetTargetScopeSigFt(3,rl32eGetSignalNo("signals/Gain2"),
           "f_ref1:%15.6f N");
@@ -1696,7 +1805,7 @@ static void FingerStrokeAssistance_initialize(void)
           "Robot/account for handedness1/MATLAB Function/p1"),"enc_raw:%15.6f");
         rl32eSetTargetScopeSigFt(3,rl32eGetSignalNo("Robot/Gain/s1"),
           "enc_norm:%15.6f");
-        rl32eSetTargetScopeSigFt(3,rl32eGetSignalNo("MATLAB Function/p7/s1"),
+        rl32eSetTargetScopeSigFt(3,rl32eGetSignalNo("MATLAB Function/p8/s1"),
           "pos_ref_1:%15.6f");
         rl32eSetTargetScopeSigFt(3,rl32eGetSignalNo("Robot/Sum/s1"),
           "pos_meas_1:%15.6f");
@@ -1711,7 +1820,7 @@ static void FingerStrokeAssistance_initialize(void)
         rl32eSetTargetScope(3, 1, 0.0);
         rl32eSetTargetScope(3, 11, 0.03);
         rl32eSetTargetScope(3, 10, 0.1);
-        xpceScopeAcqOK(3, &FingerStrokeAssistance_DW.SFunction_IWORK_l.AcquireOK);
+        xpceScopeAcqOK(3, &FingerStrokeAssistance_DW.SFunction_IWORK.AcquireOK);
       }
     }
 
@@ -1720,7 +1829,7 @@ static void FingerStrokeAssistance_initialize(void)
     }
   }
 
-  /* S-Function Block: <S50>/S-Function (scblock) */
+  /* S-Function Block: <S58>/S-Function (scblock) */
   {
     int i;
     if ((i = rl32eScopeExists(1)) == 0) {
@@ -1756,40 +1865,33 @@ static void FingerStrokeAssistance_initialize(void)
     }
   }
 
-  /* S-Function Block: <S52>/S-Function (scblock) */
+  /* S-Function Block: <S60>/S-Function (scblock) */
   {
     int i;
     if ((i = rl32eScopeExists(2)) == 0) {
       if ((i = rl32eDefScope(2,2)) != 0) {
         printf("Error creating scope 2\n");
       } else {
-        rl32eAddSignal(2, rl32eGetSignalNo("signals/Gain1/s1"));
-        rl32eAddSignal(2, rl32eGetSignalNo("signals/Gain1/s2"));
-        rl32eAddSignal(2, rl32eGetSignalNo(
-          "HL Controller/Discrete-Time Integrator"));
-        rl32eAddSignal(2, rl32eGetSignalNo("Robot/Discrete Filter1/s1"));
-        rl32eAddSignal(2, rl32eGetSignalNo("Robot/Discrete Filter1/s2"));
-        rl32eSetTargetScopeSigFt(2,rl32eGetSignalNo("signals/Gain1/s1"),
-          "f_ref_pid_1:%15.6f");
-        rl32eSetTargetScopeSigFt(2,rl32eGetSignalNo("signals/Gain1/s2"),
-          "f_ref_pid_2:%15.6f");
-        rl32eSetTargetScopeSigFt(2,rl32eGetSignalNo(
-          "HL Controller/Discrete-Time Integrator"),"pos_ref_g:%15.6f");
-        rl32eSetTargetScopeSigFt(2,rl32eGetSignalNo("Robot/Discrete Filter1/s1"),
-          "vel_meas_1:%15.6f");
-        rl32eSetTargetScopeSigFt(2,rl32eGetSignalNo("Robot/Discrete Filter1/s2"),
-          "vel_meas_2:%15.6f");
+        rl32eAddSignal(2, rl32eGetSignalNo("Robot/MATLAB Function"));
+        rl32eAddSignal(2, rl32eGetSignalNo("Robot/MATLAB Function1"));
+        rl32eAddSignal(2, rl32eGetSignalNo("Robot/PCI-6221 AD1/p12"));
+        rl32eSetTargetScopeSigFt(2,rl32eGetSignalNo("Robot/MATLAB Function"),
+          "Raw_GripForce:%15.6f");
+        rl32eSetTargetScopeSigFt(2,rl32eGetSignalNo("Robot/MATLAB Function1"),
+          "Raw_Pressure_Value:%15.6f");
+        rl32eSetTargetScopeSigFt(2,rl32eGetSignalNo("Robot/PCI-6221 AD1/p12"),
+          "%15.6f");
         rl32eSetScope(2, 4, 10);
         rl32eSetScope(2, 5, 0);
         rl32eSetScope(2, 6, 1);
         rl32eSetScope(2, 0, 0);
-        rl32eSetScope(2, 3, rl32eGetSignalNo("signals/Gain1/s1"));
+        rl32eSetScope(2, 3, rl32eGetSignalNo("Robot/MATLAB Function"));
         rl32eSetScope(2, 1, 0.0);
         rl32eSetScope(2, 2, 0);
         rl32eSetScope(2, 9, 0);
         rl32eSetTargetScope(2, 1, 0.0);
-        rl32eSetTargetScope(2, 11, -2.5);
-        rl32eSetTargetScope(2, 10, 2.5);
+        rl32eSetTargetScope(2, 11, -5.0);
+        rl32eSetTargetScope(2, 10, 5.0);
         xpceScopeAcqOK(2, &FingerStrokeAssistance_DW.SFunction_IWORK_h.AcquireOK);
       }
     }
@@ -1799,7 +1901,45 @@ static void FingerStrokeAssistance_initialize(void)
     }
   }
 
+  /* S-Function Block: <S59>/S-Function (scblock) */
+  {
+    int i;
+    if ((i = rl32eScopeExists(4)) == 0) {
+      if ((i = rl32eDefScope(4,2)) != 0) {
+        printf("Error creating scope 4\n");
+      } else {
+        rl32eAddSignal(4, rl32eGetSignalNo("Robot/MATLAB Function7"));
+        rl32eAddSignal(4, rl32eGetSignalNo("Robot/MATLAB Function8"));
+        rl32eAddSignal(4, rl32eGetSignalNo("Robot/MATLAB Function6"));
+        rl32eSetTargetScopeSigFt(4,rl32eGetSignalNo("Robot/MATLAB Function7"),
+          "Raw_X:%15.6f");
+        rl32eSetTargetScopeSigFt(4,rl32eGetSignalNo("Robot/MATLAB Function8"),
+          "Raw_Y:%15.6f");
+        rl32eSetTargetScopeSigFt(4,rl32eGetSignalNo("Robot/MATLAB Function6"),
+          "Raw_Z:%15.6f");
+        rl32eSetScope(4, 4, 10);
+        rl32eSetScope(4, 5, 0);
+        rl32eSetScope(4, 6, 1);
+        rl32eSetScope(4, 0, 0);
+        rl32eSetScope(4, 3, rl32eGetSignalNo("Robot/MATLAB Function7"));
+        rl32eSetScope(4, 1, 0.0);
+        rl32eSetScope(4, 2, 0);
+        rl32eSetScope(4, 9, 0);
+        rl32eSetTargetScope(4, 1, 0.0);
+        rl32eSetTargetScope(4, 11, -2.5);
+        rl32eSetTargetScope(4, 10, 2.5);
+        xpceScopeAcqOK(4, &FingerStrokeAssistance_DW.SFunction_IWORK_l.AcquireOK);
+      }
+    }
+
+    if (i) {
+      rl32eRestartAcquisition(4);
+    }
+  }
+
   FingerStrokeAssistance_PrevZCX.TriggeredSubsystem_Trig_ZCE =
+    UNINITIALIZED_ZCSIG;
+  FingerStrokeAssistance_PrevZCX.TriggeredSubsystem1_Trig_ZCE =
     UNINITIALIZED_ZCSIG;
 
   /* InitializeConditions for DiscreteFilter: '<S1>/Discrete Filter1' */
@@ -1810,7 +1950,7 @@ static void FingerStrokeAssistance_initialize(void)
   FingerStrokeAssistance_DW.Delay1_DSTATE =
     FingerStrokeAssistance_P.Delay1_InitialCondition;
 
-  /* InitializeConditions for UnitDelay: '<S12>/Delay Input1' */
+  /* InitializeConditions for UnitDelay: '<S13>/Delay Input1' */
   FingerStrokeAssistance_DW.DelayInput1_DSTATE =
     FingerStrokeAssistance_P.DetectChange_vinit;
 
@@ -1827,7 +1967,7 @@ static void FingerStrokeAssistance_initialize(void)
   FingerStrokeAssistance_DW.UnitDelay2_DSTATE =
     FingerStrokeAssistance_P.UnitDelay2_InitialCondition;
 
-  /* InitializeConditions for UnitDelay: '<S32>/Delay Input1' */
+  /* InitializeConditions for UnitDelay: '<S40>/Delay Input1' */
   FingerStrokeAssistance_DW.DelayInput1_DSTATE_l =
     FingerStrokeAssistance_P.DetectChange_vinit_a;
 
@@ -1840,7 +1980,7 @@ static void FingerStrokeAssistance_initialize(void)
   FingerStrokeAssistance_DW.UnitDelay2_DSTATE_h =
     FingerStrokeAssistance_P.UnitDelay2_InitialCondition_f;
 
-  /* InitializeConditions for UnitDelay: '<S33>/Delay Input1' */
+  /* InitializeConditions for UnitDelay: '<S41>/Delay Input1' */
   FingerStrokeAssistance_DW.DelayInput1_DSTATE_j =
     FingerStrokeAssistance_P.DetectChange_vinit_d;
 
@@ -1852,6 +1992,10 @@ static void FingerStrokeAssistance_initialize(void)
   /* InitializeConditions for UnitDelay: '<Root>/Unit Delay1' */
   FingerStrokeAssistance_DW.UnitDelay1_DSTATE =
     FingerStrokeAssistance_P.UnitDelay1_InitialCondition;
+
+  /* InitializeConditions for UnitDelay: '<S7>/Unit Delay1' */
+  FingerStrokeAssistance_DW.UnitDelay1_DSTATE_n =
+    FingerStrokeAssistance_P.UnitDelay1_InitialCondition_k;
 
   /* InitializeConditions for Delay: '<S1>/Delay' */
   FingerStrokeAssistance_DW.Delay_DSTATE[0] =
@@ -1869,15 +2013,15 @@ static void FingerStrokeAssistance_initialize(void)
   FingerStrokeAssistance_DW.UnitDelay_DSTATE_h[0] =
     FingerStrokeAssistance_P.UnitDelay_InitialCondition_e;
 
-  /* InitializeConditions for DiscreteIntegrator: '<S17>/Integrator' */
-  FingerStrokeAssistance_DW.Integrator_DSTATE[0] =
-    FingerStrokeAssistance_P.Integrator_IC;
-
-  /* InitializeConditions for DiscreteIntegrator: '<S17>/Filter' */
+  /* InitializeConditions for DiscreteIntegrator: '<S14>/Filter' */
   FingerStrokeAssistance_DW.Filter_DSTATE[0] =
     FingerStrokeAssistance_P.Filter_IC;
 
-  /* InitializeConditions for UnitDelay: '<S19>/UD' */
+  /* InitializeConditions for DiscreteIntegrator: '<S14>/Integrator' */
+  FingerStrokeAssistance_DW.Integrator_DSTATE[0] =
+    FingerStrokeAssistance_P.Integrator_IC;
+
+  /* InitializeConditions for UnitDelay: '<S17>/UD' */
   FingerStrokeAssistance_DW.UD_DSTATE[0] =
     FingerStrokeAssistance_P.DiscreteDerivative_ICPrevScaled;
 
@@ -1885,11 +2029,11 @@ static void FingerStrokeAssistance_initialize(void)
   FingerStrokeAssistance_DW.DiscreteFilter1_states_g[0] =
     FingerStrokeAssistance_P.DiscreteFilter1_InitialStates_c;
 
-  /* InitializeConditions for DiscreteStateSpace: '<S26>/Low Pass 100 Hz' */
+  /* InitializeConditions for DiscreteStateSpace: '<S34>/Low Pass 100 Hz' */
   FingerStrokeAssistance_DW.LowPass100Hz_DSTATE[0] =
     FingerStrokeAssistance_P.x0low[0];
 
-  /* InitializeConditions for DiscreteStateSpace: '<S26>/Low Pass 100 Hz1' */
+  /* InitializeConditions for DiscreteStateSpace: '<S34>/Low Pass 100 Hz1' */
   FingerStrokeAssistance_DW.LowPass100Hz1_DSTATE[0] =
     FingerStrokeAssistance_P.x0low[0];
 
@@ -1909,15 +2053,15 @@ static void FingerStrokeAssistance_initialize(void)
   FingerStrokeAssistance_DW.UnitDelay_DSTATE_h[1] =
     FingerStrokeAssistance_P.UnitDelay_InitialCondition_e;
 
-  /* InitializeConditions for DiscreteIntegrator: '<S17>/Integrator' */
-  FingerStrokeAssistance_DW.Integrator_DSTATE[1] =
-    FingerStrokeAssistance_P.Integrator_IC;
-
-  /* InitializeConditions for DiscreteIntegrator: '<S17>/Filter' */
+  /* InitializeConditions for DiscreteIntegrator: '<S14>/Filter' */
   FingerStrokeAssistance_DW.Filter_DSTATE[1] =
     FingerStrokeAssistance_P.Filter_IC;
 
-  /* InitializeConditions for UnitDelay: '<S19>/UD' */
+  /* InitializeConditions for DiscreteIntegrator: '<S14>/Integrator' */
+  FingerStrokeAssistance_DW.Integrator_DSTATE[1] =
+    FingerStrokeAssistance_P.Integrator_IC;
+
+  /* InitializeConditions for UnitDelay: '<S17>/UD' */
   FingerStrokeAssistance_DW.UD_DSTATE[1] =
     FingerStrokeAssistance_P.DiscreteDerivative_ICPrevScaled;
 
@@ -1925,19 +2069,19 @@ static void FingerStrokeAssistance_initialize(void)
   FingerStrokeAssistance_DW.DiscreteFilter1_states_g[1] =
     FingerStrokeAssistance_P.DiscreteFilter1_InitialStates_c;
 
-  /* InitializeConditions for DiscreteStateSpace: '<S26>/Low Pass 100 Hz' */
+  /* InitializeConditions for DiscreteStateSpace: '<S34>/Low Pass 100 Hz' */
   FingerStrokeAssistance_DW.LowPass100Hz_DSTATE[1] =
     FingerStrokeAssistance_P.x0low[1];
 
-  /* InitializeConditions for DiscreteStateSpace: '<S26>/Low Pass 100 Hz1' */
+  /* InitializeConditions for DiscreteStateSpace: '<S34>/Low Pass 100 Hz1' */
   FingerStrokeAssistance_DW.LowPass100Hz1_DSTATE[1] =
     FingerStrokeAssistance_P.x0low[1];
 
-  /* InitializeConditions for Memory: '<S26>/Memory' */
+  /* InitializeConditions for Memory: '<S34>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput =
     FingerStrokeAssistance_P.Memory_X0;
 
-  /* InitializeConditions for Memory: '<S26>/Memory1' */
+  /* InitializeConditions for Memory: '<S34>/Memory1' */
   FingerStrokeAssistance_DW.Memory1_PreviousInput =
     FingerStrokeAssistance_P.Memory1_X0;
 
@@ -1949,132 +2093,164 @@ static void FingerStrokeAssistance_initialize(void)
   FingerStrokeAssistance_DW.UnitDelay1_DSTATE_i =
     FingerStrokeAssistance_P.UnitDelay1_InitialCondition_oy;
 
-  /* InitializeConditions for Memory: '<S34>/Memory' */
+  /* InitializeConditions for Memory: '<S42>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_k[0] =
     FingerStrokeAssistance_P.Memory_X0_g[0];
 
-  /* InitializeConditions for Memory: '<S35>/Memory' */
+  /* InitializeConditions for Memory: '<S43>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_n[0] =
     FingerStrokeAssistance_P.Memory_X0_a[0];
 
-  /* InitializeConditions for Memory: '<S36>/Memory' */
+  /* InitializeConditions for Memory: '<S44>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_b[0] =
     FingerStrokeAssistance_P.Memory_X0_b[0];
 
-  /* InitializeConditions for Memory: '<S37>/Memory' */
+  /* InitializeConditions for Memory: '<S45>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_j[0] =
     FingerStrokeAssistance_P.Memory_X0_g0[0];
 
-  /* InitializeConditions for Memory: '<S38>/Memory' */
+  /* InitializeConditions for Memory: '<S46>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_i[0] =
     FingerStrokeAssistance_P.Memory_X0_bp[0];
 
-  /* InitializeConditions for Memory: '<S39>/Memory' */
+  /* InitializeConditions for Memory: '<S47>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_c[0] =
     FingerStrokeAssistance_P.Memory_X0_e[0];
 
-  /* InitializeConditions for Memory: '<S34>/Memory' */
+  /* InitializeConditions for Memory: '<S42>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_k[1] =
     FingerStrokeAssistance_P.Memory_X0_g[1];
 
-  /* InitializeConditions for Memory: '<S35>/Memory' */
+  /* InitializeConditions for Memory: '<S43>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_n[1] =
     FingerStrokeAssistance_P.Memory_X0_a[1];
 
-  /* InitializeConditions for Memory: '<S36>/Memory' */
+  /* InitializeConditions for Memory: '<S44>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_b[1] =
     FingerStrokeAssistance_P.Memory_X0_b[1];
 
-  /* InitializeConditions for Memory: '<S37>/Memory' */
+  /* InitializeConditions for Memory: '<S45>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_j[1] =
     FingerStrokeAssistance_P.Memory_X0_g0[1];
 
-  /* InitializeConditions for Memory: '<S38>/Memory' */
+  /* InitializeConditions for Memory: '<S46>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_i[1] =
     FingerStrokeAssistance_P.Memory_X0_bp[1];
 
-  /* InitializeConditions for Memory: '<S39>/Memory' */
+  /* InitializeConditions for Memory: '<S47>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_c[1] =
     FingerStrokeAssistance_P.Memory_X0_e[1];
 
-  /* InitializeConditions for Memory: '<S34>/Memory' */
+  /* InitializeConditions for Memory: '<S42>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_k[2] =
     FingerStrokeAssistance_P.Memory_X0_g[2];
 
-  /* InitializeConditions for Memory: '<S35>/Memory' */
+  /* InitializeConditions for Memory: '<S43>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_n[2] =
     FingerStrokeAssistance_P.Memory_X0_a[2];
 
-  /* InitializeConditions for Memory: '<S36>/Memory' */
+  /* InitializeConditions for Memory: '<S44>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_b[2] =
     FingerStrokeAssistance_P.Memory_X0_b[2];
 
-  /* InitializeConditions for Memory: '<S37>/Memory' */
+  /* InitializeConditions for Memory: '<S45>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_j[2] =
     FingerStrokeAssistance_P.Memory_X0_g0[2];
 
-  /* InitializeConditions for Memory: '<S38>/Memory' */
+  /* InitializeConditions for Memory: '<S46>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_i[2] =
     FingerStrokeAssistance_P.Memory_X0_bp[2];
 
-  /* InitializeConditions for Memory: '<S39>/Memory' */
+  /* InitializeConditions for Memory: '<S47>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_c[2] =
     FingerStrokeAssistance_P.Memory_X0_e[2];
 
-  /* InitializeConditions for Memory: '<S34>/Memory' */
+  /* InitializeConditions for Memory: '<S42>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_k[3] =
     FingerStrokeAssistance_P.Memory_X0_g[3];
 
-  /* InitializeConditions for Memory: '<S35>/Memory' */
+  /* InitializeConditions for Memory: '<S43>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_n[3] =
     FingerStrokeAssistance_P.Memory_X0_a[3];
 
-  /* InitializeConditions for Memory: '<S36>/Memory' */
+  /* InitializeConditions for Memory: '<S44>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_b[3] =
     FingerStrokeAssistance_P.Memory_X0_b[3];
 
-  /* InitializeConditions for Memory: '<S37>/Memory' */
+  /* InitializeConditions for Memory: '<S45>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_j[3] =
     FingerStrokeAssistance_P.Memory_X0_g0[3];
 
-  /* InitializeConditions for Memory: '<S38>/Memory' */
+  /* InitializeConditions for Memory: '<S46>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_i[3] =
     FingerStrokeAssistance_P.Memory_X0_bp[3];
 
-  /* InitializeConditions for Memory: '<S39>/Memory' */
+  /* InitializeConditions for Memory: '<S47>/Memory' */
   FingerStrokeAssistance_DW.Memory_PreviousInput_c[3] =
     FingerStrokeAssistance_P.Memory_X0_e[3];
 
+  /* SystemInitialize for MATLAB Function: '<S7>/MATLAB Function3' */
+  FingerStrokeAssistance_DW.bufSum_a = 0.0;
+  FingerStrokeAssistance_DW.i_g = 1.0;
+
+  /* SystemInitialize for MATLAB Function: '<S7>/MATLAB Function4' */
+  FingerStrokeAssistance_DW.bufSum_l = 0.0;
+  FingerStrokeAssistance_DW.i_a = 1.0;
+
+  /* SystemInitialize for MATLAB Function: '<S7>/MATLAB Function2' */
+  FingerStrokeAssistance_DW.bufSum_e = 0.0;
+  FingerStrokeAssistance_DW.i_o = 1.0;
+
+  /* SystemInitialize for MATLAB Function: '<S7>/MATLAB Function3' */
+  memset(&FingerStrokeAssistance_DW.buf_g[0], 0, 50U * sizeof(real_T));
+
+  /* SystemInitialize for MATLAB Function: '<S7>/MATLAB Function4' */
+  memset(&FingerStrokeAssistance_DW.buf_e[0], 0, 50U * sizeof(real_T));
+
+  /* SystemInitialize for MATLAB Function: '<S7>/MATLAB Function2' */
+  memset(&FingerStrokeAssistance_DW.buf_i[0], 0, 50U * sizeof(real_T));
+
+  /* SystemInitialize for MATLAB Function: '<S7>/MATLAB Function5' */
+  memset(&FingerStrokeAssistance_DW.buf[0], 0, 50U * sizeof(real_T));
+  FingerStrokeAssistance_DW.bufSum = 0.0;
+  FingerStrokeAssistance_DW.i = 1.0;
+
   /* SystemInitialize for Triggered SubSystem: '<S7>/Triggered Subsystem' */
-  /* SystemInitialize for Outport: '<S21>/Out1' */
-  FingerStrokeAssistance_B.In1[0] = FingerStrokeAssistance_P.Out1_Y0;
-  FingerStrokeAssistance_B.In1[1] = FingerStrokeAssistance_P.Out1_Y0;
+  /* SystemInitialize for Outport: '<S28>/Out1' */
+  FingerStrokeAssistance_B.In1_g[0] = FingerStrokeAssistance_P.Out1_Y0;
+  FingerStrokeAssistance_B.In1_g[1] = FingerStrokeAssistance_P.Out1_Y0;
 
   /* End of SystemInitialize for SubSystem: '<S7>/Triggered Subsystem' */
+
+  /* SystemInitialize for Triggered SubSystem: '<S7>/Triggered Subsystem1' */
+  /* SystemInitialize for Outport: '<S29>/Out1' */
+  FingerStrokeAssistance_B.In1 = FingerStrokeAssistance_P.Out1_Y0_o;
+
+  /* End of SystemInitialize for SubSystem: '<S7>/Triggered Subsystem1' */
 }
 
 /* Model terminate function */
 static void FingerStrokeAssistance_terminate(void)
 {
-  /* Level2 S-Function Block: '<S7>/PCI 6221 ENC ' (encnipcim) */
+  /* Level2 S-Function Block: '<S7>/PCI-6221 AD1' (adnipcim) */
   {
     SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[0];
     sfcnTerminate(rts);
   }
 
-  /* Level2 S-Function Block: '<S7>/PCI 6221 ENC 1' (encnipcim) */
+  /* Level2 S-Function Block: '<S7>/PCI 6221 ENC ' (encnipcim) */
   {
     SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[1];
     sfcnTerminate(rts);
   }
 
-  /* Level2 S-Function Block: '<S7>/PCI-6221 DA' (danipcim) */
+  /* Level2 S-Function Block: '<S7>/PCI 6221 ENC 1' (encnipcim) */
   {
     SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[2];
     sfcnTerminate(rts);
   }
 
-  /* Level2 S-Function Block: '<S7>/PCI-6221 AD1' (adnipcim) */
+  /* Level2 S-Function Block: '<S7>/PCI-6221 DA' (danipcim) */
   {
     SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[3];
     sfcnTerminate(rts);
@@ -2180,9 +2356,96 @@ RT_MODEL_FingerStrokeAssistance_T *FingerStrokeAssistance(void)
     rtliSetLogFormat(FingerStrokeAssistance_M->rtwLogInfo, 0);
     rtliSetLogMaxRows(FingerStrokeAssistance_M->rtwLogInfo, 1000);
     rtliSetLogDecimation(FingerStrokeAssistance_M->rtwLogInfo, 1);
-    rtliSetLogY(FingerStrokeAssistance_M->rtwLogInfo, "");
-    rtliSetLogYSignalInfo(FingerStrokeAssistance_M->rtwLogInfo, (NULL));
-    rtliSetLogYSignalPtrs(FingerStrokeAssistance_M->rtwLogInfo, (NULL));
+
+    /*
+     * Set pointers to the data and signal info for each output
+     */
+    {
+      static void * rt_LoggedOutputSignalPtrs[] = {
+        &FingerStrokeAssistance_Y.Out1[0]
+      };
+
+      rtliSetLogYSignalPtrs(FingerStrokeAssistance_M->rtwLogInfo,
+                            ((LogSignalPtrsType)rt_LoggedOutputSignalPtrs));
+    }
+
+    {
+      static int_T rt_LoggedOutputWidths[] = {
+        5
+      };
+
+      static int_T rt_LoggedOutputNumDimensions[] = {
+        1
+      };
+
+      static int_T rt_LoggedOutputDimensions[] = {
+        5
+      };
+
+      static boolean_T rt_LoggedOutputIsVarDims[] = {
+        0
+      };
+
+      static void* rt_LoggedCurrentSignalDimensions[] = {
+        (NULL)
+      };
+
+      static int_T rt_LoggedCurrentSignalDimensionsSize[] = {
+        4
+      };
+
+      static BuiltInDTypeId rt_LoggedOutputDataTypeIds[] = {
+        SS_DOUBLE
+      };
+
+      static int_T rt_LoggedOutputComplexSignals[] = {
+        0
+      };
+
+      static const char_T *rt_LoggedOutputLabels[] = {
+        "" };
+
+      static const char_T *rt_LoggedOutputBlockNames[] = {
+        "FingerStrokeAssistance/Out1" };
+
+      static RTWLogDataTypeConvert rt_RTWLogDataTypeConvert[] = {
+        { 0, SS_DOUBLE, SS_DOUBLE, 0, 0, 0, 1.0, 0, 0.0 }
+      };
+
+      static RTWLogSignalInfo rt_LoggedOutputSignalInfo[] = {
+        {
+          1,
+          rt_LoggedOutputWidths,
+          rt_LoggedOutputNumDimensions,
+          rt_LoggedOutputDimensions,
+          rt_LoggedOutputIsVarDims,
+          rt_LoggedCurrentSignalDimensions,
+          rt_LoggedCurrentSignalDimensionsSize,
+          rt_LoggedOutputDataTypeIds,
+          rt_LoggedOutputComplexSignals,
+          (NULL),
+
+          { rt_LoggedOutputLabels },
+          (NULL),
+          (NULL),
+          (NULL),
+
+          { rt_LoggedOutputBlockNames },
+
+          { (NULL) },
+          (NULL),
+          rt_RTWLogDataTypeConvert
+        }
+      };
+
+      rtliSetLogYSignalInfo(FingerStrokeAssistance_M->rtwLogInfo,
+                            rt_LoggedOutputSignalInfo);
+
+      /* set currSigDims field */
+      rt_LoggedCurrentSignalDimensions[0] = &rt_LoggedOutputWidths[0];
+    }
+
+    rtliSetLogY(FingerStrokeAssistance_M->rtwLogInfo, "yout");
   }
 
   FingerStrokeAssistance_M->solverInfoPtr =
@@ -2207,6 +2470,11 @@ RT_MODEL_FingerStrokeAssistance_T *FingerStrokeAssistance(void)
     &FingerStrokeAssistance_DW);
   (void) memset((void *)&FingerStrokeAssistance_DW, 0,
                 sizeof(DW_FingerStrokeAssistance_T));
+
+  /* external outputs */
+  FingerStrokeAssistance_M->ModelData.outputs = (&FingerStrokeAssistance_Y);
+  (void) memset(&FingerStrokeAssistance_Y.Out1[0], 0,
+                5U*sizeof(real_T));
 
   /* Initialize DataMapInfo substructure containing ModelMap for C API */
   FingerStrokeAssistance_InitializeDataMapInfo(FingerStrokeAssistance_M);
@@ -2261,7 +2529,7 @@ RT_MODEL_FingerStrokeAssistance_T *FingerStrokeAssistance(void)
     FingerStrokeAssistance_M->childSfunctions[3] =
       (&FingerStrokeAssistance_M->NonInlinedSFcns.childSFunctions[3]);
 
-    /* Level2 S-Function Block: FingerStrokeAssistance/<S7>/PCI 6221 ENC  (encnipcim) */
+    /* Level2 S-Function Block: FingerStrokeAssistance/<S7>/PCI-6221 AD1 (adnipcim) */
     {
       SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[0];
 
@@ -2313,436 +2581,7 @@ RT_MODEL_FingerStrokeAssistance_T *FingerStrokeAssistance(void)
       {
         ssSetPortInfoForOutputs(rts,
           &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn0.outputPortInfo[0]);
-        _ssSetNumOutputPorts(rts, 1);
-
-        /* port 0 */
-        {
-          _ssSetOutputPortNumDimensions(rts, 0, 1);
-          ssSetOutputPortWidth(rts, 0, 1);
-          ssSetOutputPortSignal(rts, 0, ((real_T *)
-            &FingerStrokeAssistance_B.PCI6221ENC));
-        }
-      }
-
-      /* path info */
-      ssSetModelName(rts, "PCI 6221 ENC ");
-      ssSetPath(rts, "FingerStrokeAssistance/Robot/PCI 6221 ENC ");
-      ssSetRTModel(rts,FingerStrokeAssistance_M);
-      ssSetParentSS(rts, (NULL));
-      ssSetRootSS(rts, rts);
-      ssSetVersion(rts, SIMSTRUCT_VERSION_LEVEL2);
-
-      /* parameters */
-      {
-        mxArray **sfcnParams = (mxArray **)
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn0.params;
-        ssSetSFcnParamsCount(rts, 10);
-        ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
-        ssSetSFcnParam(rts, 0, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC_P1_Size);
-        ssSetSFcnParam(rts, 1, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC_P2_Size);
-        ssSetSFcnParam(rts, 2, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC_P3_Size);
-        ssSetSFcnParam(rts, 3, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC_P4_Size);
-        ssSetSFcnParam(rts, 4, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC_P5_Size);
-        ssSetSFcnParam(rts, 5, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC_P6_Size);
-        ssSetSFcnParam(rts, 6, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC_P7_Size);
-        ssSetSFcnParam(rts, 7, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC_P8_Size);
-        ssSetSFcnParam(rts, 8, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC_P9_Size);
-        ssSetSFcnParam(rts, 9, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC_P10_Size);
-      }
-
-      /* work vectors */
-      ssSetPWork(rts, (void **) &FingerStrokeAssistance_DW.PCI6221ENC_PWORK);
-
-      {
-        struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn0.dWork;
-        struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn0.dWorkAux;
-        ssSetSFcnDWork(rts, dWorkRecord);
-        ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
-        _ssSetNumDWork(rts, 1);
-
-        /* PWORK */
-        ssSetDWorkWidth(rts, 0, 1);
-        ssSetDWorkDataType(rts, 0,SS_POINTER);
-        ssSetDWorkComplexSignal(rts, 0, 0);
-        ssSetDWork(rts, 0, &FingerStrokeAssistance_DW.PCI6221ENC_PWORK);
-      }
-
-      /* registration */
-      encnipcim(rts);
-      sfcnInitializeSizes(rts);
-      sfcnInitializeSampleTimes(rts);
-
-      /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.001);
-      ssSetOffsetTime(rts, 0, 0.0);
-      sfcnTsMap[0] = 0;
-
-      /* set compiled values of dynamic vector attributes */
-      ssSetNumNonsampledZCs(rts, 0);
-
-      /* Update connectivity flags for each port */
-      _ssSetOutputPortConnected(rts, 0, 1);
-      _ssSetOutputPortBeingMerged(rts, 0, 0);
-
-      /* Update the BufferDstPort flags for each input port */
-    }
-
-    /* Level2 S-Function Block: FingerStrokeAssistance/<S7>/PCI 6221 ENC 1 (encnipcim) */
-    {
-      SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[1];
-
-      /* timing info */
-      time_T *sfcnPeriod =
-        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn1.sfcnPeriod;
-      time_T *sfcnOffset =
-        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn1.sfcnOffset;
-      int_T *sfcnTsMap =
-        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn1.sfcnTsMap;
-      (void) memset((void*)sfcnPeriod, 0,
-                    sizeof(time_T)*1);
-      (void) memset((void*)sfcnOffset, 0,
-                    sizeof(time_T)*1);
-      ssSetSampleTimePtr(rts, &sfcnPeriod[0]);
-      ssSetOffsetTimePtr(rts, &sfcnOffset[0]);
-      ssSetSampleTimeTaskIDPtr(rts, sfcnTsMap);
-
-      /* Set up the mdlInfo pointer */
-      {
-        ssSetBlkInfo2Ptr(rts,
-                         &FingerStrokeAssistance_M->NonInlinedSFcns.blkInfo2[1]);
-      }
-
-      ssSetRTWSfcnInfo(rts, FingerStrokeAssistance_M->sfcnInfo);
-
-      /* Allocate memory of model methods 2 */
-      {
-        ssSetModelMethods2(rts,
-                           &FingerStrokeAssistance_M->NonInlinedSFcns.methods2[1]);
-      }
-
-      /* Allocate memory of model methods 3 */
-      {
-        ssSetModelMethods3(rts,
-                           &FingerStrokeAssistance_M->NonInlinedSFcns.methods3[1]);
-      }
-
-      /* Allocate memory for states auxilliary information */
-      {
-        ssSetStatesInfo2(rts,
-                         &FingerStrokeAssistance_M->NonInlinedSFcns.statesInfo2
-                         [1]);
-        ssSetPeriodicStatesInfo(rts,
-          &FingerStrokeAssistance_M->NonInlinedSFcns.periodicStatesInfo[1]);
-      }
-
-      /* outputs */
-      {
-        ssSetPortInfoForOutputs(rts,
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn1.outputPortInfo[0]);
-        _ssSetNumOutputPorts(rts, 1);
-
-        /* port 0 */
-        {
-          _ssSetOutputPortNumDimensions(rts, 0, 1);
-          ssSetOutputPortWidth(rts, 0, 1);
-          ssSetOutputPortSignal(rts, 0, ((real_T *)
-            &FingerStrokeAssistance_B.PCI6221ENC1));
-        }
-      }
-
-      /* path info */
-      ssSetModelName(rts, "PCI 6221 ENC 1");
-      ssSetPath(rts, "FingerStrokeAssistance/Robot/PCI 6221 ENC 1");
-      ssSetRTModel(rts,FingerStrokeAssistance_M);
-      ssSetParentSS(rts, (NULL));
-      ssSetRootSS(rts, rts);
-      ssSetVersion(rts, SIMSTRUCT_VERSION_LEVEL2);
-
-      /* parameters */
-      {
-        mxArray **sfcnParams = (mxArray **)
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn1.params;
-        ssSetSFcnParamsCount(rts, 10);
-        ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
-        ssSetSFcnParam(rts, 0, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC1_P1_Size);
-        ssSetSFcnParam(rts, 1, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC1_P2_Size);
-        ssSetSFcnParam(rts, 2, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC1_P3_Size);
-        ssSetSFcnParam(rts, 3, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC1_P4_Size);
-        ssSetSFcnParam(rts, 4, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC1_P5_Size);
-        ssSetSFcnParam(rts, 5, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC1_P6_Size);
-        ssSetSFcnParam(rts, 6, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC1_P7_Size);
-        ssSetSFcnParam(rts, 7, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC1_P8_Size);
-        ssSetSFcnParam(rts, 8, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC1_P9_Size);
-        ssSetSFcnParam(rts, 9, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221ENC1_P10_Size);
-      }
-
-      /* work vectors */
-      ssSetPWork(rts, (void **) &FingerStrokeAssistance_DW.PCI6221ENC1_PWORK);
-
-      {
-        struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn1.dWork;
-        struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn1.dWorkAux;
-        ssSetSFcnDWork(rts, dWorkRecord);
-        ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
-        _ssSetNumDWork(rts, 1);
-
-        /* PWORK */
-        ssSetDWorkWidth(rts, 0, 1);
-        ssSetDWorkDataType(rts, 0,SS_POINTER);
-        ssSetDWorkComplexSignal(rts, 0, 0);
-        ssSetDWork(rts, 0, &FingerStrokeAssistance_DW.PCI6221ENC1_PWORK);
-      }
-
-      /* registration */
-      encnipcim(rts);
-      sfcnInitializeSizes(rts);
-      sfcnInitializeSampleTimes(rts);
-
-      /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.001);
-      ssSetOffsetTime(rts, 0, 0.0);
-      sfcnTsMap[0] = 0;
-
-      /* set compiled values of dynamic vector attributes */
-      ssSetNumNonsampledZCs(rts, 0);
-
-      /* Update connectivity flags for each port */
-      _ssSetOutputPortConnected(rts, 0, 1);
-      _ssSetOutputPortBeingMerged(rts, 0, 0);
-
-      /* Update the BufferDstPort flags for each input port */
-    }
-
-    /* Level2 S-Function Block: FingerStrokeAssistance/<S7>/PCI-6221 DA (danipcim) */
-    {
-      SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[2];
-
-      /* timing info */
-      time_T *sfcnPeriod =
-        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.sfcnPeriod;
-      time_T *sfcnOffset =
-        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.sfcnOffset;
-      int_T *sfcnTsMap =
-        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.sfcnTsMap;
-      (void) memset((void*)sfcnPeriod, 0,
-                    sizeof(time_T)*1);
-      (void) memset((void*)sfcnOffset, 0,
-                    sizeof(time_T)*1);
-      ssSetSampleTimePtr(rts, &sfcnPeriod[0]);
-      ssSetOffsetTimePtr(rts, &sfcnOffset[0]);
-      ssSetSampleTimeTaskIDPtr(rts, sfcnTsMap);
-
-      /* Set up the mdlInfo pointer */
-      {
-        ssSetBlkInfo2Ptr(rts,
-                         &FingerStrokeAssistance_M->NonInlinedSFcns.blkInfo2[2]);
-      }
-
-      ssSetRTWSfcnInfo(rts, FingerStrokeAssistance_M->sfcnInfo);
-
-      /* Allocate memory of model methods 2 */
-      {
-        ssSetModelMethods2(rts,
-                           &FingerStrokeAssistance_M->NonInlinedSFcns.methods2[2]);
-      }
-
-      /* Allocate memory of model methods 3 */
-      {
-        ssSetModelMethods3(rts,
-                           &FingerStrokeAssistance_M->NonInlinedSFcns.methods3[2]);
-      }
-
-      /* Allocate memory for states auxilliary information */
-      {
-        ssSetStatesInfo2(rts,
-                         &FingerStrokeAssistance_M->NonInlinedSFcns.statesInfo2
-                         [2]);
-        ssSetPeriodicStatesInfo(rts,
-          &FingerStrokeAssistance_M->NonInlinedSFcns.periodicStatesInfo[2]);
-      }
-
-      /* inputs */
-      {
-        _ssSetNumInputPorts(rts, 2);
-        ssSetPortInfoForInputs(rts,
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.inputPortInfo[0]);
-
-        /* port 0 */
-        {
-          real_T const **sfcnUPtrs = (real_T const **)
-            &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.UPtrs0;
-          sfcnUPtrs[0] = &FingerStrokeAssistance_B.sf_MATLABFunction_m.output1;
-          ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
-          _ssSetInputPortNumDimensions(rts, 0, 1);
-          ssSetInputPortWidth(rts, 0, 1);
-        }
-
-        /* port 1 */
-        {
-          real_T const **sfcnUPtrs = (real_T const **)
-            &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.UPtrs1;
-          sfcnUPtrs[0] = &FingerStrokeAssistance_B.sf_MATLABFunction_m.output2;
-          ssSetInputPortSignalPtrs(rts, 1, (InputPtrsType)&sfcnUPtrs[0]);
-          _ssSetInputPortNumDimensions(rts, 1, 1);
-          ssSetInputPortWidth(rts, 1, 1);
-        }
-      }
-
-      /* path info */
-      ssSetModelName(rts, "PCI-6221 DA");
-      ssSetPath(rts, "FingerStrokeAssistance/Robot/PCI-6221 DA");
-      ssSetRTModel(rts,FingerStrokeAssistance_M);
-      ssSetParentSS(rts, (NULL));
-      ssSetRootSS(rts, rts);
-      ssSetVersion(rts, SIMSTRUCT_VERSION_LEVEL2);
-
-      /* parameters */
-      {
-        mxArray **sfcnParams = (mxArray **)
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.params;
-        ssSetSFcnParamsCount(rts, 7);
-        ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
-        ssSetSFcnParam(rts, 0, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221DA_P1_Size);
-        ssSetSFcnParam(rts, 1, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221DA_P2_Size);
-        ssSetSFcnParam(rts, 2, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221DA_P3_Size);
-        ssSetSFcnParam(rts, 3, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221DA_P4_Size);
-        ssSetSFcnParam(rts, 4, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221DA_P5_Size);
-        ssSetSFcnParam(rts, 5, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221DA_P6_Size);
-        ssSetSFcnParam(rts, 6, (mxArray*)
-                       FingerStrokeAssistance_P.PCI6221DA_P7_Size);
-      }
-
-      /* work vectors */
-      ssSetRWork(rts, (real_T *) &FingerStrokeAssistance_DW.PCI6221DA_RWORK[0]);
-      ssSetIWork(rts, (int_T *) &FingerStrokeAssistance_DW.PCI6221DA_IWORK[0]);
-
-      {
-        struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.dWork;
-        struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.dWorkAux;
-        ssSetSFcnDWork(rts, dWorkRecord);
-        ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
-        _ssSetNumDWork(rts, 2);
-
-        /* RWORK */
-        ssSetDWorkWidth(rts, 0, 6);
-        ssSetDWorkDataType(rts, 0,SS_DOUBLE);
-        ssSetDWorkComplexSignal(rts, 0, 0);
-        ssSetDWork(rts, 0, &FingerStrokeAssistance_DW.PCI6221DA_RWORK[0]);
-
-        /* IWORK */
-        ssSetDWorkWidth(rts, 1, 41);
-        ssSetDWorkDataType(rts, 1,SS_INTEGER);
-        ssSetDWorkComplexSignal(rts, 1, 0);
-        ssSetDWork(rts, 1, &FingerStrokeAssistance_DW.PCI6221DA_IWORK[0]);
-      }
-
-      /* registration */
-      danipcim(rts);
-      sfcnInitializeSizes(rts);
-      sfcnInitializeSampleTimes(rts);
-
-      /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.001);
-      ssSetOffsetTime(rts, 0, 0.0);
-      sfcnTsMap[0] = 0;
-
-      /* set compiled values of dynamic vector attributes */
-      ssSetNumNonsampledZCs(rts, 0);
-
-      /* Update connectivity flags for each port */
-      _ssSetInputPortConnected(rts, 0, 1);
-      _ssSetInputPortConnected(rts, 1, 1);
-
-      /* Update the BufferDstPort flags for each input port */
-      ssSetInputPortBufferDstPort(rts, 0, -1);
-      ssSetInputPortBufferDstPort(rts, 1, -1);
-    }
-
-    /* Level2 S-Function Block: FingerStrokeAssistance/<S7>/PCI-6221 AD1 (adnipcim) */
-    {
-      SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[3];
-
-      /* timing info */
-      time_T *sfcnPeriod =
-        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.sfcnPeriod;
-      time_T *sfcnOffset =
-        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.sfcnOffset;
-      int_T *sfcnTsMap =
-        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.sfcnTsMap;
-      (void) memset((void*)sfcnPeriod, 0,
-                    sizeof(time_T)*1);
-      (void) memset((void*)sfcnOffset, 0,
-                    sizeof(time_T)*1);
-      ssSetSampleTimePtr(rts, &sfcnPeriod[0]);
-      ssSetOffsetTimePtr(rts, &sfcnOffset[0]);
-      ssSetSampleTimeTaskIDPtr(rts, sfcnTsMap);
-
-      /* Set up the mdlInfo pointer */
-      {
-        ssSetBlkInfo2Ptr(rts,
-                         &FingerStrokeAssistance_M->NonInlinedSFcns.blkInfo2[3]);
-      }
-
-      ssSetRTWSfcnInfo(rts, FingerStrokeAssistance_M->sfcnInfo);
-
-      /* Allocate memory of model methods 2 */
-      {
-        ssSetModelMethods2(rts,
-                           &FingerStrokeAssistance_M->NonInlinedSFcns.methods2[3]);
-      }
-
-      /* Allocate memory of model methods 3 */
-      {
-        ssSetModelMethods3(rts,
-                           &FingerStrokeAssistance_M->NonInlinedSFcns.methods3[3]);
-      }
-
-      /* Allocate memory for states auxilliary information */
-      {
-        ssSetStatesInfo2(rts,
-                         &FingerStrokeAssistance_M->NonInlinedSFcns.statesInfo2
-                         [3]);
-        ssSetPeriodicStatesInfo(rts,
-          &FingerStrokeAssistance_M->NonInlinedSFcns.periodicStatesInfo[3]);
-      }
-
-      /* outputs */
-      {
-        ssSetPortInfoForOutputs(rts,
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.outputPortInfo[0]);
-        _ssSetNumOutputPorts(rts, 8);
+        _ssSetNumOutputPorts(rts, 12);
 
         /* port 0 */
         {
@@ -2807,6 +2646,38 @@ RT_MODEL_FingerStrokeAssistance_T *FingerStrokeAssistance(void)
           ssSetOutputPortSignal(rts, 7, ((real_T *)
             &FingerStrokeAssistance_B.PCI6221AD1_o8));
         }
+
+        /* port 8 */
+        {
+          _ssSetOutputPortNumDimensions(rts, 8, 1);
+          ssSetOutputPortWidth(rts, 8, 1);
+          ssSetOutputPortSignal(rts, 8, ((real_T *)
+            &FingerStrokeAssistance_B.PCI6221AD1_o9));
+        }
+
+        /* port 9 */
+        {
+          _ssSetOutputPortNumDimensions(rts, 9, 1);
+          ssSetOutputPortWidth(rts, 9, 1);
+          ssSetOutputPortSignal(rts, 9, ((real_T *)
+            &FingerStrokeAssistance_B.PCI6221AD1_o10));
+        }
+
+        /* port 10 */
+        {
+          _ssSetOutputPortNumDimensions(rts, 10, 1);
+          ssSetOutputPortWidth(rts, 10, 1);
+          ssSetOutputPortSignal(rts, 10, ((real_T *)
+            &FingerStrokeAssistance_B.PCI6221AD1_o11));
+        }
+
+        /* port 11 */
+        {
+          _ssSetOutputPortNumDimensions(rts, 11, 1);
+          ssSetOutputPortWidth(rts, 11, 1);
+          ssSetOutputPortSignal(rts, 11, ((real_T *)
+            &FingerStrokeAssistance_B.PCI6221AD1_o12));
+        }
       }
 
       /* path info */
@@ -2820,7 +2691,7 @@ RT_MODEL_FingerStrokeAssistance_T *FingerStrokeAssistance(void)
       /* parameters */
       {
         mxArray **sfcnParams = (mxArray **)
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.params;
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn0.params;
         ssSetSFcnParamsCount(rts, 7);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
         ssSetSFcnParam(rts, 0, (mxArray*)
@@ -2845,9 +2716,9 @@ RT_MODEL_FingerStrokeAssistance_T *FingerStrokeAssistance(void)
 
       {
         struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.dWork;
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn0.dWork;
         struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
-          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.dWorkAux;
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn0.dWorkAux;
         ssSetSFcnDWork(rts, dWorkRecord);
         ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
         _ssSetNumDWork(rts, 2);
@@ -2882,11 +2753,15 @@ RT_MODEL_FingerStrokeAssistance_T *FingerStrokeAssistance(void)
       _ssSetOutputPortConnected(rts, 0, 1);
       _ssSetOutputPortConnected(rts, 1, 1);
       _ssSetOutputPortConnected(rts, 2, 1);
-      _ssSetOutputPortConnected(rts, 3, 1);
-      _ssSetOutputPortConnected(rts, 4, 1);
-      _ssSetOutputPortConnected(rts, 5, 1);
-      _ssSetOutputPortConnected(rts, 6, 1);
-      _ssSetOutputPortConnected(rts, 7, 1);
+      _ssSetOutputPortConnected(rts, 3, 0);
+      _ssSetOutputPortConnected(rts, 4, 0);
+      _ssSetOutputPortConnected(rts, 5, 0);
+      _ssSetOutputPortConnected(rts, 6, 0);
+      _ssSetOutputPortConnected(rts, 7, 0);
+      _ssSetOutputPortConnected(rts, 8, 1);
+      _ssSetOutputPortConnected(rts, 9, 1);
+      _ssSetOutputPortConnected(rts, 10, 1);
+      _ssSetOutputPortConnected(rts, 11, 1);
       _ssSetOutputPortBeingMerged(rts, 0, 0);
       _ssSetOutputPortBeingMerged(rts, 1, 0);
       _ssSetOutputPortBeingMerged(rts, 2, 0);
@@ -2895,20 +2770,453 @@ RT_MODEL_FingerStrokeAssistance_T *FingerStrokeAssistance(void)
       _ssSetOutputPortBeingMerged(rts, 5, 0);
       _ssSetOutputPortBeingMerged(rts, 6, 0);
       _ssSetOutputPortBeingMerged(rts, 7, 0);
+      _ssSetOutputPortBeingMerged(rts, 8, 0);
+      _ssSetOutputPortBeingMerged(rts, 9, 0);
+      _ssSetOutputPortBeingMerged(rts, 10, 0);
+      _ssSetOutputPortBeingMerged(rts, 11, 0);
 
       /* Update the BufferDstPort flags for each input port */
+    }
+
+    /* Level2 S-Function Block: FingerStrokeAssistance/<S7>/PCI 6221 ENC  (encnipcim) */
+    {
+      SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[1];
+
+      /* timing info */
+      time_T *sfcnPeriod =
+        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn1.sfcnPeriod;
+      time_T *sfcnOffset =
+        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn1.sfcnOffset;
+      int_T *sfcnTsMap =
+        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn1.sfcnTsMap;
+      (void) memset((void*)sfcnPeriod, 0,
+                    sizeof(time_T)*1);
+      (void) memset((void*)sfcnOffset, 0,
+                    sizeof(time_T)*1);
+      ssSetSampleTimePtr(rts, &sfcnPeriod[0]);
+      ssSetOffsetTimePtr(rts, &sfcnOffset[0]);
+      ssSetSampleTimeTaskIDPtr(rts, sfcnTsMap);
+
+      /* Set up the mdlInfo pointer */
+      {
+        ssSetBlkInfo2Ptr(rts,
+                         &FingerStrokeAssistance_M->NonInlinedSFcns.blkInfo2[1]);
+      }
+
+      ssSetRTWSfcnInfo(rts, FingerStrokeAssistance_M->sfcnInfo);
+
+      /* Allocate memory of model methods 2 */
+      {
+        ssSetModelMethods2(rts,
+                           &FingerStrokeAssistance_M->NonInlinedSFcns.methods2[1]);
+      }
+
+      /* Allocate memory of model methods 3 */
+      {
+        ssSetModelMethods3(rts,
+                           &FingerStrokeAssistance_M->NonInlinedSFcns.methods3[1]);
+      }
+
+      /* Allocate memory for states auxilliary information */
+      {
+        ssSetStatesInfo2(rts,
+                         &FingerStrokeAssistance_M->NonInlinedSFcns.statesInfo2
+                         [1]);
+        ssSetPeriodicStatesInfo(rts,
+          &FingerStrokeAssistance_M->NonInlinedSFcns.periodicStatesInfo[1]);
+      }
+
+      /* outputs */
+      {
+        ssSetPortInfoForOutputs(rts,
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn1.outputPortInfo[0]);
+        _ssSetNumOutputPorts(rts, 1);
+
+        /* port 0 */
+        {
+          _ssSetOutputPortNumDimensions(rts, 0, 1);
+          ssSetOutputPortWidth(rts, 0, 1);
+          ssSetOutputPortSignal(rts, 0, ((real_T *)
+            &FingerStrokeAssistance_B.PCI6221ENC));
+        }
+      }
+
+      /* path info */
+      ssSetModelName(rts, "PCI 6221 ENC ");
+      ssSetPath(rts, "FingerStrokeAssistance/Robot/PCI 6221 ENC ");
+      ssSetRTModel(rts,FingerStrokeAssistance_M);
+      ssSetParentSS(rts, (NULL));
+      ssSetRootSS(rts, rts);
+      ssSetVersion(rts, SIMSTRUCT_VERSION_LEVEL2);
+
+      /* parameters */
+      {
+        mxArray **sfcnParams = (mxArray **)
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn1.params;
+        ssSetSFcnParamsCount(rts, 10);
+        ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
+        ssSetSFcnParam(rts, 0, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC_P1_Size);
+        ssSetSFcnParam(rts, 1, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC_P2_Size);
+        ssSetSFcnParam(rts, 2, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC_P3_Size);
+        ssSetSFcnParam(rts, 3, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC_P4_Size);
+        ssSetSFcnParam(rts, 4, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC_P5_Size);
+        ssSetSFcnParam(rts, 5, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC_P6_Size);
+        ssSetSFcnParam(rts, 6, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC_P7_Size);
+        ssSetSFcnParam(rts, 7, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC_P8_Size);
+        ssSetSFcnParam(rts, 8, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC_P9_Size);
+        ssSetSFcnParam(rts, 9, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC_P10_Size);
+      }
+
+      /* work vectors */
+      ssSetPWork(rts, (void **) &FingerStrokeAssistance_DW.PCI6221ENC_PWORK);
+
+      {
+        struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn1.dWork;
+        struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn1.dWorkAux;
+        ssSetSFcnDWork(rts, dWorkRecord);
+        ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
+        _ssSetNumDWork(rts, 1);
+
+        /* PWORK */
+        ssSetDWorkWidth(rts, 0, 1);
+        ssSetDWorkDataType(rts, 0,SS_POINTER);
+        ssSetDWorkComplexSignal(rts, 0, 0);
+        ssSetDWork(rts, 0, &FingerStrokeAssistance_DW.PCI6221ENC_PWORK);
+      }
+
+      /* registration */
+      encnipcim(rts);
+      sfcnInitializeSizes(rts);
+      sfcnInitializeSampleTimes(rts);
+
+      /* adjust sample time */
+      ssSetSampleTime(rts, 0, 0.001);
+      ssSetOffsetTime(rts, 0, 0.0);
+      sfcnTsMap[0] = 0;
+
+      /* set compiled values of dynamic vector attributes */
+      ssSetNumNonsampledZCs(rts, 0);
+
+      /* Update connectivity flags for each port */
+      _ssSetOutputPortConnected(rts, 0, 1);
+      _ssSetOutputPortBeingMerged(rts, 0, 0);
+
+      /* Update the BufferDstPort flags for each input port */
+    }
+
+    /* Level2 S-Function Block: FingerStrokeAssistance/<S7>/PCI 6221 ENC 1 (encnipcim) */
+    {
+      SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[2];
+
+      /* timing info */
+      time_T *sfcnPeriod =
+        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.sfcnPeriod;
+      time_T *sfcnOffset =
+        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.sfcnOffset;
+      int_T *sfcnTsMap =
+        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.sfcnTsMap;
+      (void) memset((void*)sfcnPeriod, 0,
+                    sizeof(time_T)*1);
+      (void) memset((void*)sfcnOffset, 0,
+                    sizeof(time_T)*1);
+      ssSetSampleTimePtr(rts, &sfcnPeriod[0]);
+      ssSetOffsetTimePtr(rts, &sfcnOffset[0]);
+      ssSetSampleTimeTaskIDPtr(rts, sfcnTsMap);
+
+      /* Set up the mdlInfo pointer */
+      {
+        ssSetBlkInfo2Ptr(rts,
+                         &FingerStrokeAssistance_M->NonInlinedSFcns.blkInfo2[2]);
+      }
+
+      ssSetRTWSfcnInfo(rts, FingerStrokeAssistance_M->sfcnInfo);
+
+      /* Allocate memory of model methods 2 */
+      {
+        ssSetModelMethods2(rts,
+                           &FingerStrokeAssistance_M->NonInlinedSFcns.methods2[2]);
+      }
+
+      /* Allocate memory of model methods 3 */
+      {
+        ssSetModelMethods3(rts,
+                           &FingerStrokeAssistance_M->NonInlinedSFcns.methods3[2]);
+      }
+
+      /* Allocate memory for states auxilliary information */
+      {
+        ssSetStatesInfo2(rts,
+                         &FingerStrokeAssistance_M->NonInlinedSFcns.statesInfo2
+                         [2]);
+        ssSetPeriodicStatesInfo(rts,
+          &FingerStrokeAssistance_M->NonInlinedSFcns.periodicStatesInfo[2]);
+      }
+
+      /* outputs */
+      {
+        ssSetPortInfoForOutputs(rts,
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.outputPortInfo[0]);
+        _ssSetNumOutputPorts(rts, 1);
+
+        /* port 0 */
+        {
+          _ssSetOutputPortNumDimensions(rts, 0, 1);
+          ssSetOutputPortWidth(rts, 0, 1);
+          ssSetOutputPortSignal(rts, 0, ((real_T *)
+            &FingerStrokeAssistance_B.PCI6221ENC1));
+        }
+      }
+
+      /* path info */
+      ssSetModelName(rts, "PCI 6221 ENC 1");
+      ssSetPath(rts, "FingerStrokeAssistance/Robot/PCI 6221 ENC 1");
+      ssSetRTModel(rts,FingerStrokeAssistance_M);
+      ssSetParentSS(rts, (NULL));
+      ssSetRootSS(rts, rts);
+      ssSetVersion(rts, SIMSTRUCT_VERSION_LEVEL2);
+
+      /* parameters */
+      {
+        mxArray **sfcnParams = (mxArray **)
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.params;
+        ssSetSFcnParamsCount(rts, 10);
+        ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
+        ssSetSFcnParam(rts, 0, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC1_P1_Size);
+        ssSetSFcnParam(rts, 1, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC1_P2_Size);
+        ssSetSFcnParam(rts, 2, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC1_P3_Size);
+        ssSetSFcnParam(rts, 3, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC1_P4_Size);
+        ssSetSFcnParam(rts, 4, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC1_P5_Size);
+        ssSetSFcnParam(rts, 5, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC1_P6_Size);
+        ssSetSFcnParam(rts, 6, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC1_P7_Size);
+        ssSetSFcnParam(rts, 7, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC1_P8_Size);
+        ssSetSFcnParam(rts, 8, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC1_P9_Size);
+        ssSetSFcnParam(rts, 9, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221ENC1_P10_Size);
+      }
+
+      /* work vectors */
+      ssSetPWork(rts, (void **) &FingerStrokeAssistance_DW.PCI6221ENC1_PWORK);
+
+      {
+        struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.dWork;
+        struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn2.dWorkAux;
+        ssSetSFcnDWork(rts, dWorkRecord);
+        ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
+        _ssSetNumDWork(rts, 1);
+
+        /* PWORK */
+        ssSetDWorkWidth(rts, 0, 1);
+        ssSetDWorkDataType(rts, 0,SS_POINTER);
+        ssSetDWorkComplexSignal(rts, 0, 0);
+        ssSetDWork(rts, 0, &FingerStrokeAssistance_DW.PCI6221ENC1_PWORK);
+      }
+
+      /* registration */
+      encnipcim(rts);
+      sfcnInitializeSizes(rts);
+      sfcnInitializeSampleTimes(rts);
+
+      /* adjust sample time */
+      ssSetSampleTime(rts, 0, 0.001);
+      ssSetOffsetTime(rts, 0, 0.0);
+      sfcnTsMap[0] = 0;
+
+      /* set compiled values of dynamic vector attributes */
+      ssSetNumNonsampledZCs(rts, 0);
+
+      /* Update connectivity flags for each port */
+      _ssSetOutputPortConnected(rts, 0, 1);
+      _ssSetOutputPortBeingMerged(rts, 0, 0);
+
+      /* Update the BufferDstPort flags for each input port */
+    }
+
+    /* Level2 S-Function Block: FingerStrokeAssistance/<S7>/PCI-6221 DA (danipcim) */
+    {
+      SimStruct *rts = FingerStrokeAssistance_M->childSfunctions[3];
+
+      /* timing info */
+      time_T *sfcnPeriod =
+        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.sfcnPeriod;
+      time_T *sfcnOffset =
+        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.sfcnOffset;
+      int_T *sfcnTsMap =
+        FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.sfcnTsMap;
+      (void) memset((void*)sfcnPeriod, 0,
+                    sizeof(time_T)*1);
+      (void) memset((void*)sfcnOffset, 0,
+                    sizeof(time_T)*1);
+      ssSetSampleTimePtr(rts, &sfcnPeriod[0]);
+      ssSetOffsetTimePtr(rts, &sfcnOffset[0]);
+      ssSetSampleTimeTaskIDPtr(rts, sfcnTsMap);
+
+      /* Set up the mdlInfo pointer */
+      {
+        ssSetBlkInfo2Ptr(rts,
+                         &FingerStrokeAssistance_M->NonInlinedSFcns.blkInfo2[3]);
+      }
+
+      ssSetRTWSfcnInfo(rts, FingerStrokeAssistance_M->sfcnInfo);
+
+      /* Allocate memory of model methods 2 */
+      {
+        ssSetModelMethods2(rts,
+                           &FingerStrokeAssistance_M->NonInlinedSFcns.methods2[3]);
+      }
+
+      /* Allocate memory of model methods 3 */
+      {
+        ssSetModelMethods3(rts,
+                           &FingerStrokeAssistance_M->NonInlinedSFcns.methods3[3]);
+      }
+
+      /* Allocate memory for states auxilliary information */
+      {
+        ssSetStatesInfo2(rts,
+                         &FingerStrokeAssistance_M->NonInlinedSFcns.statesInfo2
+                         [3]);
+        ssSetPeriodicStatesInfo(rts,
+          &FingerStrokeAssistance_M->NonInlinedSFcns.periodicStatesInfo[3]);
+      }
+
+      /* inputs */
+      {
+        _ssSetNumInputPorts(rts, 2);
+        ssSetPortInfoForInputs(rts,
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.inputPortInfo[0]);
+
+        /* port 0 */
+        {
+          real_T const **sfcnUPtrs = (real_T const **)
+            &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.UPtrs0;
+          sfcnUPtrs[0] = &FingerStrokeAssistance_B.sf_MATLABFunction_m.output1;
+          ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
+          _ssSetInputPortNumDimensions(rts, 0, 1);
+          ssSetInputPortWidth(rts, 0, 1);
+        }
+
+        /* port 1 */
+        {
+          real_T const **sfcnUPtrs = (real_T const **)
+            &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.UPtrs1;
+          sfcnUPtrs[0] = &FingerStrokeAssistance_B.sf_MATLABFunction_m.output2;
+          ssSetInputPortSignalPtrs(rts, 1, (InputPtrsType)&sfcnUPtrs[0]);
+          _ssSetInputPortNumDimensions(rts, 1, 1);
+          ssSetInputPortWidth(rts, 1, 1);
+        }
+      }
+
+      /* path info */
+      ssSetModelName(rts, "PCI-6221 DA");
+      ssSetPath(rts, "FingerStrokeAssistance/Robot/PCI-6221 DA");
+      ssSetRTModel(rts,FingerStrokeAssistance_M);
+      ssSetParentSS(rts, (NULL));
+      ssSetRootSS(rts, rts);
+      ssSetVersion(rts, SIMSTRUCT_VERSION_LEVEL2);
+
+      /* parameters */
+      {
+        mxArray **sfcnParams = (mxArray **)
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.params;
+        ssSetSFcnParamsCount(rts, 7);
+        ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
+        ssSetSFcnParam(rts, 0, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221DA_P1_Size);
+        ssSetSFcnParam(rts, 1, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221DA_P2_Size);
+        ssSetSFcnParam(rts, 2, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221DA_P3_Size);
+        ssSetSFcnParam(rts, 3, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221DA_P4_Size);
+        ssSetSFcnParam(rts, 4, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221DA_P5_Size);
+        ssSetSFcnParam(rts, 5, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221DA_P6_Size);
+        ssSetSFcnParam(rts, 6, (mxArray*)
+                       FingerStrokeAssistance_P.PCI6221DA_P7_Size);
+      }
+
+      /* work vectors */
+      ssSetRWork(rts, (real_T *) &FingerStrokeAssistance_DW.PCI6221DA_RWORK[0]);
+      ssSetIWork(rts, (int_T *) &FingerStrokeAssistance_DW.PCI6221DA_IWORK[0]);
+
+      {
+        struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.dWork;
+        struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
+          &FingerStrokeAssistance_M->NonInlinedSFcns.Sfcn3.dWorkAux;
+        ssSetSFcnDWork(rts, dWorkRecord);
+        ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
+        _ssSetNumDWork(rts, 2);
+
+        /* RWORK */
+        ssSetDWorkWidth(rts, 0, 6);
+        ssSetDWorkDataType(rts, 0,SS_DOUBLE);
+        ssSetDWorkComplexSignal(rts, 0, 0);
+        ssSetDWork(rts, 0, &FingerStrokeAssistance_DW.PCI6221DA_RWORK[0]);
+
+        /* IWORK */
+        ssSetDWorkWidth(rts, 1, 41);
+        ssSetDWorkDataType(rts, 1,SS_INTEGER);
+        ssSetDWorkComplexSignal(rts, 1, 0);
+        ssSetDWork(rts, 1, &FingerStrokeAssistance_DW.PCI6221DA_IWORK[0]);
+      }
+
+      /* registration */
+      danipcim(rts);
+      sfcnInitializeSizes(rts);
+      sfcnInitializeSampleTimes(rts);
+
+      /* adjust sample time */
+      ssSetSampleTime(rts, 0, 0.001);
+      ssSetOffsetTime(rts, 0, 0.0);
+      sfcnTsMap[0] = 0;
+
+      /* set compiled values of dynamic vector attributes */
+      ssSetNumNonsampledZCs(rts, 0);
+
+      /* Update connectivity flags for each port */
+      _ssSetInputPortConnected(rts, 0, 1);
+      _ssSetInputPortConnected(rts, 1, 1);
+
+      /* Update the BufferDstPort flags for each input port */
+      ssSetInputPortBufferDstPort(rts, 0, -1);
+      ssSetInputPortBufferDstPort(rts, 1, -1);
     }
   }
 
   /* Initialize Sizes */
   FingerStrokeAssistance_M->Sizes.numContStates = (0);/* Number of continuous states */
-  FingerStrokeAssistance_M->Sizes.numY = (0);/* Number of model outputs */
+  FingerStrokeAssistance_M->Sizes.numY = (5);/* Number of model outputs */
   FingerStrokeAssistance_M->Sizes.numU = (0);/* Number of model inputs */
   FingerStrokeAssistance_M->Sizes.sysDirFeedThru = (0);/* The model is not direct feedthrough */
   FingerStrokeAssistance_M->Sizes.numSampTimes = (1);/* Number of sample times */
-  FingerStrokeAssistance_M->Sizes.numBlocks = (132);/* Number of blocks */
-  FingerStrokeAssistance_M->Sizes.numBlockIO = (130);/* Number of block outputs */
-  FingerStrokeAssistance_M->Sizes.numBlockPrms = (253);/* Sum of parameter "widths" */
+  FingerStrokeAssistance_M->Sizes.numBlocks = (155);/* Number of blocks */
+  FingerStrokeAssistance_M->Sizes.numBlockIO = (145);/* Number of block outputs */
+  FingerStrokeAssistance_M->Sizes.numBlockPrms = (265);/* Sum of parameter "widths" */
   return FingerStrokeAssistance_M;
 }
 

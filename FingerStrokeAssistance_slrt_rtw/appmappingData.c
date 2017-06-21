@@ -12,8 +12,8 @@ const AppMapInfo appInfo[] =
 			FingerStrokeAssistance_SIDMAP,
 			FingerStrokeAssistance_SBIO,
 			FingerStrokeAssistance_SLBL,
-			{0,200},
-			129,
+			{0,215},
+			145,
 		},
 		{ /* ParamMapInfo */
 			FingerStrokeAssistance_PTIDSMAP,

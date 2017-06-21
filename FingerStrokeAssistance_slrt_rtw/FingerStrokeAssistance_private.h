@@ -3,9 +3,9 @@
  *
  * Code generation for model "FingerStrokeAssistance".
  *
- * Model version              : 1.1127
+ * Model version              : 1.1213
  * Simulink Coder version : 8.10 (R2016a) 10-Feb-2016
- * C source code generated on : Mon Mar 06 14:20:29 2017
+ * C source code generated on : Tue Jun 20 17:04:50 2017
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -30,9 +30,9 @@ extern real_T rt_powd_snf(real_T u0, real_T u1);
 extern real_T rt_roundd_snf(real_T u);
 extern const char *getRefMdlPath(const char *refMdl);
 extern int getRefMdlSignalNumber(const char *mdlBlock, const char *signalName);
+extern void adnipcim(SimStruct *rts);
 extern void encnipcim(SimStruct *rts);
 extern void danipcim(SimStruct *rts);
-extern void adnipcim(SimStruct *rts);
 extern void FingerStrokeAssi_MATLABFunction(real_T rtu_input1, real_T rtu_input2,
   real_T rtu_leftyMode, B_MATLABFunction_FingerStroke_T *localB);
 extern void FingerStrokeAssistance_gainramp(real_T rtu_tr, real_T rtu_valD,
