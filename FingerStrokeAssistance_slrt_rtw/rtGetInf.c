@@ -3,9 +3,9 @@
  *
  * Code generation for model "FingerStrokeAssistance".
  *
- * Model version              : 1.1213
+ * Model version              : 1.1275
  * Simulink Coder version : 8.10 (R2016a) 10-Feb-2016
- * C source code generated on : Tue Jun 20 17:04:50 2017
+ * C source code generated on : Mon Jul 03 13:01:17 2017
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping

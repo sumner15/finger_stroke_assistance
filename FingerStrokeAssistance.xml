@@ -862,6 +862,30 @@ Dynamic2</Name>
 
     </SubSystem>
     <SubSystem>
+    <Name>One Finger Mode// Two Finger Mode</Name>
+    <xPCName>FingerStrokeAssistance/One Finger Mode// Two Finger Mode</xPCName>
+    
+    
+ 
+            <block>
+            <blkName>Constant</blkName>
+            <xpcblkName>One Finger Mode// Two Finger Mode/Constant</xpcblkName>
+            <SLblockPath>FingerStrokeAssistance/One Finger Mode// Two Finger Mode/Constant</SLblockPath>
+            <isSrc>[1 0 1]</isSrc>
+          <parameter>
+          <paramName>Value</paramName>
+          <dim>[1, 1]</dim>  
+          </parameter>
+          </block>
+
+
+    
+    
+
+
+
+    </SubSystem>
+    <SubSystem>
     <Name>Position Control // Force Control</Name>
     <xPCName>FingerStrokeAssistance/Position Control // Force Control</xPCName>
     
@@ -1227,48 +1251,6 @@ Subsystem1</Name>
 
     </SubSystem>
     <SubSystem>
-    <Name>account for handedness2</Name>
-    <xPCName>FingerStrokeAssistance/Robot/account for handedness2</xPCName>
-        <SubSystem>
-    <Name>MATLAB Function</Name>
-    <xPCName>FingerStrokeAssistance/Robot/account for handedness2/MATLAB Function</xPCName>
-    
-    
-    </SubSystem>
-
-    
-
-
-    
-    
-
-
-  
-              
-
-              
-       
-              <signal>
-              <sigName>MATLAB Function/p1</sigName>
-              <xpcsigName>Robot/account for handedness2/MATLAB Function/p1</xpcsigName>
-              <sigWidth>1</sigWidth>
-              <sigDim>[1, 1]</sigDim>
-            </signal>
-
-  
-              
-
-              
-       
-              <signal>
-              <sigName>MATLAB Function/p2</sigName>
-              <xpcsigName>Robot/account for handedness2/MATLAB Function/p2</xpcsigName>
-              <sigWidth>1</sigWidth>
-              <sigDim>[1, 1]</sigDim>
-            </signal>
-
-    </SubSystem>
-    <SubSystem>
     <Name>filtered force output</Name>
     <xPCName>FingerStrokeAssistance/Robot/filtered force output</xPCName>
     
@@ -1435,7 +1417,6 @@ Subsystem1</Name>
           <dim>[1, 1]</dim>  
           </parameter>
           </block>
-
 
 
 
@@ -3673,8 +3654,34 @@ Integrator</sigName>
 
 
     </SubSystem>
+    <SubSystem>
+    <Name>Scope (xPC) 8</Name>
+    <xPCName>FingerStrokeAssistance/signals/Scope (xPC) 8</xPCName>
+    
+    
+
 
     
+    
+
+
+    </SubSystem>
+    <SubSystem>
+    <Name>Scope (xPC) 9</Name>
+    <xPCName>FingerStrokeAssistance/signals/Scope (xPC) 9</xPCName>
+    
+    
+
+
+    
+    
+
+
+    </SubSystem>
+
+    
+
+
 
 
 
@@ -3759,11 +3766,36 @@ Integrator</sigName>
 
 
 
+
+ 
+            <block>
+            <blkName>Constant</blkName>
+            <xpcblkName>Constant</xpcblkName>
+            <SLblockPath>FingerStrokeAssistance/Constant</SLblockPath>
+            <isSrc>[1 0 1]</isSrc>
+          <parameter>
+          <paramName>Value</paramName>
+          <dim>[1, 1]</dim>  
+          </parameter>
+          </block>
+
  
             <block>
             <blkName>Constant1</blkName>
             <xpcblkName>Constant1</xpcblkName>
             <SLblockPath>FingerStrokeAssistance/Constant1</SLblockPath>
+            <isSrc>[1 0 1]</isSrc>
+          <parameter>
+          <paramName>Value</paramName>
+          <dim>[1, 1]</dim>  
+          </parameter>
+          </block>
+
+ 
+            <block>
+            <blkName>Constant10</blkName>
+            <xpcblkName>Constant10</xpcblkName>
+            <SLblockPath>FingerStrokeAssistance/Constant10</SLblockPath>
             <isSrc>[1 0 1]</isSrc>
           <parameter>
           <paramName>Value</paramName>
@@ -3855,7 +3887,32 @@ Integrator</sigName>
           </parameter>
           </block>
 
+ 
+            <block>
+            <blkName>Constant9</blkName>
+            <xpcblkName>Constant9</xpcblkName>
+            <SLblockPath>FingerStrokeAssistance/Constant9</SLblockPath>
+            <isSrc>[1 0 1]</isSrc>
+          <parameter>
+          <paramName>Value</paramName>
+          <dim>[1, 1]</dim>  
+          </parameter>
+          </block>
 
+
+
+
+ 
+            <block>
+            <blkName>Manual Switch</blkName>
+            <xpcblkName>Manual Switch</xpcblkName>
+            <SLblockPath>FingerStrokeAssistance/Manual Switch</SLblockPath>
+            <isSrc>[0 2 1]</isSrc>
+          <parameter>
+          <paramName>CurrentSetting</paramName>
+          <dim>[1, 1]</dim>  
+          </parameter>
+          </block>
 
  
             <block>
@@ -4088,6 +4145,24 @@ Integrator</sigName>
     
 
 
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+
+
   
               
 
@@ -4113,6 +4188,40 @@ Integrator</sigName>
               <signal>
               <sigName>Data Type Conversion1</sigName>
               <xpcsigName>Data Type Conversion1</xpcsigName>
+              <sigWidth>1</sigWidth>
+              <sigDim>[1, 1]</sigDim>
+            </signal>
+
+
+    
+    
+
+
+  
+              
+
+              
+       
+              <signal>
+              <sigName>Data Type Conversion2</sigName>
+              <xpcsigName>Data Type Conversion2</xpcsigName>
+              <sigWidth>1</sigWidth>
+              <sigDim>[1, 1]</sigDim>
+            </signal>
+
+
+    
+    
+
+
+  
+              
+
+              
+       
+              <signal>
+              <sigName>Manual Switch</sigName>
+              <xpcsigName>Manual Switch</xpcsigName>
               <sigWidth>1</sigWidth>
               <sigDim>[1, 1]</sigDim>
             </signal>
